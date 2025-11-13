@@ -219,7 +219,7 @@ a {
 
 
 // ========== Badges ==========
-.badge {
+.custom-badge {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: bold;
@@ -228,32 +228,32 @@ a {
   line-height: 1;
 }
 
-.badge-light-success {
+.custom-badge-light-success {
   color: #198754;
   background-color: rgba(25, 135, 84, 0.15);
 }
 
-.badge-light-danger {
+.custom-badge-light-danger {
   color: #dc3545;
   background-color: rgba(220, 53, 69, 0.15);
 }
 
-.badge-light-warning {
+.custom-badge-light-warning {
   color: #ffc107;
   background-color: rgba(255, 193, 7, 0.15);
 }
 
-.badge-light-info {
+.custom-badge-light-info {
   color: #0dcaf0;
   background-color: rgba(13, 202, 240, 0.15);
 }
 
-.badge-light-secondary {
+.custom-badge-light-secondary {
   color: #6c757d;
   background-color: rgba(108, 117, 125, 0.15);
 }
 
-.badge-light-purple {
+.custom-badge-light-purple {
   color: $primary-dark;
   background-color: rgba($primary-dark, 0.15);
 }
@@ -307,16 +307,18 @@ a {
   }
 }
 
-/* Progress Bar */
-.custom-progress-container {
-  .custom-progress-bar {
+/* ============================= */
+/* 🔵 SIMPLE PROGRESS BAR (no milestones) */
+/* ============================= */
+.simple-progress-container {
+  .simple-progress-bar {
     height: 16px;
     background: rgba(160, 160, 160, 0.2);
     border-radius: 10px;
     overflow: hidden;
     position: relative;
 
-    .custom-progress-fill {
+    .simple-progress-fill {
       height: 100%;
       background: linear-gradient(90deg, #6f42c1, #27abec);
       border-radius: 10px;
@@ -324,4 +326,58 @@ a {
       box-shadow: 0 0 8px rgba(111, 66, 193, 0.6);
     }
   }
+}
+
+/* ============================= */
+/* 🟣 ADVANCED PROGRESS BAR (with milestones) */
+/* ============================= */
+.milestone-progress-container {
+  position: relative;
+
+  .milestone-progress-bar {
+    height: 18px;
+    background: rgba(150, 150, 150, 0.15);
+    border-radius: 10px;
+    position: relative;
+
+    .milestone-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #6f42c1, #27abec);
+      border-radius: 10px;
+      transition: width 1.2s ease-in-out;
+      box-shadow: 0 0 8px rgba(111, 66, 193, 0.6);
+    }
+
+    .milestone {
+      position: absolute;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      background-color: #fff;
+      border: 3px solid #6f42c1;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
+
+      &:hover {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 0 10px rgba(111, 66, 193, 0.5);
+      }
+
+      &.active {
+        background-color: #27abec;
+        border-color: #27abec;
+        box-shadow: 0 0 12px rgba(39, 171, 236, 0.6);
+      }
+    }
+  }
+
+}
+
+
+// modal styles
+.modal-content{
+  background: #e1d9f3;
 }
