@@ -130,8 +130,18 @@ a {
 
 /* شماره کاربر گوشه بالا سمت چپ */
 .user-number-label {
-  background: #6f42c1;
-  font-size: 0.85rem;
+  position: absolute;        // چسبیدن به کارت
+  top: 24px;
+  left: 0;
+  transform: rotate(-45deg) translate(-25%, 25%); // چرخش مورب و تنظیم موقعیت
+  transform-origin: top left;
+  background: #6f42c1;       // رنگ پس‌زمینه
+  color: #fff;                // متن سفید
+  font-size: 0.75rem;         // اندازه متن
+  font-weight: bold;
+  padding: 4px 12px;          // فاصله داخلی
+  z-index: 10;                // بالاتر از محتوا
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 
@@ -263,6 +273,68 @@ a {
     width: 0;
     height: 0;
     opacity: 0.7;
+  }
+  70% {
+    width: 220%;
+    height: 220%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.pulse-button-outline {
+  background-color: transparent !important; // حالت اولیه شفاف
+  color: #27abec !important; // متن آبی
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 30px;
+  border: 2px solid #27abec; // فقط بوردر اولیه
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+
+  // سایه اولیه
+  box-shadow: 0 0 0 0 rgba(39, 171, 236, 0.3);
+
+  &:hover {
+    transform: scale(1.05);
+    // background-color: #27abec; 
+    // color: #fff !important; 
+    box-shadow: 0 0 15px rgba(39, 171, 236, 0.6);
+    border-color: #27abec; // رنگ بوردر در هاور
+  }
+
+  // افکت پالس نور
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    // background: rgba(39, 171, 236, 0.2);
+    background: #27abec;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::after {
+    animation: pulseGlowOutline 1.2s ease-out infinite;
+  }
+}
+
+@keyframes pulseGlowOutline {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.6;
   }
   70% {
     width: 220%;
