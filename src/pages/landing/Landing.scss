@@ -1,0 +1,63 @@
+.landing-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+
+/* Fade-in title */
+.fade-in-title {
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+/* Slogans */
+.slogan-list {
+  margin-top: 20px;
+}
+
+.slogan-item {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeSlide 1s ease forwards;
+}
+
+/* Delay classes */
+.delay-0 { animation-delay: 0.4s; }
+.delay-1 { animation-delay: 0.7s; }
+.delay-2 { animation-delay: 1s; }
+.delay-3 { animation-delay: 1.3s; }
+
+/* Fade-in button */
+.fade-in-button {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1.8s;
+  margin-top: 25px;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

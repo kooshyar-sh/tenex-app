@@ -3,11 +3,14 @@ import { Container, Button, Row, Col } from "react-bootstrap";
 import Lottie from "lottie-react";
 import businessDeal from "../assets/Chart.json"; // مسیر فایل لاتی
 import OurVision from "../components/ourVision/OurVision";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   // حالت‌ها
   const [walletAddress, setWalletAddress] = useState("");
   const [registered, setRegistered] = useState(false);
+
+  const navigate = useNavigate();
 
   // دیتای فیک
   const fakeWallet = "0x1234...ABCD";
@@ -20,7 +23,7 @@ export default function Home() {
 
   const handleGetStarted = () => {
     setRegistered(true);
-    alert("Welcome to TENEX! 🚀");
+    navigate("/mint");
   };
 
   return (

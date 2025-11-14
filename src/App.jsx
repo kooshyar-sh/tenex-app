@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import AppNavbar from "./components/AppNavbar";
 import Home from "./pages/Home";
-import Landing from "./pages/Landing";
+import Landing from "./pages/landing/Landing";
 import Dashboard from "./pages/Dashboard";
 import Mint from "./pages/Mint";
 import Referrals from "./pages/Referrals";

@@ -91,6 +91,63 @@ a {
   padding: 12px;
 }
 
+/* ========== Animated Gradient Border Add-on ========== */
+.animated-border {
+  position: relative;
+}
+
+.animated-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px; /* ضخامت بوردر */
+  border-radius: inherit;
+  background: linear-gradient(
+    130deg,
+    #7f5af0,
+    #b388ff,
+    #ff8ce6,
+    #7f5af0
+  );
+  background-size: 300% 300%;
+  animation: animatedBorderMove 4s linear infinite;
+  z-index: -1; /* پشت کارت قرار بگیره */
+}
+
+.step2-card {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 12px;
+    background: linear-gradient(130deg, #7f5af0, #b388ff, #ff8ce6, #7f5af0);
+    background-size: 300% 300%;
+    animation: animatedBorderMove 4s linear infinite;
+    z-index: -1;
+  }
+}
+
+/* شماره کاربر گوشه بالا سمت چپ */
+.user-number-label {
+  background: #6f42c1;
+  font-size: 0.85rem;
+}
+
+
+/* انیمیشن حرکت گرادینت */
+@keyframes animatedBorderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 // ========== Buttons ==========
 .btn-outline-blue {
   border-radius: 6px;
@@ -380,4 +437,24 @@ a {
 // modal styles
 .modal-content{
   background: #e1d9f3;
+}
+
+/* custom input */
+.number-input {
+  background: #f4f0fa; /* مشابه تم سایت */
+  color: #6f42c1; 
+  border: 1px solid #6f42c1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  outline: none;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: rgba(111, 66, 193, 0.6);
+  }
+
+  &:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 5px #6f42c1;
+  }
 }
