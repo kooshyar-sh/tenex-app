@@ -11,7 +11,7 @@ export default function Home() {
 
   // دیتای فیک
   const fakeWallet = "0x1234...ABCD";
-  const memberCount = 102; // بعداً از API میاد
+  const memberCount = 62751; // بعداً از API میاد
 
   // هندل‌ها
   const handleConnectWallet = () => {
@@ -50,6 +50,7 @@ export default function Home() {
             TENEX member
           </span>
           <Button onClick={handleGetStarted} className="pulse-button">
+            <i className="bi bi-rocket-takeoff-fill me-2"></i>
             Get Started
           </Button>
         </div>

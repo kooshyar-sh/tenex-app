@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import TokenSupplyProjection from "../tokenSupplyProjection/TokenSupplyProjection";
 
 export default function OurVision() {
   const totalMembers = 330000;
@@ -121,6 +122,10 @@ export default function OurVision() {
           </span>
         </div>
       </div>
+
+
+      <TokenSupplyProjection />
+
 
       {/* ===== MODAL ===== */}
       <Modal
