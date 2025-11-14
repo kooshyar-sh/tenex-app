@@ -1,5 +1,6 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useState } from "react";
+import Countdown from "react-countdown";
 
 export default function Mint() {
   const [step, setStep] = useState(1); // کنترل استپ‌ها
@@ -34,7 +35,6 @@ export default function Mint() {
 
   return (
     <Container className="py-5">
-
       {/* ====================== STEPPER ====================== */}
       <div className="d-flex justify-content-center align-items-center mb-5 position-relative">
         {/* خط پس‌زمینه */}
@@ -73,7 +73,9 @@ export default function Mint() {
       {/* ====================== STEP 1 — Tier Selection ====================== */}
       {step === 1 && (
         <>
-          <h3 className="fw-bold text-purple mb-4 text-center">Select a Tier</h3>
+          <h3 className="fw-bold text-purple mb-4 text-center">
+            Select a Tier
+          </h3>
 
           <Row className="justify-content-center">
             {tiers.map((t, index) => (
@@ -86,11 +88,21 @@ export default function Mint() {
                   }}
                 >
                   <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
-                  <p className="text-muted mb-1"><strong>Pay:</strong> {t.price}</p>
-                  <p className="text-muted mb-1"><strong>Mint:</strong> {t.mint}</p>
-                  <p className="text-muted mb-1"><strong>Earn:</strong> {t.direct} direct sales</p>
-                  <p className="text-muted mb-0"><strong>Earn:</strong> {t.balance} weekly team balance</p>
-                  <Button className="shining-button mt-3">Select {t.name}</Button>
+                  <p className="text-muted mb-1">
+                    <strong>Pay:</strong> {t.price}
+                  </p>
+                  <p className="text-muted mb-1">
+                    <strong>Mint:</strong> {t.mint}
+                  </p>
+                  <p className="text-muted mb-1">
+                    <strong>Earn:</strong> {t.direct} direct sales
+                  </p>
+                  <p className="text-muted mb-0">
+                    <strong>Earn:</strong> {t.balance} weekly team balance
+                  </p>
+                  <Button className="shining-button mt-3">
+                    Select {t.name}
+                  </Button>
                 </div>
               </Col>
             ))}
@@ -106,7 +118,9 @@ export default function Mint() {
             #{userNumber.toLocaleString()}
           </div>
 
-          <h5 className="fw-bold text-purple mb-3 mt-5">Who introduced you? (Referral Code)</h5>
+          <h5 className="fw-bold text-purple mb-3 mt-5">
+            Who introduced you? (Referral Code)
+          </h5>
           <input
             type="text"
             className="number-input w-100 mb-3"
@@ -117,14 +131,54 @@ export default function Mint() {
 
           {/* Buttons */}
           <div className="d-flex justify-content-between mt-3">
-            <Button
-              className="pulse-button-outline"
-              onClick={() => setStep(1)}
-            >
+            <Button className="pulse-button-outline" onClick={() => setStep(1)}>
               <i className="bi bi-chevron-left me-2"></i> Back
             </Button>
-            <Button className="pulse-button">
+            <Button className="pulse-button" onClick={() => setStep(3)}>
               Next <i className="bi bi-chevron-right ms-2"></i>
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* ====================== STEP 3 — Subscription ====================== */}
+      {step === 3 && selectedTier && (
+        <div className="main-card animated-border step3-card position-relative p-4">
+          {/* Top-left user number */}
+          <div className="user-number-label rounded">
+            #{userNumber.toLocaleString()}
+          </div>
+
+          <h5 className="fw-bold text-purple mb-3 mt-5">
+            Your selected tier: {selectedTier}{" "}
+            {selectedTier === "Bronze" && "(0.1 BNB)"}
+            {selectedTier === "Silver" && "(0.3 BNB)"}
+            {selectedTier === "Gold" && "(1 BNB)"}
+          </h5>
+
+          {/* Subscribe Button */}
+          <Button className="pulse-button mt-3">
+            <i className="bi bi-bag-check me-2"></i> Subscribe
+          </Button>
+
+          {/* Info Text */}
+          <div className="mt-4 text-start">
+            <p>
+              You will be the member number:{" "}
+              <strong>{userNumber.toLocaleString()}</strong>
+            </p>
+            <p>
+              Your first earning will be claimable in the next payment cycle:{" "}
+              <Countdown date={Date.now() + 5 * 24 * 60 * 60 * 1000} />{" "}
+              {/* مثال 5 روز */}
+            </p>
+            <p>10X tokens into circulation (in your wallet)</p>
+          </div>
+
+          {/* Back button */}
+          <div className="d-flex justify-content-start mt-3">
+            <Button className="pulse-button-outline" onClick={() => setStep(2)}>
+              <i className="bi bi-chevron-left me-2"></i> Back
             </Button>
           </div>
         </div>
