@@ -9,7 +9,6 @@ export default function OurVision() {
   const [activeMilestone, setActiveMilestone] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  // نقاط milestone با مقدار عضو و ضریب
   const milestoneValues = [
     500, 2500, 7000, 13000, 21000, 33000, 63000, 163000, 330000,
   ];
@@ -26,7 +25,7 @@ export default function OurVision() {
       "Legend",
       "Ultimate",
     ];
-    const multipliers = [1, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6];
+    const multipliers = [1, 0.95, 0.9, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35];
     const start = index === 0 ? 1 : milestoneValues[index - 1];
     const end = value;
     return {
@@ -38,14 +37,12 @@ export default function OurVision() {
     };
   });
 
-  // دیتا سمت راست
   const supplyData = {
     min: "24,278,543",
     mid: "80,119,191",
     max: "293,770,369",
   };
 
-  // پاداش‌های پایه
   const baseRewards = {
     bronze: 100,
     silver: 330,
@@ -53,7 +50,7 @@ export default function OurVision() {
   };
 
   useEffect(() => {
-    const percentage = (currentMembers / totalMembers) * 100;
+    const percentage = getMilestonePosition(currentMembers);
     setProgress(percentage);
   }, []);
 
@@ -70,14 +67,35 @@ export default function OurVision() {
     gold: Math.round(baseRewards.gold * multiplier),
   });
 
+  // ===== تابع محاسبه موقعیت غیرخطی برای نمایش بهتر =====
+  const getMilestonePosition = (value) => {
+    const minDisplay = milestoneValues[0]; // 500
+    const maxDisplay = milestoneValues[milestoneValues.length - 1]; // 330000
+
+    // لگاریتمی کردن مقادیر + exponent برای کشش نقاط ابتدایی
+    const exponent = 0.6; // عدد بین 0 و 1 => کشش ابتدایی
+    const adjustedValue = Math.pow(value, exponent);
+
+    const adjustedMin = Math.pow(minDisplay, exponent);
+    const adjustedMax = Math.pow(maxDisplay, exponent);
+
+    const normalized =
+      (adjustedValue - adjustedMin) / (adjustedMax - adjustedMin);
+
+    const minOffset = 0.05; // فاصله اولین نقطه از ابتدا
+    const leftPercent = minOffset * 100 + normalized * (100 - minOffset * 100);
+
+    return leftPercent;
+  };
+
   return (
     <section className="text-center py-5 mt-5">
       <h1 className="fw-bold text-purple mb-3">Our Vision</h1>
 
       <p className="text-muted mx-auto mb-4" style={{ maxWidth: "700px" }}>
         Our vision is to create a{" "}
-        <span className="fw-semibold text-blue">community-oriented</span> &
-        <span className="fw-semibold text-blue"> community-owned</span> DeFi
+        <span className="fw-semibold text-blue">community-oriented</span> &{" "}
+        <span className="fw-semibold text-blue">community-owned</span> DeFi
         project that empowers users through innovation, fairness, and
         transparent tokenomics. Together we’re building the next generation of
         decentralized finance with real growth and shared success.
@@ -85,7 +103,6 @@ export default function OurVision() {
 
       <h5 className="fw-bold text-dark mt-5 mb-3">Members Progress Bar</h5>
 
-      {/* Progress Bar */}
       <div
         className="milestone-progress-container mx-auto"
         style={{ maxWidth: "800px", position: "relative" }}
@@ -102,7 +119,7 @@ export default function OurVision() {
           ></div>
 
           {milestones.map((m, index) => {
-            const leftPercent = (m.value / totalMembers) * 100;
+            const leftPercent = getMilestonePosition(m.value);
             return (
               <div
                 key={index}
@@ -123,11 +140,8 @@ export default function OurVision() {
         </div>
       </div>
 
-
       <TokenSupplyProjection />
 
-
-      {/* ===== MODAL ===== */}
       <Modal
         show={showModal}
         onHide={handleCloseModal}
@@ -155,7 +169,6 @@ export default function OurVision() {
 
             <Modal.Body>
               <div className="row">
-                {/* Rewards */}
                 <div className="col-md-6 border-end">
                   <h6 className="fw-semibold mb-3">Rewards</h6>
                   {(() => {
@@ -196,7 +209,6 @@ export default function OurVision() {
                   })()}
                 </div>
 
-                {/* Supply Data */}
                 <div className="col-md-6">
                   <h6 className="fw-semibold mb-3">Supply Data</h6>
                   <p className="mb-1">
