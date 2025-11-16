@@ -529,3 +529,22 @@ a {
     box-shadow: 0 0 5px #6f42c1;
   }
 }
+
+
+// statsPanel styles
+.stats-card {
+  min-height: 160px; // هم اندازه کارت‌ها
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h6 {
+    font-size: 0.9rem;
+  }
+
+  canvas {
+    max-width: 120px;
+    max-height: 120px;
+  }
+}

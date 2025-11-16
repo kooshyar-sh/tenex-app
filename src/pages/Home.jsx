@@ -3,6 +3,7 @@ import { Container, Button, Row, Col } from "react-bootstrap";
 import Lottie from "lottie-react";
 import businessDeal from "../assets/Chart.json"; // مسیر فایل لاتی
 import OurVision from "../components/ourVision/OurVision";
+import StatsPanel from "../components/statsPanel/statsPanel";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -68,7 +69,7 @@ export default function Home() {
       {/* بخش توضیحات و انیمیشن */}
       <Row className="align-items-center mt-5">
         <Col md={7} className="mb-4 mb-md-0 text-start">
-          <ul className="list-unstyled fs-5 fw-semibold">
+          <ul className="list-unstyled text-muted fs-5 fw-semibold">
             <li className="mb-3">• Join the deflationary mint progress</li>
             <li className="mb-3">• Mint 10X tokens</li>
             <li className="mb-3">• Build your own team</li>
@@ -80,6 +81,8 @@ export default function Home() {
       </Row>
 
       <OurVision />
+
+      <StatsPanel />
     </Container>
   );
 }
