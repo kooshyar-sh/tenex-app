@@ -18,7 +18,7 @@ export default function App() {
     if (isLanding) {
       document.body.style.background = "#000"; // پس‌زمینه تیره ساده برای افکت LiquidEther
     } else {
-      document.body.style.background = "#dac9f3"; // رنگ بنفش روشن برای بقیه صفحات
+      document.body.style.background = "#e7ddf6ff"; // رنگ بنفش روشن برای بقیه صفحات
     }
   }, [isLanding]);
 
