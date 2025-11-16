@@ -533,18 +533,26 @@ a {
 
 // statsPanel styles
 .stats-card {
-  min-height: 160px; // هم اندازه کارت‌ها
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all 0.8s ease;
 
-  h6 {
-    font-size: 0.9rem;
+  &.opacity-0 {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  &.fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   canvas {
     max-width: 120px;
     max-height: 120px;
+    transition: all 1.5s ease;
   }
 }
