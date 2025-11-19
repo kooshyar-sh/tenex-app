@@ -1,14 +1,19 @@
-.section {
-  width: 100vw;
+.snap-container {
   height: 100vh;
-  position: relative;
-  overflow: hidden;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
-/* SECTION ONE */
-.section-one {
-  background: #000;
+.snap-section {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  position: relative;
 }
+
+
 
 .canvas-wrapper {
   position: absolute;
@@ -85,3 +90,4 @@
     transform: translateY(0);
   }
 }
+
