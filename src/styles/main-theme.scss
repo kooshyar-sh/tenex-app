@@ -70,6 +70,10 @@ a {
   scrollbar-color: $primary-color $bg-light;
 }
 
+.navbar-toggler:focus {
+  box-shadow: none;    
+}
+
 // ========== Cards ==========
 .card,
 .main-card {
@@ -508,6 +512,10 @@ a {
 // modal styles
 .modal-content{
   background: #f3f1f8;
+}
+
+.volume-modal-sm {
+  max-width: 380px !important;
 }
 
 /* custom input */

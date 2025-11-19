@@ -105,7 +105,7 @@ export default function OurVision() {
 
       <div
         className="milestone-progress-container mx-auto"
-        style={{ maxWidth: "800px", position: "relative" }}
+        style={{ position: "relative" }}
       >
         <div className="d-flex justify-content-between mb-2">
           <span className="fw-semibold text-muted">0</span>

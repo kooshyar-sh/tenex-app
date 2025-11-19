@@ -19,7 +19,7 @@ export default function AppNavbar() {
           <Nav className="me-auto">
             <Nav.Link
               as={Link}
-              to="/dashboard"
+              to="/user"
               className="fw-semibold text-purple"
             >
               Dashboard

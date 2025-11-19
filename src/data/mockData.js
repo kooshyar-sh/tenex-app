@@ -5,6 +5,14 @@ export const currentUser = {
   minted: 500,
   binaryVolume: 42000,
   referralsCount: 18,
+  allTimeReward: 1.52,
+  weeklyReward: 0.14,
+  leftWing: 9.2,
+  rightWing: 9.3,
+  weekLeft: 4.1,
+  weekRight: 4.2,
+  new24h: 12,
+  new7d: 84,
 };
 
 export const referralList = [
