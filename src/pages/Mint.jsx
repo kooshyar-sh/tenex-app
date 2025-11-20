@@ -82,6 +82,20 @@ export default function Mint() {
             {tiers.map((t, index) => (
               <Col md={4} key={index} className="mb-4">
                 <div className="main-card animated-border text-center h-100 p-4">
+                  <div
+                    className={
+                      "tier-badge custom-badge " +
+                      (index === 0
+                        ? "custom-badge-light-warning" // Bronze → Most Used
+                        : index === 1
+                        ? "custom-badge-light-info" // Silver → Medium Profit
+                        : "custom-badge-light-success") // Gold → Best Volume
+                    }
+                  >
+                    {index === 0 && "Most Used"}
+                    {index === 1 && "Medium Profit"}
+                    {index === 2 && "Best Volume"}
+                  </div>
                   <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
                   <p className="text-muted mb-1">
                     <strong>Pay:</strong> {t.price}
@@ -109,7 +123,7 @@ export default function Mint() {
                       setStep(2); // رفتن به Step2 بعد انتخاب
                     }}
                   >
-                    Select {t.name}
+                    Select {t.name} (no: {userNumber.toLocaleString()})
                   </Button>
                 </div>
               </Col>
