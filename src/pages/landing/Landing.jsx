@@ -7,20 +7,40 @@ export default function Landing() {
   const navigate = useNavigate();
   const sectionTwoRef = useRef(null);
   const containerRef = useRef(null);
-  const [activeStep, setActiveStep] = useState(0); // 0: section1, 1-3: کارت‌ها, 4: section3
+  const [activeStep, setActiveStep] = useState(0);
   const totalCards = 4;
   const isScrollingRef = useRef(false);
+
+  const cards = [
+    {
+      title: "Sign Up & Get Referral Code",
+      desc: "Register to receive your unique referral code and start building your community path.",
+      icon: "bi-person-plus",
+    },
+    {
+      title: "Buy Package & Mint Token",
+      desc: "Select a package, mint your token, and become part of our investment network.",
+      icon: "bi-box-seam",
+    },
+    {
+      title: "Invite Others & Build Your Network",
+      desc: "Invite at least two more people to complete your set and grow your share in the community.",
+      icon: "bi-people",
+    },
+    {
+      title: "Token Share & Earn Commission",
+      desc: "As your network grows, claim your token share and receive commissions for referrals.",
+      icon: "bi-cash-stack",
+    },
+  ];
 
   useEffect(() => {
     const container = containerRef.current;
 
     const handleWheel = (e) => {
-      e.preventDefault(); // جلوگیری از scroll پیشفرض
-
-      // اگر هنوز step قبل کامل نشده است، هیچ کاری نکن
+      e.preventDefault();
       if (isScrollingRef.current) return;
-
-      isScrollingRef.current = true; // شروع scroll کنترل‌شده
+      isScrollingRef.current = true;
 
       setActiveStep((prev) => {
         let next = prev + (e.deltaY > 0 ? 1 : -1);
@@ -29,7 +49,6 @@ export default function Landing() {
         return next;
       });
 
-      // بعد از 600ms اجازه scroll بعدی داده می‌شود
       setTimeout(() => {
         isScrollingRef.current = false;
       }, 600);
@@ -41,7 +60,6 @@ export default function Landing() {
 
   useEffect(() => {
     const container = containerRef.current;
-
     if (activeStep === 0) {
       container.scrollTo({ top: 0, behavior: "smooth" });
     } else if (activeStep >= 1 && activeStep <= totalCards) {
@@ -59,20 +77,17 @@ export default function Landing() {
 
   return (
     <div className="snap-container" ref={containerRef}>
-      {/* SECTION ONE */}
-      <section className="snap-section">
+      <section className="snap-section position-relative">
         <div className="canvas-wrapper">
           <LiquidEther
             colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
             mouseForce={20}
             cursorSize={100}
-            autoDemo={true}
+            autoDemo
           />
         </div>
-
         <div className="landing-content">
           <h1 className="fade-in-title">Welcome to Tenex</h1>
-
           <div className="slogan-list">
             {[
               "10X your seed investment",
@@ -85,7 +100,6 @@ export default function Landing() {
               </p>
             ))}
           </div>
-
           <button
             className="shining-button btn-lg mt-3 fade-in-button"
             onClick={() => navigate("/home")}
@@ -95,28 +109,10 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SECTION TWO */}
       <section className="snap-section section-two" ref={sectionTwoRef}>
         <div className="section-two-wrapper container">
           <div className="card-row">
-            {[
-              {
-                title: "Sign Up & Get Referral Code",
-                desc: "Register to receive your unique referral code and start building your community path.",
-              },
-              {
-                title: "Buy Package & Mint Token",
-                desc: "Select a package, mint your token, and become part of our investment network.",
-              },
-              {
-                title: "Invite Others & Build Your Network",
-                desc: "Invite at least two more people to complete your set and grow your share in the community.",
-              },
-              {
-                title: "Token Share & Earn Commission",
-                desc: "As your network grows, claim your token share and receive commissions for referrals.",
-              },
-            ].map((card, idx) => (
+            {cards.map((card, idx) => (
               <div
                 key={idx}
                 className={`info-card ${
@@ -124,6 +120,13 @@ export default function Landing() {
                 }`}
                 style={{ zIndex: activeStep - 1 === idx ? 10 : 1 }}
               >
+                <div className="icon-wrapper">
+                  <i
+                    className={`bi ${card.icon} card-icon ${
+                      activeStep - 1 === idx ? "icon-active" : ""
+                    }`}
+                  ></i>
+                </div>
                 <h3>{card.title}</h3>
                 <p>{card.desc}</p>
               </div>
@@ -132,7 +135,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SECTION THREE */}
       <section className="snap-section section-three"></section>
     </div>
   );

@@ -10,9 +10,7 @@
   height: 100vh;
   width: 100%;
   scroll-snap-align: start;
-  position: relative;
 }
-
 
 
 .canvas-wrapper {
@@ -127,10 +125,6 @@
 
 /* Responsive: stack vertically on small screens */
 @media (max-width: 992px) {
-  .section-two-wrapper{
-    padding: 2rem 0;
-  }
-
   .card-row {
     flex-direction: column;
     align-items: center;
@@ -146,3 +140,31 @@
     transform: scale(1) translateY(0) rotate(1);
   }
 }
+
+.icon-wrapper {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-icon {
+  font-size: 2rem;
+  color: #fff;
+}
+
+/* انیمیشن مدام روی آیکون فعال */
+.icon-active {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.3) rotate(10deg); }
+  50% { transform: scale(1.2) rotate(-5deg); }
+  75% { transform: scale(1.3) rotate(10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
