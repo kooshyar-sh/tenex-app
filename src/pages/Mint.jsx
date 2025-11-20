@@ -112,7 +112,7 @@ export default function Mint() {
 
       {/* ====================== STEP 2 — Referral Input ====================== */}
       {step === 2 && (
-        <div className="main-card col-md-6 mx-auto animated-border step2-card position-relative p-4">
+        <div className="main-card col-md-6 mx-auto animated-border position-relative p-4">
           {/* Top-left user number */}
           <div className="user-number-label rounded">
             #{userNumber.toLocaleString()}

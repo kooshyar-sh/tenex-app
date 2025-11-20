@@ -103,7 +103,7 @@ a {
 .animated-border::before {
   content: "";
   position: absolute;
-  inset: -2px; /* ضخامت بوردر */
+  inset: -3px; /* ضخامت بوردر */
   border-radius: inherit;
   background: linear-gradient(
     130deg,
@@ -117,20 +117,52 @@ a {
   z-index: -1; /* پشت کارت قرار بگیره */
 }
 
-.step2-card {
-  position: relative;
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: 12px;
-    background: linear-gradient(130deg, #7f5af0, #b388ff, #ff8ce6, #7f5af0);
-    background-size: 300% 300%;
-    animation: animatedBorderMove 4s linear infinite;
-    z-index: -1;
-  }
-}
+
+// .animated-border {
+//   position: relative;
+//   z-index: 1;
+//   border-radius: 16px;
+//   overflow: hidden; 
+// }
+
+// .animated-border::before {
+//   content: "";
+//   position: absolute;
+//   inset: -3px; 
+//   border-radius: inherit;
+//   background: conic-gradient(
+//     from 0deg,
+//     #7f5af0,
+//     #b388ff,
+//     #ff8ce6,
+//     #7f5af0
+//   );
+//   animation: rotateGradient 5s linear infinite;
+//   z-index: -1;
+// }
+
+// .animated-border::after {
+//   content: "";
+//   position: absolute;
+//   inset: 3px;
+//   background: #f3f1f8;  
+//   border-radius: inherit;
+//   z-index: -1;
+// }
+
+// @keyframes rotateGradient {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+
+
+
+
 
 /* شماره کاربر گوشه بالا سمت چپ */
 .user-number-label {
