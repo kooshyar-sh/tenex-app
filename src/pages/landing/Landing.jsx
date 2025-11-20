@@ -8,7 +8,7 @@ export default function Landing() {
   const sectionTwoRef = useRef(null);
   const containerRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0); // 0: section1, 1-3: کارت‌ها, 4: section3
-  const totalCards = 3;
+  const totalCards = 4;
   const isScrollingRef = useRef(false);
 
   useEffect(() => {
@@ -45,9 +45,15 @@ export default function Landing() {
     if (activeStep === 0) {
       container.scrollTo({ top: 0, behavior: "smooth" });
     } else if (activeStep >= 1 && activeStep <= totalCards) {
-      container.scrollTo({ top: sectionTwoRef.current.offsetTop, behavior: "smooth" });
+      container.scrollTo({
+        top: sectionTwoRef.current.offsetTop,
+        behavior: "smooth",
+      });
     } else if (activeStep === totalCards + 1) {
-      container.scrollTo({ top: container.scrollHeight - container.clientHeight, behavior: "smooth" });
+      container.scrollTo({
+        top: container.scrollHeight - container.clientHeight,
+        behavior: "smooth",
+      });
     }
   }, [activeStep]);
 
@@ -74,7 +80,9 @@ export default function Landing() {
               "Grow with the future of finance",
               "Invest smart, evolve faster",
             ].map((s, i) => (
-              <p className={`slogan-item delay-${i}`} key={i}>{s}</p>
+              <p className={`slogan-item delay-${i}`} key={i}>
+                {s}
+              </p>
             ))}
           </div>
 
@@ -91,13 +99,32 @@ export default function Landing() {
       <section className="snap-section section-two" ref={sectionTwoRef}>
         <div className="section-two-wrapper">
           <div className="card-row">
-            {[0, 1, 2].map((idx) => (
+            {[
+              {
+                title: "Sign Up & Get Referral Code",
+                desc: "Register to receive your unique referral code and start building your community path.",
+              },
+              {
+                title: "Buy Package & Mint Token",
+                desc: "Select a package, mint your token, and become part of our investment network.",
+              },
+              {
+                title: "Invite Others",
+                desc: "Invite two more people to complete your set and grow your share in the community.",
+              },
+              {
+                title: "Token Share & Earn Commission",
+                desc: "As your network grows, claim your token share and receive commissions for referrals.",
+              },
+            ].map((card, idx) => (
               <div
                 key={idx}
-                className={`info-card ${activeStep - 1 === idx ? "active" : ""}`}
+                className={`info-card ${
+                  activeStep - 1 === idx ? "active" : ""
+                }`}
               >
-                <h3>Card {idx + 1}</h3>
-                <p>Some description for card {idx + 1}</p>
+                <h3>{card.title}</h3>
+                <p>{card.desc}</p>
               </div>
             ))}
           </div>
