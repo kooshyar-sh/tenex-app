@@ -5,6 +5,7 @@ import businessDeal from "../assets/Chart.json"; // مسیر فایل لاتی
 import OurVision from "../components/ourVision/OurVision";
 import StatsPanel from "../components/statsPanel/statsPanel";
 import { useNavigate } from "react-router-dom";
+import TextType from "../components/TextType/TextType"; // مسیر صحیح TextType
 
 export default function Home() {
   // حالت‌ها
@@ -31,7 +32,18 @@ export default function Home() {
     <Container className="py-5 text-center">
       {/* Header */}
       <h1 className="fw-bold text-purple mb-3">
-        <i className="bi bi-stars me-2 text-blue"></i> Welcome to TENEX
+        <i className="bi bi-stars me-2 text-blue"></i>
+        <TextType
+          text={[
+            "Welcome to TENEX",
+            "Grow Your Investment",
+            "Join the Future!",
+          ]}
+          typingSpeed={75}
+          pauseDuration={1500}
+          showCursor={true}
+          cursorCharacter="|"
+        />
       </h1>
 
       {/* دکمه یا آدرس ولت */}
@@ -61,7 +73,7 @@ export default function Home() {
       )}
 
       {/* توضیح زیر عنوان */}
-      <p className="text-muted mt-4">
+      <p className="text-muted fw-semibold mt-4">
         The official token launch platform of TENEX. Earn and mint tokens by
         growing your binary network.
       </p>
@@ -69,11 +81,32 @@ export default function Home() {
       {/* بخش توضیحات و انیمیشن */}
       <Row className="align-items-center mt-5">
         <Col md={7} className="mb-4 mb-md-0 text-start">
-          <ul className="list-unstyled text-muted fs-5 fw-semibold">
-            <li className="mb-3">• Join the deflationary mint progress</li>
-            <li className="mb-3">• Mint 10X tokens</li>
-            <li className="mb-3">• Build your own team</li>
-          </ul>
+          <div className="text-muted fw-semibold">
+            <p className="mb-3">
+              TENEX is on a mission to revolutionize the token ecosystem by
+              launching a deflationary minting system, allowing users to earn
+              and mint tokens while growing their networks.
+            </p>
+            <p className="mb-3">
+              Our token will be listed on multiple decentralized and centralized
+              exchanges to ensure liquidity and accessibility for all members.
+            </p>
+            <p className="mb-3">
+              We are actively collaborating with other blockchain projects to
+              integrate innovative DeFi solutions and expand the utility of our
+              token across ecosystems.
+            </p>
+            <p className="mb-3">
+              Our long-term vision includes creating additional decentralized
+              platforms and tools, empowering our community to build, trade, and
+              interact within a secure and scalable environment.
+            </p>
+            <p className="mb-3">
+              Join TENEX today and become part of a growing network that merges
+              investment opportunities with decentralized technology
+              innovations.
+            </p>
+          </div>
         </Col>
         <Col md={5}>
           <Lottie animationData={businessDeal} loop={true} />

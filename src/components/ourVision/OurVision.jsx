@@ -92,7 +92,7 @@ export default function OurVision() {
     <section className="text-center py-5 mt-5">
       <h1 className="fw-bold text-purple mb-3">Our Vision</h1>
 
-      <p className="text-muted mx-auto mb-4" style={{ maxWidth: "700px" }}>
+      <p className="text-muted fw-semibold mx-auto mb-4" style={{ maxWidth: "700px" }}>
         Our vision is to create a{" "}
         <span className="fw-semibold text-blue">community-oriented</span> &{" "}
         <span className="fw-semibold text-blue">community-owned</span> DeFi
