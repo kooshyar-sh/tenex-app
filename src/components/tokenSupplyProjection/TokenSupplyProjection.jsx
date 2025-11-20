@@ -20,7 +20,6 @@ ChartJS.register(
 );
 
 export default function TokenSupplyProjection() {
-
   const xLabels = [
     "1–500",
     "501–2,500",
@@ -30,15 +29,23 @@ export default function TokenSupplyProjection() {
     "21,001–33,000",
     "33,001–63,000",
     "63,001–163,000",
-    "163,001–330,000"
+    "163,001–330,000",
   ];
 
   // ---- Min / Max ----
-  const cumMin = [83981,402947,1083039,1939641,2821437,4131534,6902801,14460978,24278543];
-  const cumMax = [1016165,4875662,13104769,23469653,34139386,49991561,83523889,174977829,293770369];
+  const cumMin = [
+    83981, 402947, 1083039, 1939641, 2821437, 4131534, 6902801, 14460978,
+    24278543,
+  ];
+  const cumMax = [
+    1016165, 4875662, 13104769, 23469653, 34139386, 49991561, 83523889,
+    174977829, 293770369,
+  ];
 
   // ---- MEMBERS AT BREAKPOINTS ----
-  const membersAtEachLevel = [500, 2500, 7000, 13000, 21000, 33000, 63000, 163000, 330000];
+  const membersAtEachLevel = [
+    500, 2500, 7000, 13000, 21000, 33000, 63000, 163000, 330000,
+  ];
 
   // ---- DYNAMIC CURVE (S-CURVE / SOFT EXPO CURVE) ----
   const dynamicLimit = 62750;
@@ -62,7 +69,7 @@ export default function TokenSupplyProjection() {
   const colors = {
     min: "#7A3FFF",
     max: "#FF4F81",
-    dynamic: "#00D1C1"
+    dynamic: "#00D1C1",
   };
 
   // ---- CHART DATA ----
@@ -93,7 +100,7 @@ export default function TokenSupplyProjection() {
         tension: 0.4,
         borderColor: colors.dynamic,
         pointBackgroundColor: colors.dynamic,
-      }
+      },
     ],
   };
 
@@ -118,12 +125,12 @@ export default function TokenSupplyProjection() {
       duration: 1200,
       easing: "easeOutQuart",
       delay: (context) => {
-        if (context.datasetIndex === 0) return 0;     // Min
-        if (context.datasetIndex === 1) return 300;   // Max
-        if (context.datasetIndex === 2) return 600;   // Dynamic
+        if (context.datasetIndex === 0) return 0; // Min
+        if (context.datasetIndex === 1) return 300; // Max
+        if (context.datasetIndex === 2) return 600; // Dynamic
         return 0;
-      }
-    }
+      },
+    },
   };
 
   return (
@@ -131,7 +138,14 @@ export default function TokenSupplyProjection() {
       <h3 className="fw-bold text-purple mb-4">Token Supply Projection</h3>
 
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-        <Line data={data} options={options} />
+        <Line
+          data={data}
+          options={{
+            ...options,
+            maintainAspectRatio: false, 
+          }}
+          height={400}
+        />
       </div>
     </section>
   );
