@@ -103,7 +103,7 @@ a {
 .animated-border::before {
   content: "";
   position: absolute;
-  inset: -3px; /* ضخامت بوردر */
+  inset: -4px; 
   border-radius: inherit;
   background: linear-gradient(
     130deg,
@@ -114,8 +114,56 @@ a {
   );
   background-size: 300% 300%;
   animation: animatedBorderMove 4s linear infinite;
-  z-index: -1; /* پشت کارت قرار بگیره */
+  z-index: -1; 
 }
+
+
+
+// .animated-border {
+//   position: relative;
+//   z-index: 1;
+//   border-radius: 16px;
+// }
+
+// .animated-border::before {
+//   content: "";
+//   position: absolute;
+//   inset: -1px;
+//   border-radius: inherit;
+//   background: linear-gradient(
+//     180deg,
+//     rgb(0, 183, 255),
+//     rgb(255, 48, 255),
+//     rgb(0, 183, 255)
+//   );
+//   background-size: 100% 300%; /* مهم → سه برابر تا حرکت نرم بشه */
+//   animation: flowingBorder 6s linear infinite;
+//   z-index: -1;
+// }
+
+// @keyframes flowingBorder {
+//   0% {
+//     background-position: 0% 0%;
+//   }
+//   50% {
+//     background-position: 0% 100%;
+//   }
+//   100% {
+//     background-position: 0% 0%;
+//   }
+// }
+
+// .animated-border::after {
+//   content: "";
+//   position: absolute;
+//   inset: 3px;
+//   background: #f3f1f8;
+//   border-radius: inherit;
+//   z-index: -1;
+// }
+
+
+
 
 
 
