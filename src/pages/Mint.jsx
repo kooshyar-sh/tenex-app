@@ -82,10 +82,7 @@ export default function Mint() {
               <Col md={4} key={index} className="mb-4">
                 <div
                   className="main-card animated-border text-center h-100 p-4"
-                  onClick={() => {
-                    setSelectedTier(t.name);
-                    setStep(2); // رفتن به Step2 بعد انتخاب
-                  }}
+                  
                 >
                   <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
                   <p className="text-muted mb-1">
@@ -100,7 +97,10 @@ export default function Mint() {
                   <p className="text-muted mb-0">
                     <strong>Earn:</strong> {t.balance} weekly team balance
                   </p>
-                  <Button className="shining-button mt-3">
+                  <Button className="shining-button mt-3"onClick={() => {
+                    setSelectedTier(t.name);
+                    setStep(2); // رفتن به Step2 بعد انتخاب
+                  }}>
                     Select {t.name}
                   </Button>
                 </div>
