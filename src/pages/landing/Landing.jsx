@@ -111,7 +111,7 @@ export default function Landing() {
 
       <section className="snap-section section-two" ref={sectionTwoRef}>
         <div className="section-two-wrapper container">
-          <div className="card-row">
+          <div className="card-row my-auto">
             {cards.map((card, idx) => (
               <div
                 key={idx}

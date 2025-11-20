@@ -100,7 +100,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  position: relative;
   height: 180px;
   flex-wrap: nowrap; /* keep in one row by default */
 }
@@ -114,7 +113,6 @@
   opacity: 0.5;
   transform: scale(0.9) translateY(20px);
   transition: all 0.5s ease;
-  position: relative;
 }
 
 .info-card.active {
@@ -168,3 +166,45 @@
   100% { transform: scale(1) rotate(0deg); }
 }
 
+@media (max-width: 576px) {
+
+  /* کوچک کردن فاصله عمودی ستون کارت‌ها */
+  .card-row {
+    height: auto;
+    gap: 10px;
+  }
+
+  /* کوچک‌تر و جمع‌وجورتر کردن هر کارت */
+  .info-card {
+    padding: 12px;
+    width: 90%;
+    border-radius: 10px;
+    transform: scale(0.85);
+  }
+
+  .info-card.active {
+    transform: scale(0.95) translateY(0) rotate(0deg);
+  }
+
+  /* کوچک کردن آیکون‌ها */
+  .icon-wrapper {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 10px;
+  }
+
+  .card-icon {
+    font-size: 1.7rem;
+  }
+
+  /* کوچک کردن عنوان و متن کارت */
+  .info-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+  }
+
+  .info-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
