@@ -3,6 +3,7 @@ import AppNavbar from "./components/AppNavbar";
 import Home from "./pages/Home";
 import Landing from "./pages/landing/Landing";
 import Mint from "./pages/Mint";
+import SectionTwo from "./pages/SectionTwo";
 import Referrals from "./pages/Referrals";
 import Dashboard from "./pages/user/Dashboard";
 import UserLayout from "./pages/user/UserLayout";
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/mint" element={<Mint />} />
+        <Route path="/section" element={<SectionTwo />} />
         <Route path="/referrals" element={<Referrals />} />
 
         {/* User Panel */}
