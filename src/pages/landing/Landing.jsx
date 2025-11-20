@@ -97,7 +97,7 @@ export default function Landing() {
 
       {/* SECTION TWO */}
       <section className="snap-section section-two" ref={sectionTwoRef}>
-        <div className="section-two-wrapper">
+        <div className="section-two-wrapper container">
           <div className="card-row">
             {[
               {
@@ -109,8 +109,8 @@ export default function Landing() {
                 desc: "Select a package, mint your token, and become part of our investment network.",
               },
               {
-                title: "Invite Others",
-                desc: "Invite two more people to complete your set and grow your share in the community.",
+                title: "Invite Others & Build Your Network",
+                desc: "Invite at least two more people to complete your set and grow your share in the community.",
               },
               {
                 title: "Token Share & Earn Commission",
@@ -122,6 +122,7 @@ export default function Landing() {
                 className={`info-card ${
                   activeStep - 1 === idx ? "active" : ""
                 }`}
+                style={{ zIndex: activeStep - 1 === idx ? 10 : 1 }}
               >
                 <h3>{card.title}</h3>
                 <p>{card.desc}</p>

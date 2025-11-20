@@ -100,22 +100,49 @@
 
 .card-row {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  height: 180px;
+  flex-wrap: nowrap; /* keep in one row by default */
 }
+
 
 .info-card {
   padding: 20px;
   border-radius: 14px;
   background: #333;
   color: white;
-  opacity: 0.4;
-  transition: 0.35s ease;
-  transform: scale(0.9);
+  opacity: 0.5;
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.5s ease;
+  position: relative;
 }
 
 .info-card.active {
-  background: #5227ff;
   opacity: 1;
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(82, 39, 255, 0.7);
+  transform: scale(1.1) translateY(0) rotate(-2deg);
+  box-shadow: 0 10px 30px rgba(82, 39, 255, 0.6);
+}
+
+/* Responsive: stack vertically on small screens */
+@media (max-width: 992px) {
+  .section-two-wrapper{
+    padding: 2rem 0;
+  }
+
+  .card-row {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .info-card {
+    transform: scale(0.95) translateY(0) rotate(); /* reset transform */
+    width: 80%; /* take most of screen width */
+  }
+
+  .info-card.active {
+    transform: scale(1) translateY(0) rotate(1);
+  }
 }
