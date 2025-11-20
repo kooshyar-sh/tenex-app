@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useState } from "react";
 import Countdown from "react-countdown";
+import TooltipCard from "../components/TooltipCard/TooltipCard";
 
 export default function Mint() {
   const [step, setStep] = useState(1); // کنترل استپ‌ها
@@ -80,10 +81,7 @@ export default function Mint() {
           <Row className="justify-content-center">
             {tiers.map((t, index) => (
               <Col md={4} key={index} className="mb-4">
-                <div
-                  className="main-card animated-border text-center h-100 p-4"
-                  
-                >
+                <div className="main-card animated-border text-center h-100 p-4">
                   <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
                   <p className="text-muted mb-1">
                     <strong>Pay:</strong> {t.price}
@@ -91,16 +89,26 @@ export default function Mint() {
                   <p className="text-muted mb-1">
                     <strong>Mint:</strong> {t.mint}
                   </p>
-                  <p className="text-muted mb-1">
-                    <strong>Earn:</strong> {t.direct} direct sales
-                  </p>
+                  <TooltipCard
+                    title="Important Info"
+                    description="Fully custom tooltip without Tailwind."
+                    badge="Verified"
+                  >
+                    <p className="text-muted mb-1">
+                      <strong>Earn:</strong> {t.direct} direct sales
+                    </p>
+                  </TooltipCard>
+
                   <p className="text-muted mb-0">
                     <strong>Earn:</strong> {t.balance} weekly team balance
                   </p>
-                  <Button className="shining-button mt-3"onClick={() => {
-                    setSelectedTier(t.name);
-                    setStep(2); // رفتن به Step2 بعد انتخاب
-                  }}>
+                  <Button
+                    className="shining-button mt-3"
+                    onClick={() => {
+                      setSelectedTier(t.name);
+                      setStep(2); // رفتن به Step2 بعد انتخاب
+                    }}
+                  >
                     Select {t.name}
                   </Button>
                 </div>
