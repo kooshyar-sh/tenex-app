@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import businessDeal from "../assets/Chart.json"; // مسیر فایل لاتی
 import OurVision from "../components/ourVision/OurVision";
 import StatsPanel from "../components/statsPanel/statsPanel";
+import FAQ from "../components/FAQ/FAQ";
 import { useNavigate } from "react-router-dom";
 import TextType from "../components/TextType/TextType"; // مسیر صحیح TextType
 
@@ -116,6 +117,9 @@ export default function Home() {
       <OurVision />
 
       <StatsPanel />
+
+      <FAQ />
+
     </Container>
   );
 }
