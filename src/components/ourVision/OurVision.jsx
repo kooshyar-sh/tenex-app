@@ -89,7 +89,7 @@ export default function OurVision() {
   };
 
   return (
-    <section className="text-center py-5 mt-5">
+    <section className="text-center mt-5">
       <h1 className="fw-bold text-purple mb-3">Our Vision</h1>
 
       <p className="text-muted fw-semibold mx-auto mb-4" style={{ maxWidth: "700px" }}>

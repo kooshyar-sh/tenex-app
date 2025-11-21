@@ -53,8 +53,10 @@ export default function StatsPanel() {
   };
 
   return (
-    <div ref={ref}>
-      <Row className="mt-5 g-4">
+    <div ref={ref} className="mt-5">
+      <h1 className="fw-bold text-purple mb-3">Stats Panel</h1>
+
+      <Row className="g-4">
         {stats.map((s, idx) => (
           <Col xs={6} md={4} lg={3} key={idx}>
             <div
