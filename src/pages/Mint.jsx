@@ -144,7 +144,7 @@ export default function Mint() {
                         title="Weekly Team Balance"
                         description={`This percentage represents the earnings you get from one side of your team each week. For example, if your team's balance on that side reaches ${teamBalanceAmount} BNB, and your balance percentage is ${balancePercentage}%, you earn ${balanceEarned} BNB. This is calculated from a single side only, not both sides of the team.`}
                         badge="Weekly Payout"
-                        mobileHorizontalPosition="right"
+                        mobileHorizontalPosition="left"
                       >
                         <i
                           className="bi bi-question-circle-fill text-muted small ms-2"

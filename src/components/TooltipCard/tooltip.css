@@ -55,6 +55,21 @@
   transform: translateX(-50%) rotate(225deg);
 }
 
+/* Arrow horizontal desktop */
+.tooltip-wrapper.left-desktop .tooltip-arrow {
+  left: 10%; /* نزدیک سمت چپ */
+  transform: rotate(45deg);
+}
+.tooltip-wrapper.center-desktop .tooltip-arrow {
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+.tooltip-wrapper.right-desktop .tooltip-arrow {
+  right: 10%; /* نزدیک سمت راست */
+  left: auto;
+  transform: rotate(45deg);
+}
+
 @media (max-width: 480px) {
   .custom-tooltip {
     width: 240px;
@@ -72,8 +87,8 @@
 
   /* Horizontal */
   .tooltip-wrapper.left-mobile .custom-tooltip {
-    left: 0;
-    right: auto;
+    right: 0;
+    left: auto;
     transform: none; /* هیچ translateX ای اعمال نشود */
   }
   .tooltip-wrapper.center-mobile .custom-tooltip {
@@ -82,8 +97,8 @@
     transform: translateX(-50%);
   }
   .tooltip-wrapper.right-mobile .custom-tooltip {
-    right: 0;
-    left: auto;
+    left: 0;
+    right: auto;
     transform: none; /* هیچ translateX ای اعمال نشود */
   }
 
@@ -97,6 +112,20 @@
     top: -6px;
     left: 50%;
     transform: translateX(-50%) rotate(225deg);
+  }
+
+  .tooltip-wrapper.left-mobile .tooltip-arrow {
+    left: 85%;
+    transform: rotate(45deg);
+  }
+  .tooltip-wrapper.center-mobile .tooltip-arrow {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .tooltip-wrapper.right-mobile .tooltip-arrow {
+    right: 85%;
+    left: auto;
+    transform: rotate(45deg);
   }
 }
 
