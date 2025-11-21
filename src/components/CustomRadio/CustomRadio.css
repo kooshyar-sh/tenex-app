@@ -1,0 +1,48 @@
+.custom-radio-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-family: "Bahnschrift", Arial, sans-serif;
+  color: #333;
+}
+
+.custom-radio-wrapper.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #6f42c1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.radio-inner {
+  width: 12px;
+  height: 12px;
+  background: #6f42c1;
+  border-radius: 50%;
+  display: none;
+  transition: all 0.2s ease;
+}
+
+.custom-radio-wrapper.checked .radio-inner {
+  display: block;
+}
+
+.radio-label {
+  font-size: 14px;
+}
+
+/* Hover effect */
+.custom-radio-wrapper:hover:not(.disabled) .radio-circle {
+  border-color: #4e2c91;
+}

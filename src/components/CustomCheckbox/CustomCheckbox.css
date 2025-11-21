@@ -1,0 +1,47 @@
+.custom-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-family: "Bahnschrift", Arial, sans-serif;
+  color: #333;
+}
+
+.custom-checkbox-wrapper.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.checkbox-box {
+  width: 20px;
+ height: 20px;
+  border: 2px solid #6f42c1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.checkbox-inner {
+  width: 12px;
+  height: 12px;
+  background: #6f42c1;
+  display: none;
+  border-radius: 2px;
+}
+
+.custom-checkbox-wrapper.checked .checkbox-inner {
+  display: block;
+}
+
+.checkbox-label {
+  font-size: 14px;
+}
+
+/* Hover */
+.custom-checkbox-wrapper:hover:not(.disabled) .checkbox-box {
+  border-color: #4e2c91;
+}

@@ -92,7 +92,7 @@ const Loader = () => {
             ></path>
           </g>
           <path
-            stroke-width="0.5"
+            strokeWidth="0.5"
             stroke="#F4F4F4"
             d="M68.9898 68.7324L49.0242 56.699C47.6459 55.8683 45.4111 55.8683 44.0328 56.699L24.0673 68.7324C22.6889 69.5631 22.6889 70.91 24.0673 71.7407L44.0328 83.7741C45.4111 84.6048 47.6459 84.6048 49.0242 83.7741L68.9898 71.7407C70.3681 70.91 70.3681 69.5631 68.9898 68.7324Z"
           ></path>
@@ -102,57 +102,57 @@ const Loader = () => {
         <path
           fill="url(#paint3_linear_204_217)"
           d="M43.5482 32.558C44.5429 32.558 45.3493 31.7162 45.3493 30.6778C45.3493 29.6394 44.5429 28.7976 43.5482 28.7976C42.5535 28.7976 41.7471 29.6394 41.7471 30.6778C41.7471 31.7162 42.5535 32.558 43.5482 32.558Z"
-          class="particle p1"
+          className="particle p1"
         ></path>
         <path
           fill="url(#paint4_linear_204_217)"
           d="M50.0323 48.3519C51.027 48.3519 51.8334 47.5101 51.8334 46.4717C51.8334 45.4333 51.027 44.5915 50.0323 44.5915C49.0375 44.5915 48.2311 45.4333 48.2311 46.4717C48.2311 47.5101 49.0375 48.3519 50.0323 48.3519Z"
-          class="particle p2"
+          className="particle p2"
         ></path>
         <path
           fill="url(#paint5_linear_204_217)"
           d="M40.3062 62.6416C41.102 62.6416 41.7471 61.9681 41.7471 61.1374C41.7471 60.3067 41.102 59.6332 40.3062 59.6332C39.5104 59.6332 38.8653 60.3067 38.8653 61.1374C38.8653 61.9681 39.5104 62.6416 40.3062 62.6416Z"
-          class="particle p3"
+          className="particle p3"
         ></path>
         <path
           fill="url(#paint6_linear_204_217)"
           d="M50.7527 73.9229C52.1453 73.9229 53.2743 72.7444 53.2743 71.2906C53.2743 69.8368 52.1453 68.6583 50.7527 68.6583C49.3601 68.6583 48.2311 69.8368 48.2311 71.2906C48.2311 72.7444 49.3601 73.9229 50.7527 73.9229Z"
-          class="particle p4"
+          className="particle p4"
         ></path>
         <path
           fill="url(#paint7_linear_204_217)"
           d="M48.5913 76.9312C49.1882 76.9312 49.672 76.4262 49.672 75.8031C49.672 75.1801 49.1882 74.675 48.5913 74.675C47.9945 74.675 47.5107 75.1801 47.5107 75.8031C47.5107 76.4262 47.9945 76.9312 48.5913 76.9312Z"
-          class="particle p5"
+          className="particle p5"
         ></path>
         <path
           fill="url(#paint8_linear_204_217)"
           d="M52.9153 67.1541C53.115 67.1541 53.2768 66.9858 53.2768 66.7781C53.2768 66.5704 53.115 66.402 52.9153 66.402C52.7156 66.402 52.5538 66.5704 52.5538 66.7781C52.5538 66.9858 52.7156 67.1541 52.9153 67.1541Z"
-          class="particle p6"
+          className="particle p6"
         ></path>
         <path
           fill="url(#paint9_linear_204_217)"
           d="M52.1936 43.8394C52.7904 43.8394 53.2743 43.3344 53.2743 42.7113C53.2743 42.0883 52.7904 41.5832 52.1936 41.5832C51.5967 41.5832 51.1129 42.0883 51.1129 42.7113C51.1129 43.3344 51.5967 43.8394 52.1936 43.8394Z"
-          class="particle p7"
+          className="particle p7"
         ></path>
         <path
           fill="url(#paint10_linear_204_217)"
           d="M57.2367 29.5497C57.8335 29.5497 58.3173 29.0446 58.3173 28.4216C58.3173 27.7985 57.8335 27.2935 57.2367 27.2935C56.6398 27.2935 56.156 27.7985 56.156 28.4216C56.156 29.0446 56.6398 29.5497 57.2367 29.5497Z"
-          class="particle p8"
+          className="particle p8"
         ></path>
         <path
           fill="url(#paint11_linear_204_217)"
           d="M43.9084 34.8144C44.3063 34.8144 44.6289 34.4777 44.6289 34.0623C44.6289 33.647 44.3063 33.3102 43.9084 33.3102C43.5105 33.3102 43.188 33.647 43.188 34.0623C43.188 34.4777 43.5105 34.8144 43.9084 34.8144Z"
-          class="particle p9"
+          className="particle p9"
         ></path>
       </g>
       <g id="reflectores">
         <path
-          fill-opacity="0.2"
+          fillOpacity="0.2"
           fill="url(#paint12_linear_204_217)"
           d="M49.2037 57.0009L68.7638 68.7786C69.6763 69.3089 69.7967 69.9684 69.794 70.1625V13.7383C69.7649 13.5587 69.6807 13.4657 69.4338 13.3096L48.4832 0.601307C46.9202 -0.192595 46.0788 -0.208238 44.6446 0.601307L23.6855 13.2118C23.1956 13.5876 23.1966 13.7637 23.1956 14.4904L23.246 70.1625C23.2948 69.4916 23.7327 69.0697 25.1768 68.2447L43.9084 57.0008C44.8268 56.4344 45.3776 56.2639 46.43 56.2487C47.5299 56.2257 48.1356 56.4222 49.2037 57.0009Z"
         ></path>
         <path
-          fill-opacity="0.2"
+          fillOpacity="0.2"
           fill="url(#paint13_linear_204_217)"
           d="M48.8867 27.6696C49.9674 26.9175 68.6774 14.9197 68.6774 14.9197C69.3063 14.5327 69.7089 14.375 69.7796 13.756V70.1979C69.7775 70.8816 69.505 71.208 68.7422 71.7322L48.9299 83.6603C48.2003 84.1258 47.6732 84.2687 46.5103 84.2995C45.3295 84.2679 44.8074 84.1213 44.0907 83.6603L24.4348 71.8149C23.5828 71.3313 23.2369 71.0094 23.2316 70.1979L23.1884 13.9816C23.1798 14.8398 23.4982 15.3037 24.7518 16.0874C24.7518 16.0874 42.7629 26.9175 44.2038 27.6696C45.6447 28.4217 46.0049 28.4217 46.5452 28.4217C47.0856 28.4217 47.806 28.4217 48.8867 27.6696Z"
         ></path>
@@ -192,8 +192,8 @@ const Loader = () => {
           x1="1.00946"
           id="paint0_linear_204_217"
         >
-          <stop stop-color="#5727CC"></stop>
-          <stop stop-color="#4354BF" offset="1"></stop>
+          <stop stopColor="#5727CC"></stop>
+          <stop stopColor="#4354BF" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -203,9 +203,9 @@ const Loader = () => {
           x1="92.5"
           id="paint1_linear_204_217"
         >
-          <stop stop-color="#4559C4"></stop>
-          <stop stop-color="#332C94" offset="0.29"></stop>
-          <stop stop-color="#5727CB" offset="1"></stop>
+          <stop stopColor="#4559C4"></stop>
+          <stop stopColor="#332C94" offset="0.29"></stop>
+          <stop stopColor="#5727CB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -215,8 +215,8 @@ const Loader = () => {
           x1="92.5"
           id="paint2_linear_204_217"
         >
-          <stop stop-color="#91DDFB"></stop>
-          <stop stop-color="#8841D5" offset="1"></stop>
+          <stop stopColor="#91DDFB"></stop>
+          <stop stopColor="#8841D5" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -226,8 +226,8 @@ const Loader = () => {
           x1="43.5482"
           id="paint3_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -237,8 +237,8 @@ const Loader = () => {
           x1="50.0323"
           id="paint4_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -248,8 +248,8 @@ const Loader = () => {
           x1="40.3062"
           id="paint5_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -259,8 +259,8 @@ const Loader = () => {
           x1="50.7527"
           id="paint6_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -270,8 +270,8 @@ const Loader = () => {
           x1="48.5913"
           id="paint7_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -281,8 +281,8 @@ const Loader = () => {
           x1="52.9153"
           id="paint8_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -292,8 +292,8 @@ const Loader = () => {
           x1="52.1936"
           id="paint9_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -303,8 +303,8 @@ const Loader = () => {
           x1="57.2367"
           id="paint10_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -314,8 +314,8 @@ const Loader = () => {
           x1="43.9084"
           id="paint11_linear_204_217"
         >
-          <stop stop-color="#5927CE"></stop>
-          <stop stop-color="#91DDFB" offset="1"></stop>
+          <stop stopColor="#5927CE"></stop>
+          <stop stopColor="#91DDFB" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -325,8 +325,8 @@ const Loader = () => {
           x1="67.8638"
           id="paint12_linear_204_217"
         >
-          <stop stop-color="#97E6FF"></stop>
-          <stop stop-opacity="0" stop-color="white" offset="1"></stop>
+          <stop stopColor="#97E6FF"></stop>
+          <stop stopOpacity="0" stopColor="white" offset="1"></stop>
         </linearGradient>
         <linearGradient
           gradientUnits="userSpaceOnUse"
@@ -336,8 +336,8 @@ const Loader = () => {
           x1="36.2597"
           id="paint13_linear_204_217"
         >
-          <stop stop-color="#97E6FF"></stop>
-          <stop stop-opacity="0" stop-color="white" offset="1"></stop>
+          <stop stopColor="#97E6FF"></stop>
+          <stop stopOpacity="0" stopColor="white" offset="1"></stop>
         </linearGradient>
       </defs>
     </svg>

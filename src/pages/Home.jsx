@@ -82,9 +82,9 @@ export default function Home() {
       <Row className="align-items-center mt-5">
         <Col md={7} className="mb-4 mb-md-0 text-start">
           <div className="text-muted fw-semibold">
-            <h2 class="text-purple fw-bold"> TENEX</h2>
+            <h2 className="text-purple fw-bold"> TENEX</h2>
 
-            <h5 class="mb-3">Revolutionizing the Token Ecosystem</h5>
+            <h5 className="mb-3">Revolutionizing the Token Ecosystem</h5>
 
             <p>
               TENEX is on a mission to revolutionize the token ecosystem by

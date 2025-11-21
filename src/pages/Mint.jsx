@@ -129,7 +129,7 @@ export default function Mint() {
                     </p>
 
                     {/* Direct Sales */}
-                    <p className="text-muted mb-1">
+                    <div className="text-muted mb-1">
                       <strong>Earn:</strong> {t.direct} direct sales
                       <TooltipCard
                         title="Direct Sales"
@@ -141,10 +141,10 @@ export default function Mint() {
                           style={{ cursor: "pointer" }}
                         ></i>
                       </TooltipCard>
-                    </p>
+                    </div>
 
                     {/* Weekly Team Balance */}
-                    <p className="text-muted mb-0">
+                    <div className="text-muted mb-0">
                       <strong>Earn:</strong> {t.balance} weekly team balance
                       <TooltipCard
                         title="Weekly Team Balance"
@@ -157,7 +157,7 @@ export default function Mint() {
                           style={{ cursor: "pointer" }}
                         ></i>
                       </TooltipCard>
-                    </p>
+                    </div>
 
                     {/* Select Button */}
                     <Button
@@ -252,7 +252,7 @@ export default function Mint() {
       )}
 
       {/* ====================== Modal برای لودینگ ====================== */}
-      <Modal show={showModal} centered backdrop="static">
+      <Modal show={showModal} centered onHide={() => setShowModal(false)} >
         <Modal.Body className="text-center">
           <Loader />
           <p className="mt-3">Processing your subscription...</p>
