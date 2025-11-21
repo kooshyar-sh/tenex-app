@@ -21,6 +21,12 @@
   z-index: 20;
 }
 
+@media (max-width: 480px) {
+  .custom-tooltip {
+    width: 240px;
+  }
+}
+
 .tooltip-wrapper:hover .custom-tooltip {
   /* opacity: 1; */
   visibility: visible;
