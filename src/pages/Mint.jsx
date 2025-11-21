@@ -82,7 +82,7 @@ export default function Mint() {
             {tiers.map((t, index) => {
               // ===== محاسبات داینامیک =====
               const teamBalanceAmount = 1; // مثال: 1 BNB تعادل تیم
-              const balancePercentage = parseFloat(t.balance) || 0;// درصد هر Tier
+              const balancePercentage = parseFloat(t.balance) || 0; // درصد هر Tier
               const balanceEarned =
                 (teamBalanceAmount * balancePercentage) / 100; // پورسانت دریافتی
 
@@ -123,36 +123,35 @@ export default function Mint() {
                     </p>
 
                     {/* Direct Sales */}
-<p className="text-muted mb-1">
-  <strong>Earn:</strong> {t.direct} direct sales
-  <TooltipCard
-    title="Direct Sales"
-    description="Direct sales represent the percentage you earn from users who joined using your referral code. This commission is generated instantly from their purchases and does not require any team balance or structure."
-    badge="Instant Commission"
-  >
-    <i
-      className="bi bi-question-circle-fill text-muted small ms-2"
-      style={{ cursor: 'pointer' }}
-    ></i>
-  </TooltipCard>
-</p>
+                    <p className="text-muted mb-1">
+                      <strong>Earn:</strong> {t.direct} direct sales
+                      <TooltipCard
+                        title="Direct Sales"
+                        description="Direct sales represent the percentage you earn from users who joined using your referral code. This commission is generated instantly from their purchases and does not require any team balance or structure."
+                        badge="Instant Commission"
+                      >
+                        <i
+                          className="bi bi-question-circle-fill text-muted small ms-2"
+                          style={{ cursor: "pointer" }}
+                        ></i>
+                      </TooltipCard>
+                    </p>
 
-
-{/* Weekly Team Balance */}
-<p className="text-muted mb-0">
-  <strong>Earn:</strong> {t.balance} weekly team balance
-  <TooltipCard
-    title="Weekly Team Balance"
-    description={`This percentage represents the earnings you get from one side of your team each week. For example, if your team's balance on that side reaches ${teamBalanceAmount} BNB, and your balance percentage is ${balancePercentage}%, you earn ${balanceEarned} BNB. This is calculated from a single side only, not both sides of the team.`}
-    badge="Weekly Payout"
-  >
-    <i
-      className="bi bi-question-circle-fill text-muted small ms-2"
-      style={{ cursor: 'pointer' }}
-    ></i>
-  </TooltipCard>
-</p>
-
+                    {/* Weekly Team Balance */}
+                    <p className="text-muted mb-0">
+                      <strong>Earn:</strong> {t.balance} weekly team balance
+                      <TooltipCard
+                        title="Weekly Team Balance"
+                        description={`This percentage represents the earnings you get from one side of your team each week. For example, if your team's balance on that side reaches ${teamBalanceAmount} BNB, and your balance percentage is ${balancePercentage}%, you earn ${balanceEarned} BNB. This is calculated from a single side only, not both sides of the team.`}
+                        badge="Weekly Payout"
+                        mobileHorizontalPosition="right"
+                      >
+                        <i
+                          className="bi bi-question-circle-fill text-muted small ms-2"
+                          style={{ cursor: "pointer" }}
+                        ></i>
+                      </TooltipCard>
+                    </p>
 
                     {/* Select Button */}
                     <Button

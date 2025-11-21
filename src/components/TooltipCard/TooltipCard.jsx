@@ -5,20 +5,29 @@ export default function TooltipCard({
   title = "Information",
   description = "This is a tooltip with detailed information.",
   badge = "Premium Feature",
+  verticalPosition = "top", // 'top' | 'bottom'
+  horizontalPosition = "center", // 'left' | 'center' | 'right'
+  mobileVerticalPosition = "top",
+  mobileHorizontalPosition = "center",
 }) {
   return (
-    <div className="tooltip-wrapper">
-      {/* Trigger */}
+    <div
+      className={`tooltip-wrapper 
+                  ${verticalPosition}-desktop ${horizontalPosition}-desktop
+                  ${mobileVerticalPosition}-mobile ${mobileHorizontalPosition}-mobile`}
+    >
       <div className="tooltip-trigger">{children}</div>
 
-      {/* Tooltip Box */}
       <div className="custom-tooltip">
         <div className="tooltip-content">
-
-          {/* Header */}
           <div className="tooltip-header">
             <div className="tooltip-icon">
-              <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                width="18"
+                height="18"
+              >
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -29,21 +38,26 @@ export default function TooltipCard({
             <h3 className="tooltip-title">{title}</h3>
           </div>
 
-          {/* Body */}
           <p className="tooltip-desc">{description}</p>
 
-          <div className="tooltip-badge">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-              />
-            </svg>
-            <span>{badge}</span>
-          </div>
+          {badge && (
+            <div className="tooltip-badge">
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                width="16"
+                height="16"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                />
+              </svg>
+              <span>{badge}</span>
+            </div>
+          )}
 
-          {/* Tooltip Arrow */}
           <div className="tooltip-arrow"></div>
         </div>
       </div>
