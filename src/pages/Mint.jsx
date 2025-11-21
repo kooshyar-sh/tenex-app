@@ -79,55 +79,95 @@ export default function Mint() {
           </h3>
 
           <Row className="justify-content-center">
-            {tiers.map((t, index) => (
-              <Col md={4} key={index} className="mb-4">
-                <div className="main-card animated-border text-center h-100 p-4">
-                  <div
-                    className={
-                      "tier-badge custom-badge " +
-                      (index === 0
-                        ? "custom-badge-light-warning" // Bronze → Most Used
-                        : index === 1
-                        ? "custom-badge-light-info" // Silver → Medium Profit
-                        : "custom-badge-light-success") // Gold → Best Volume
-                    }
-                  >
-                    {index === 0 && "Most Used"}
-                    {index === 1 && "Medium Profit"}
-                    {index === 2 && "Best Volume"}
-                  </div>
-                  <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
-                  <p className="text-muted mb-1">
-                    <strong>Pay:</strong> {t.price}
-                  </p>
-                  <p className="text-muted mb-1">
-                    <strong>Mint:</strong> {t.mint}
-                  </p>
-                  <TooltipCard
-                    title="Important Info"
-                    description="Fully custom tooltip without Tailwind."
-                    badge="Verified"
-                  >
-                    <p className="text-muted mb-1">
-                      <strong>Earn:</strong> {t.direct} direct sales
-                    </p>
-                  </TooltipCard>
+            {tiers.map((t, index) => {
+              // ===== محاسبات داینامیک =====
+              const teamBalanceAmount = 1; // مثال: 1 BNB تعادل تیم
+              const balancePercentage = parseFloat(t.balance) || 0;// درصد هر Tier
+              const balanceEarned =
+                (teamBalanceAmount * balancePercentage) / 100; // پورسانت دریافتی
 
-                  <p className="text-muted mb-0">
-                    <strong>Earn:</strong> {t.balance} weekly team balance
-                  </p>
-                  <Button
-                    className="shining-button mt-3"
-                    onClick={() => {
-                      setSelectedTier(t.name);
-                      setStep(2); // رفتن به Step2 بعد انتخاب
-                    }}
-                  >
-                    Select {t.name} (no: {userNumber.toLocaleString()})
-                  </Button>
-                </div>
-              </Col>
-            ))}
+              // ===== تعیین Badge هر Tier =====
+              const tierBadge =
+                index === 0
+                  ? {
+                      text: "Most Used",
+                      className: "custom-badge-light-warning",
+                    } // Bronze
+                  : index === 1
+                  ? {
+                      text: "Medium Profit",
+                      className: "custom-badge-light-info",
+                    } // Silver
+                  : {
+                      text: "Best Value",
+                      className: "custom-badge-light-success",
+                    }; // Gold
+
+              return (
+                <Col md={4} key={index} className="mb-4">
+                  <div className="main-card animated-border text-center h-100 p-4">
+                    {/* Tier Badge */}
+                    <div
+                      className={`tier-badge custom-badge ${tierBadge.className}`}
+                    >
+                      {tierBadge.text}
+                    </div>
+
+                    {/* Tier Info */}
+                    <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
+                    <p className="text-muted mb-1">
+                      <strong>Pay:</strong> {t.price}
+                    </p>
+                    <p className="text-muted mb-1">
+                      <strong>Mint:</strong> {t.mint}
+                    </p>
+
+                    {/* Direct Sales */}
+<p className="text-muted mb-1">
+  <strong>Earn:</strong> {t.direct} direct sales
+  <TooltipCard
+    title="Direct Sales"
+    description="Direct sales represent the percentage you earn from users who joined using your referral code. This commission is generated instantly from their purchases and does not require any team balance or structure."
+    badge="Instant Commission"
+  >
+    <i
+      className="bi bi-question-circle-fill text-muted small ms-2"
+      style={{ cursor: 'pointer' }}
+    ></i>
+  </TooltipCard>
+</p>
+
+
+{/* Weekly Team Balance */}
+<p className="text-muted mb-0">
+  <strong>Earn:</strong> {t.balance} weekly team balance
+  <TooltipCard
+    title="Weekly Team Balance"
+    description={`This percentage represents the earnings you get from one side of your team each week. For example, if your team's balance on that side reaches ${teamBalanceAmount} BNB, and your balance percentage is ${balancePercentage}%, you earn ${balanceEarned} BNB. This is calculated from a single side only, not both sides of the team.`}
+    badge="Weekly Payout"
+  >
+    <i
+      className="bi bi-question-circle-fill text-muted small ms-2"
+      style={{ cursor: 'pointer' }}
+    ></i>
+  </TooltipCard>
+</p>
+
+
+                    {/* Select Button */}
+                    <Button
+                      className="shining-button mt-3"
+                      onClick={() => {
+                        setSelectedTier(t.name);
+                        setStep(2); // رفتن به Step2 بعد انتخاب
+                      }}
+                    >
+                      Select {t.name} (no: {userNumber.toLocaleString()})
+                    </Button>
+                  </div>
+                </Col>
+              );
+            })}
           </Row>
         </>
       )}

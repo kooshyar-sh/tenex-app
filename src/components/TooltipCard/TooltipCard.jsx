@@ -43,9 +43,6 @@ export default function TooltipCard({
             <span>{badge}</span>
           </div>
 
-          {/* Glow Background */}
-          <div className="tooltip-glow"></div>
-
           {/* Tooltip Arrow */}
           <div className="tooltip-arrow"></div>
         </div>

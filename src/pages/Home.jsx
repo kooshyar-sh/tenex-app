@@ -82,26 +82,26 @@ export default function Home() {
       <Row className="align-items-center mt-5">
         <Col md={7} className="mb-4 mb-md-0 text-start">
           <div className="text-muted fw-semibold">
-            <p className="mb-3">
+            <h2 class="text-purple fw-bold"> TENEX</h2>
+
+            <h5 class="mb-3">Revolutionizing the Token Ecosystem</h5>
+
+            <p>
               TENEX is on a mission to revolutionize the token ecosystem by
               launching a deflationary minting system, allowing users to earn
               and mint tokens while growing their networks.
-            </p>
-            <p className="mb-3">
+              <br />
               Our token will be listed on multiple decentralized and centralized
               exchanges to ensure liquidity and accessibility for all members.
-            </p>
-            <p className="mb-3">
+              <br />
               We are actively collaborating with other blockchain projects to
               integrate innovative DeFi solutions and expand the utility of our
               token across ecosystems.
-            </p>
-            <p className="mb-3">
+              <br />
               Our long-term vision includes creating additional decentralized
               platforms and tools, empowering our community to build, trade, and
               interact within a secure and scalable environment.
-            </p>
-            <p className="mb-3">
+              <br />
               Join TENEX today and become part of a growing network that merges
               investment opportunities with decentralized technology
               innovations.

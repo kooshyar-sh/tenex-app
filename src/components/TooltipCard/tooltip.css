@@ -15,14 +15,14 @@
   left: 50%;
   transform: translateX(-50%) translateY(10px);
   width: 280px;
-  opacity: 0;
+  /* opacity: 0; */
   visibility: hidden;
   transition: 0.3s ease-out;
   z-index: 20;
 }
 
 .tooltip-wrapper:hover .custom-tooltip {
-  opacity: 1;
+  /* opacity: 1; */
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
@@ -31,23 +31,15 @@
 .tooltip-content {
   position: relative;
   padding: 16px;
-  background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(30, 30, 30, 0.95));
+  background: linear-gradient(135deg, rgba(100, 72, 119, 0.529), rgba(228, 99, 235, 0.693));
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 25px rgba(79, 70, 229, 0.2);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 0 25px rgb(98 5 120 / 26%);
+  backdrop-filter: blur(4px);
   overflow: hidden;
 }
 
-/* Glow Backdrop */
-.tooltip-glow {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
-  filter: blur(25px);
-  opacity: 0.4;
-  z-index: -1;
-}
+
 
 /* Header */
 .tooltip-header {
@@ -68,14 +60,15 @@
 }
 
 .tooltip-title {
-  color: white;
+  color: #fff;
   font-size: 14px;
   font-weight: 600;
 }
 
 /* Text */
 .tooltip-desc {
-  color: #d0d0d0;
+  color: #fff;
+  text-align: start;
   font-size: 13px;
   line-height: 1.4;
   margin-bottom: 10px;
@@ -87,7 +80,7 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #a9a9a9;
+  color: #fff;
 }
 
 /* Tooltip Arrow */

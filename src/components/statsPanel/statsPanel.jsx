@@ -56,9 +56,9 @@ export default function StatsPanel() {
     <div ref={ref}>
       <Row className="mt-5 g-4">
         {stats.map((s, idx) => (
-          <Col md={4} lg={3} key={idx}>
+          <Col xs={6} md={4} lg={3} key={idx}>
             <div
-              className={`main-card text-center p-4 h-100 stats-card ${
+              className={`main-card text-center h-100 stats-card ${
                 startAnimation ? "fade-in-up" : "opacity-0"
               }`}
             >
@@ -80,7 +80,7 @@ export default function StatsPanel() {
         ))}
 
         {/* نمودار دایره‌ای */}
-        <Col md={4} lg={3}>
+        <Col xs={6} md={4} lg={3}>
           <div
             className={`main-card text-center p-4 h-100 stats-card ${
               startAnimation ? "fade-in-up" : "opacity-0"
