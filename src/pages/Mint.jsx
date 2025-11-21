@@ -1,12 +1,14 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 import Countdown from "react-countdown";
 import TooltipCard from "../components/TooltipCard/TooltipCard";
+import Loader from "../components/loader/Loader";
 
 export default function Mint() {
   const [step, setStep] = useState(1); // کنترل استپ‌ها
   const [selectedTier, setSelectedTier] = useState(null);
   const [referral, setReferral] = useState("");
+  const [showModal, setShowModal] = useState(false); // modal state
 
   const userNumber = 62751; // شماره کاربر داینامیک
 
@@ -33,6 +35,10 @@ export default function Mint() {
       balance: "13%",
     },
   ];
+
+  const handleSubscribe = () => {
+    setShowModal(true); // باز کردن مدال
+  };
 
   return (
     <Container className="py-5">
@@ -218,7 +224,7 @@ export default function Mint() {
           </h5>
 
           {/* Subscribe Button */}
-          <Button className="pulse-button mt-3">
+          <Button className="pulse-button mt-3" onClick={handleSubscribe}>
             <i className="bi bi-bag-check me-2"></i> Subscribe
           </Button>
 
@@ -244,6 +250,14 @@ export default function Mint() {
           </div>
         </div>
       )}
+
+      {/* ====================== Modal برای لودینگ ====================== */}
+      <Modal show={showModal} centered backdrop="static">
+        <Modal.Body className="text-center">
+          <Loader />
+          <p className="mt-3">Processing your subscription...</p>
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 }
