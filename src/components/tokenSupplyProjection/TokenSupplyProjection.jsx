@@ -66,11 +66,10 @@ export default function TokenSupplyProjection() {
 
   // ---- Format Y axis (max 3 digits + K/M) ----
   const formatY = (value) => {
-    if (value >= 1_000_000) return (value / 1_000_000).toFixed(2) + "M";
-    if (value >= 1_000) return (value / 1_000).toFixed(2) + "K";
-    return value.toString();
-  };
-  
+  if (value >= 1_000_000) return Math.round(value / 1_000_000) + "M";
+  if (value >= 1_000) return Math.round(value / 1_000) + "K";
+  return value.toString();
+};
 
   // ---- Animated Gradient (3D Effect + Shadow) ----
   useEffect(() => {
@@ -141,7 +140,7 @@ export default function TokenSupplyProjection() {
         pointBackgroundColor: "#FF4F81",
       },
       {
-        label: "Dynamic Projection (Smooth)",
+        label: "Dynamic Projection",
         data: dynamicCurve,
         borderDash: [5, 5],
         borderWidth: 4,
@@ -168,7 +167,7 @@ export default function TokenSupplyProjection() {
         enabled: true,
         mode: "nearest", 
         intersect: true, 
-        backgroundColor: "rgba(0,0,0,0.85)",
+        backgroundColor: "rgba(137, 61, 141, 0.69)",
         titleColor: "#fff",
         bodyColor: "#eee",
         borderColor: "#7f3cff",
