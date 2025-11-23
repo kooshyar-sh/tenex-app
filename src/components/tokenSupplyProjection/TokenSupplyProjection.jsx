@@ -66,10 +66,10 @@ export default function TokenSupplyProjection() {
 
   // ---- Format Y axis (max 3 digits + K/M) ----
   const formatY = (value) => {
-  if (value >= 1_000_000) return Math.round(value / 1_000_000) + "M";
-  if (value >= 1_000) return Math.round(value / 1_000) + "K";
-  return value.toString();
-};
+    if (value >= 1_000_000) return Math.round(value / 1_000_000) + "M";
+    if (value >= 1_000) return Math.round(value / 1_000) + "K";
+    return value.toString();
+  };
 
   // ---- Animated Gradient (3D Effect + Shadow) ----
   useEffect(() => {
@@ -165,8 +165,8 @@ export default function TokenSupplyProjection() {
       },
       tooltip: {
         enabled: true,
-        mode: "nearest", 
-        intersect: true, 
+        mode: "nearest",
+        intersect: true,
         backgroundColor: "rgba(137, 61, 141, 0.69)",
         titleColor: "#fff",
         bodyColor: "#eee",
@@ -212,15 +212,57 @@ export default function TokenSupplyProjection() {
 
   return (
     <section className="mt-5 pt-4">
-      <h1 className="fw-bold text-purple mb-3">Token Supply Projection</h1>
+      <h1 className="fw-bold text-purple mb-4">Token Supply Projection</h1>
 
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-        <Line
-          ref={chartRef}
-          data={data}
-          options={{ ...options, maintainAspectRatio: false }}
-          height={400}
-        />
+      <div className="row align-items-center text-muted">
+        {/* --- Left Column: Description --- */}
+        <div className="col-md-5 mb-4 text-start">
+          <div>
+            <h4 className="fw-bold mb-3 text-purple">What This Chart Shows</h4>
+
+            <p>
+              This chart illustrates how token supply evolves based on the
+              membership packages chosen by users. Each curve reflects a
+              different scenario depending on the package investment.
+            </p>
+
+            <ul className="px-0">
+              <li>
+                <b>Min Projection:</b> Occurs when users choose the{" "}
+                <b>Bronze Package</b> and mint tokens with 0.1 BNB, resulting in
+                a conservative cumulative supply.
+              </li>
+              <li>
+                <b>Max Projection:</b> Happens when users select the{" "}
+                <b>Gold Package</b> and mint tokens with 1 BNB, producing a
+                higher cumulative supply.
+              </li>
+              <li>
+                <b>Dynamic Projection:</b> Represents a smooth mid-range
+                scenario, showing realistic supply growth as adoption increases
+                across all packages.
+              </li>
+            </ul>
+
+            <p>
+              The dynamic projection provides a balanced view between the
+              minimum and maximum outcomes, reflecting typical adoption trends
+              as more users mint tokens through different packages.
+            </p>
+          </div>
+        </div>
+
+        {/* --- Right Column: Chart --- */}
+        <div className="col-md-7">
+          <div style={{ maxWidth: "100%", margin: "0 auto" }}>
+            <Line
+              ref={chartRef}
+              data={data}
+              options={{ ...options, maintainAspectRatio: false }}
+              height={400}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );
