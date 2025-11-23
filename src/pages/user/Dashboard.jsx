@@ -2,7 +2,6 @@ import {
   Container,
   Row,
   Col,
-  Card,
   Modal,
   Button,
 } from "react-bootstrap";
@@ -27,17 +26,8 @@ export default function Dashboard() {
   const [earningsPeriod, setEarningsPeriod] = useState("weekly");
   const [referralsPeriod, setReferralsPeriod] = useState("weekly");
 
-  // داده‌های فرضی برای نمودارها
+  // داده‌های فرضی نمودارها
   const earningsData = {
-    daily: [
-      { time: "Mon", BNB: 0.1 },
-      { time: "Tue", BNB: 0.2 },
-      { time: "Wed", BNB: 0.15 },
-      { time: "Thu", BNB: 0.3 },
-      { time: "Fri", BNB: 0.25 },
-      { time: "Sat", BNB: 0.2 },
-      { time: "Sun", BNB: 0.35 },
-    ],
     weekly: [
       { time: "Week1", BNB: 1 },
       { time: "Week2", BNB: 1.2 },
@@ -50,18 +40,14 @@ export default function Dashboard() {
       { time: "Mar", BNB: 5 },
       { time: "Apr", BNB: 4.2 },
     ],
+    all: [
+      { time: "2022", BNB: 20 },
+      { time: "2023", BNB: 25 },
+      { time: "2024", BNB: 18 },
+    ],
   };
 
   const referralsData = {
-    daily: [
-      { time: "Mon", newUsers: 2 },
-      { time: "Tue", newUsers: 3 },
-      { time: "Wed", newUsers: 1 },
-      { time: "Thu", newUsers: 4 },
-      { time: "Fri", newUsers: 2 },
-      { time: "Sat", newUsers: 3 },
-      { time: "Sun", newUsers: 5 },
-    ],
     weekly: [
       { time: "Week1", newUsers: 8 },
       { time: "Week2", newUsers: 12 },
@@ -74,7 +60,14 @@ export default function Dashboard() {
       { time: "Mar", newUsers: 50 },
       { time: "Apr", newUsers: 42 },
     ],
+    all: [
+      { time: "2022", newUsers: 400 },
+      { time: "2023", newUsers: 520 },
+      { time: "2024", newUsers: 450 },
+    ],
   };
+
+  const periods = ["weekly", "monthly", "all"];
 
   return (
     <Container>
@@ -163,7 +156,7 @@ export default function Dashboard() {
 
             {/* دکمه انتخاب بازه زمانی */}
             <div className="mb-2">
-              {["daily", "weekly", "monthly"].map((p) => (
+              {periods.map((p) => (
                 <Button
                   key={p}
                   variant={earningsPeriod === p ? "primary" : "outline-primary"}
@@ -201,12 +194,10 @@ export default function Dashboard() {
 
             {/* دکمه انتخاب بازه زمانی */}
             <div className="mb-2">
-              {["daily", "weekly", "monthly"].map((p) => (
+              {periods.map((p) => (
                 <Button
                   key={p}
-                  variant={
-                    referralsPeriod === p ? "primary" : "outline-primary"
-                  }
+                  variant={referralsPeriod === p ? "primary" : "outline-primary"}
                   size="sm"
                   className="me-2"
                   onClick={() => setReferralsPeriod(p)}
@@ -228,6 +219,7 @@ export default function Dashboard() {
           </div>
         </Col>
       </Row>
+
 
       <Modal
         show={showVolumeModal}
