@@ -229,12 +229,12 @@ export default function TokenSupplyProjection() {
             <ul className="px-0">
               <li>
                 <b>Min Projection:</b> Occurs when users choose the{" "}
-                <b>Bronze Package</b> and mint tokens with 0.1 BNB, resulting in
+                <span className="fw-semibold text-blue">Bronze Package</span> and mint tokens with 0.1 BNB, resulting in
                 a conservative cumulative supply.
               </li>
               <li>
                 <b>Max Projection:</b> Happens when users select the{" "}
-                <b>Gold Package</b> and mint tokens with 1 BNB, producing a
+                <span className="fw-semibold text-blue">Gold Package</span> and mint tokens with 1 BNB, producing a
                 higher cumulative supply.
               </li>
               <li>

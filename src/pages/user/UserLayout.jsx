@@ -16,12 +16,12 @@ export default function UserLayout() {
             </NavLink>
           </li>
 
-          <li>
+          {/* <li>
             <NavLink to="statistics" className="nav-item">
               <i className="bi bi-graph-up"></i>
               <span>Statistics</span>
             </NavLink>
-          </li>
+          </li> */}
 
           <li>
             <NavLink to="my-team" className="nav-item">

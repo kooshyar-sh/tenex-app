@@ -3,16 +3,78 @@ import {
   Row,
   Col,
   Card,
-  Table,
-  ProgressBar,
-  Badge,
+  Modal,
+  Button,
 } from "react-bootstrap";
-import { currentUser, referralList } from "../../data/mockData";
-import { Modal } from "react-bootstrap";
+import { currentUser } from "../../data/mockData";
 import { useState } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+} from "recharts";
 
 export default function Dashboard() {
   const [showVolumeModal, setShowVolumeModal] = useState(false);
+
+  const [earningsPeriod, setEarningsPeriod] = useState("weekly");
+  const [referralsPeriod, setReferralsPeriod] = useState("weekly");
+
+  // داده‌های فرضی برای نمودارها
+  const earningsData = {
+    daily: [
+      { time: "Mon", BNB: 0.1 },
+      { time: "Tue", BNB: 0.2 },
+      { time: "Wed", BNB: 0.15 },
+      { time: "Thu", BNB: 0.3 },
+      { time: "Fri", BNB: 0.25 },
+      { time: "Sat", BNB: 0.2 },
+      { time: "Sun", BNB: 0.35 },
+    ],
+    weekly: [
+      { time: "Week1", BNB: 1 },
+      { time: "Week2", BNB: 1.2 },
+      { time: "Week3", BNB: 0.8 },
+      { time: "Week4", BNB: 1.5 },
+    ],
+    monthly: [
+      { time: "Jan", BNB: 4 },
+      { time: "Feb", BNB: 3.5 },
+      { time: "Mar", BNB: 5 },
+      { time: "Apr", BNB: 4.2 },
+    ],
+  };
+
+  const referralsData = {
+    daily: [
+      { time: "Mon", newUsers: 2 },
+      { time: "Tue", newUsers: 3 },
+      { time: "Wed", newUsers: 1 },
+      { time: "Thu", newUsers: 4 },
+      { time: "Fri", newUsers: 2 },
+      { time: "Sat", newUsers: 3 },
+      { time: "Sun", newUsers: 5 },
+    ],
+    weekly: [
+      { time: "Week1", newUsers: 8 },
+      { time: "Week2", newUsers: 12 },
+      { time: "Week3", newUsers: 9 },
+      { time: "Week4", newUsers: 15 },
+    ],
+    monthly: [
+      { time: "Jan", newUsers: 40 },
+      { time: "Feb", newUsers: 35 },
+      { time: "Mar", newUsers: 50 },
+      { time: "Apr", newUsers: 42 },
+    ],
+  };
 
   return (
     <Container>
@@ -88,50 +150,81 @@ export default function Dashboard() {
               <small className="text-muted">New (7d):</small>{" "}
               <strong className="text-info">{currentUser.new7d}</strong>
             </p>
-
-            <hr />
-            <small>
-              Referral code: <code>{currentUser.referralCode}</code>
-            </small>
           </div>
         </Col>
       </Row>
 
-      <Row>
-        <Col className="p-0 px-md-2 mt-2 mt-md-0">
-          <div className="main-card">
-            <h5 className="text-purple mb-3">
-              <i className="bi bi-diagram-3 me-2 text-blue"></i> Referral List
-            </h5>
+      {/* ---------- ردیف نمودارها ---------- */}
+      <Row className="mt-4">
+        {/* نمودار BNB Earnings */}
+        <Col md={6} className="p-0 px-md-2 mb-3">
+          <div className="main-card p-3">
+            <h5 className="text-purple mb-3">BNB Earnings</h5>
 
-            <Table hover responsive bordered className="custom-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Address</th>
-                  <th>Level</th>
-                  <th>Volume</th>
-                </tr>
-              </thead>
-              <tbody>
-                {referralList.map((r, idx) => (
-                  <tr key={idx}>
-                    <td>{r.name}</td>
-                    <td className="text-muted">{r.address}</td>
-                    <td>
-                      <Badge
-                        bg="light"
-                        text="dark"
-                        className="badge-light-purple"
-                      >
-                        {r.level}
-                      </Badge>
-                    </td>
-                    <td>{r.volume}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+            {/* دکمه انتخاب بازه زمانی */}
+            <div className="mb-2">
+              {["daily", "weekly", "monthly"].map((p) => (
+                <Button
+                  key={p}
+                  variant={earningsPeriod === p ? "primary" : "outline-primary"}
+                  size="sm"
+                  className="me-2"
+                  onClick={() => setEarningsPeriod(p)}
+                >
+                  {p.charAt(0).toUpperCase() + p.slice(1)}
+                </Button>
+              ))}
+            </div>
+
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={earningsData[earningsPeriod]}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="time" />
+                <YAxis />
+                <Tooltip />
+                <Line
+                  type="monotone"
+                  dataKey="BNB"
+                  stroke="#6f42c1"
+                  strokeWidth={2}
+                  dot={{ r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </Col>
+
+        {/* نمودار تعداد افراد جدید */}
+        <Col md={6} className="p-0 px-md-2 mb-3">
+          <div className="main-card p-3">
+            <h5 className="text-purple mb-3">New Team Members</h5>
+
+            {/* دکمه انتخاب بازه زمانی */}
+            <div className="mb-2">
+              {["daily", "weekly", "monthly"].map((p) => (
+                <Button
+                  key={p}
+                  variant={
+                    referralsPeriod === p ? "primary" : "outline-primary"
+                  }
+                  size="sm"
+                  className="me-2"
+                  onClick={() => setReferralsPeriod(p)}
+                >
+                  {p.charAt(0).toUpperCase() + p.slice(1)}
+                </Button>
+              ))}
+            </div>
+
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={referralsData[referralsPeriod]}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="time" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="newUsers" fill="#0d6efd" barSize={18} />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </Col>
       </Row>
