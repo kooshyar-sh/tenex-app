@@ -699,12 +699,10 @@ a {
   }
 }
 
-
 // dashboard styles
 @media (min-width: 768px) {
-
   .dashboard-top-row .main-card {
-    flex: 1; 
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -712,8 +710,6 @@ a {
     align-items: start;
   }
 }
-
-
 
 // myTeam styles
 .wallet-cell {
@@ -766,7 +762,18 @@ a {
   box-shadow: 0 4px 20px rgba(88, 3, 103, 0.3);
   min-width: 200px;
 
+  .popover-header {
+    background-color: #e7ddf6ff;
+    color: $primary-dark;
+    font-weight: bold;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid $border-color;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
   .popover-arrow::after {
     border-right-color: $main-card;
-}
+  }
 }

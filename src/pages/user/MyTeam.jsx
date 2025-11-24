@@ -1,4 +1,4 @@
-import { referralList } from "../../data/mockData";
+import { leftWingList, rightWingList } from "../../data/mockData";
 import {
   Container,
   Row,
@@ -11,13 +11,15 @@ import {
 import { useState } from "react";
 import { BiCopy, BiShow } from "react-icons/bi";
 
-const shortenAddress = (addr) => {
-  if (!addr) return "";
-  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-};
+const shortenAddress = (addr) =>
+  addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : "";
 
 export default function MyTeam() {
+  const [activeWing, setActiveWing] = useState("left"); // left یا right
   const [copied, setCopied] = useState(null);
+
+  const [sortBy, setSortBy] = useState(""); 
+const [filterFilled, setFilterFilled] = useState(null); 
 
   const copyToClipboard = (text, idx) => {
     navigator.clipboard.writeText(text);
@@ -25,14 +27,37 @@ export default function MyTeam() {
     setTimeout(() => setCopied(null), 1500);
   };
 
+  const currentList = activeWing === "left" ? leftWingList : rightWingList;
+
   return (
     <Container>
+      <Row className="mb-3">
+        <Col className="d-flex gap-2">
+          <Button
+            className={activeWing === "left" ? "btn-blue" : "btn-outline-blue"}
+            onClick={() => setActiveWing("left")}
+          >
+            Left Wing
+          </Button>
+          <Button
+            className={activeWing === "right" ? "btn-blue" : "btn-outline-blue"}
+            onClick={() => setActiveWing("right")}
+          >
+            Right Wing
+          </Button>
+        </Col>
+      </Row>
+
       <Row>
-        <Col className="p-0 px-md-2 mt-2 mt-md-0">
+        <Col className="p-0 px-md-2">
           <div className="main-card">
             <h5 className="text-purple mb-3">
-              <i className="bi bi-diagram-3 me-2 text-blue"></i> Referral List
+              <i className="bi bi-diagram-3 me-2 text-blue"></i>
+              {activeWing === "left"
+                ? "Left Wing Referral List"
+                : "Right Wing Referral List"}
             </h5>
+            
 
             <Table hover responsive bordered className="custom-table">
               <thead>
@@ -49,8 +74,9 @@ export default function MyTeam() {
                 </tr>
               </thead>
               <tbody>
-                {referralList.map((r, idx) => (
+                {currentList.map((r, idx) => (
                   <tr key={idx}>
+                    {/* Popover */}
                     <td className="text-center">
                       <OverlayTrigger
                         trigger="click"
@@ -61,6 +87,9 @@ export default function MyTeam() {
                             id={`popover-${idx}`}
                             className="custom-popover"
                           >
+                            <Popover.Header as="h6">
+                              Additional Info
+                            </Popover.Header>
                             <Popover.Body>
                               <div className="mb-2">
                                 <strong>Joined Date:</strong> {r.joinedDate}
