@@ -174,6 +174,7 @@ export default function TokenSupplyProjectionRecharts() {
                   strokeWidth={3}
                   dot={{ r: 4 }}
                   strokeDasharray="6 6"
+                  className="dynamic-pulse-line"
                 />
               </LineChart>
             </ResponsiveContainer>
