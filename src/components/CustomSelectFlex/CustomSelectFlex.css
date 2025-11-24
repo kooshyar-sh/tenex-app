@@ -18,7 +18,7 @@
 .my-select-header {
   padding: 8px 12px;
   display: flex;
-  justify-content: space-between; /* متن + آیکون کنار هم */
+  justify-content: space-between;
   align-items: center;
   color: #222;
   font-size: 14px;
@@ -53,6 +53,30 @@
 }
 
 .my-select-item:hover {
-  background: #f5ddf9; /* bg-light */
+  background: #f5ddf9;
   color: #7f3cff;
+}
+
+/* -----------------------------
+     📱 Mobile Optimization
+------------------------------*/
+@media (max-width: 576px) {
+  .my-select {
+    min-width: 140px;
+    border-width: 1.6px;
+  }
+
+  .my-select-header {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .my-select-header i {
+    font-size: 14px;
+  }
+
+  .my-select-item {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
 }

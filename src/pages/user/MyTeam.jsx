@@ -82,7 +82,7 @@ export default function MyTeam() {
                   : "Right Wing Referral List"}
               </h5>
 
-              <div className="d-flex align-items-center gap-3 flex-wrap">
+              <div className="d-flex align-items-center gap-3 flex-wrap mt-2 mt-lg-0">
                 {/* ---------- Sort Select ---------- */}
                 <CustomSelectFlex
                   value={sortBy}
