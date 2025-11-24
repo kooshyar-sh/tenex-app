@@ -610,9 +610,14 @@ a {
   background: $main-card;
 }
 
-.volume-modal-sm {
-  max-width: 380px !important;
+.modal-dialog{
+  justify-content: center;
+
+  .modal-content{
+    max-width: 380px !important;
+  }
 }
+
 
 /* custom input */
 .number-input {
@@ -777,3 +782,46 @@ a {
     border-right-color: $main-card;
   }
 }
+
+// custom select styles
+.custom-select-wrapper {
+  position: relative;
+  width: 180px;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 2px solid #a66bff;
+  background: $main-card;
+  color: #222;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  transition: 0.2s ease;
+  font-family: "Bahnschrift";
+}
+
+.custom-select:hover {
+  border-color: #7f3cff;
+}
+
+.custom-select:focus {
+  border-color: #7f3cff;
+  box-shadow: 0 0 0 3px rgba(166, 107, 255, 0.3);
+}
+
+/* Arrow */
+.custom-select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #7f3cff;
+  pointer-events: none;
+}
+

@@ -8,18 +8,19 @@ import {
   Popover,
   Button,
 } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { BiCopy, BiShow } from "react-icons/bi";
+import CustomRadio from "../../components/CustomRadio/CustomRadio";
 
 const shortenAddress = (addr) =>
   addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : "";
 
 export default function MyTeam() {
-  const [activeWing, setActiveWing] = useState("left"); // left یا right
+  const [activeWing, setActiveWing] = useState("left");
   const [copied, setCopied] = useState(null);
 
-  const [sortBy, setSortBy] = useState(""); 
-const [filterFilled, setFilterFilled] = useState(null); 
+  const [sortBy, setSortBy] = useState("");
+  const [filterFilled, setFilterFilled] = useState(null); // null = همه
 
   const copyToClipboard = (text, idx) => {
     navigator.clipboard.writeText(text);
@@ -29,8 +30,29 @@ const [filterFilled, setFilterFilled] = useState(null);
 
   const currentList = activeWing === "left" ? leftWingList : rightWingList;
 
+  const processedList = useMemo(() => {
+    let data = [...currentList];
+
+    // ---- Filtering ----
+    if (filterFilled === "filled") {
+      data = data.filter((item) => item.referralCode !== null);
+    } else if (filterFilled === "empty") {
+      data = data.filter((item) => item.referralCode === null);
+    }
+
+    // ---- Sorting ----
+    if (sortBy === "level") {
+      data.sort((a, b) => a.level - b.level);
+    } else if (sortBy === "date") {
+      data.sort((a, b) => new Date(a.joinedDate) - new Date(b.joinedDate));
+    }
+
+    return data;
+  }, [currentList, sortBy, filterFilled]);
+
   return (
     <Container>
+      {/* Wing Selector */}
       <Row className="mb-3">
         <Col className="d-flex gap-2">
           <Button
@@ -51,18 +73,50 @@ const [filterFilled, setFilterFilled] = useState(null);
       <Row>
         <Col className="p-0 px-md-2">
           <div className="main-card">
-            <h5 className="text-purple mb-3">
-              <i className="bi bi-diagram-3 me-2 text-blue"></i>
-              {activeWing === "left"
-                ? "Left Wing Referral List"
-                : "Right Wing Referral List"}
-            </h5>
-            
+            {/* Title + Sorting/Filtering */}
+            <div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
+              <h5 className="text-purple mb-0">
+                <i className="bi bi-diagram-3 me-2 text-blue"></i>
+                {activeWing === "left"
+                  ? "Left Wing Referral List"
+                  : "Right Wing Referral List"}
+              </h5>
 
+              <div className="d-flex align-items-center gap-3 flex-wrap">
+                {/* Sort Select */}
+                <div className="custom-select-wrapper">
+                  <select
+                    className="custom-select"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                  >
+                    <option value="">Sort: None</option>
+                    <option value="level">Sort by Level</option>
+                    <option value="date">Sort by Joined Date</option>
+                  </select>
+                </div>
+
+                {/* ---------- Filter Select (All / Filled / Empty) ---------- */}
+
+                <div className="custom-select-wrapper">
+                  <select
+                    className="custom-select"
+                    value={filterFilled}
+                    onChange={(e) => setFilterFilled(e.target.value)}
+                  >
+                    <option value="all">All</option>
+                    <option value="filled">Filled</option>
+                    <option value="empty">Only Empty</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Table */}
             <Table hover responsive bordered className="custom-table">
               <thead>
                 <tr>
-                  <th style={{ width: "30px", textAlign: "center" }}>
+                  <th style={{ width: "40px", textAlign: "center" }}>
                     <i
                       className="bi bi-question-circle-fill text-muted small"
                       style={{ cursor: "pointer" }}
@@ -73,10 +127,11 @@ const [filterFilled, setFilterFilled] = useState(null);
                   <th>BNB Volume</th>
                 </tr>
               </thead>
+
               <tbody>
-                {currentList.map((r, idx) => (
+                {processedList.map((r, idx) => (
                   <tr key={idx}>
-                    {/* Popover */}
+                    {/* Popover Button */}
                     <td className="text-center">
                       <OverlayTrigger
                         trigger="click"
@@ -90,10 +145,12 @@ const [filterFilled, setFilterFilled] = useState(null);
                             <Popover.Header as="h6">
                               Additional Info
                             </Popover.Header>
+
                             <Popover.Body>
                               <div className="mb-2">
-                                <strong>Joined Date:</strong> {r.joinedDate}
+                                <strong>Joined Date: </strong> {r.joinedDate}
                               </div>
+
                               {r.referralCode ? (
                                 <div className="d-flex align-items-center">
                                   <span className="me-2">{r.referralCode}</span>

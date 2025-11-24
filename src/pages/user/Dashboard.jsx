@@ -245,7 +245,6 @@ export default function Dashboard() {
         show={showVolumeModal}
         onHide={() => setShowVolumeModal(false)}
         centered
-        dialogClassName="volume-modal-sm"
       >
         <Modal.Header closeButton>
           <Modal.Title className="text-purple">Team Volume Details</Modal.Title>
