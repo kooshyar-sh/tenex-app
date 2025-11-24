@@ -8,8 +8,16 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { useEffect, useState } from "react";
 
 export default function TokenSupplyProjectionRecharts() {
+  const [offset, setOffset] = useState(3000);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setOffset(0), 150);
+    return () => clearTimeout(timer);
+  }, []);
+
   const xLabels = [
     "1–500",
     "501–2,500",
@@ -165,7 +173,7 @@ export default function TokenSupplyProjectionRecharts() {
                   stroke="#00D1C1"
                   strokeWidth={3}
                   dot={{ r: 4 }}
-                  strokeDasharray="5 5"
+                  strokeDasharray="6 6"
                 />
               </LineChart>
             </ResponsiveContainer>
