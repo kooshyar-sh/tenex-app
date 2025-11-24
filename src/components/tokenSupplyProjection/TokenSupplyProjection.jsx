@@ -1,30 +1,15 @@
 import {
-  Chart as ChartJS,
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
   Tooltip,
   Legend,
-  Filler,
-} from "chart.js";
+  ResponsiveContainer,
+} from "recharts";
 
-import { Line } from "react-chartjs-2";
-import { useEffect, useRef } from "react";
-
-ChartJS.register(
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  Tooltip,
-  Legend,
-  Filler
-);
-
-export default function TokenSupplyProjection() {
-  const chartRef = useRef(null);
-
+export default function TokenSupplyProjectionRecharts() {
   const xLabels = [
     "1–500",
     "501–2,500",
@@ -64,150 +49,42 @@ export default function TokenSupplyProjection() {
     x <= dynamicLimit ? sCurveProjection(x) : null
   );
 
-  // ---- Format Y axis (max 3 digits + K/M) ----
-  const formatY = (value) => {
-    if (value >= 1_000_000) return Math.round(value / 1_000_000) + "M";
-    if (value >= 1_000) return Math.round(value / 1_000) + "K";
-    return value.toString();
-  };
+  // داده‌ها برای recharts
+  const chartData = xLabels.map((label, i) => ({
+    level: label,
+    min: cumMin[i],
+    max: cumMax[i],
+    dynamic: dynamicCurve[i] ?? null,
+  }));
 
-  // ---- Animated Gradient (3D Effect + Shadow) ----
-  useEffect(() => {
-    const chart = chartRef.current;
-    if (!chart) return;
-
-    let t = 0;
-    let lastFrame = 0;
-
-    const animate = (timestamp) => {
-      if (timestamp - lastFrame < 33) {
-        requestAnimationFrame(animate);
-        return;
-      }
-      lastFrame = timestamp;
-
-      const ctx = chart.ctx;
-      const width = chart.width;
-      const height = chart.height;
-
-      t += 0.01;
-      if (t > 1) t = 0;
-
-      // ---- Animated 3D Gradient ----
-      const grad = ctx.createLinearGradient(0, 0, width, 0);
-      grad.addColorStop((t + 0) % 1, "rgba(0, 209, 193, 0.05)");
-      grad.addColorStop((t + 0.3) % 1, "rgba(0, 209, 193, 0.6)");
-      grad.addColorStop((t + 0.6) % 1, "rgba(0, 209, 193, 1)");
-      grad.addColorStop((t + 0.9) % 1, "rgba(0, 209, 193, 0.4)");
-
-      chart.data.datasets[2].borderColor = grad;
-
-      // ---- 3D glow fill ----
-      const fillGrad = ctx.createLinearGradient(0, 0, 0, height);
-      fillGrad.addColorStop(0, "rgba(0, 209, 193, 0.20)");
-      fillGrad.addColorStop(1, "rgba(0, 209, 193, 0.0)");
-
-      chart.data.datasets[2].backgroundColor = fillGrad;
-
-      chart.update();
-      requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-  }, []);
-
-  const data = {
-    labels: xLabels,
-    datasets: [
-      {
-        label: "Min Projection",
-        data: cumMin,
-        borderWidth: 3,
-        tension: 0.35,
-        borderColor: "#7A3FFF",
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        pointBackgroundColor: "#7A3FFF",
-      },
-      {
-        label: "Max Projection",
-        data: cumMax,
-        borderWidth: 3,
-        tension: 0.35,
-        borderColor: "#FF4F81",
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        pointBackgroundColor: "#FF4F81",
-      },
-      {
-        label: "Dynamic Projection",
-        data: dynamicCurve,
-        borderDash: [5, 5],
-        borderWidth: 4,
-        tension: 0.5,
-        fill: true,
-        pointBackgroundColor: "#00D1C1",
-        pointRadius: 4,
-        pointHoverRadius: 6,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-        labels: {
-          font: { family: "Segoe UI", size: 14, weight: "600" },
-          color: "#333", // back to normal (not white)
-        },
-      },
-      tooltip: {
-        enabled: true,
-        mode: "nearest",
-        intersect: true,
-        backgroundColor: "rgba(137, 61, 141, 0.69)",
-        titleColor: "#fff",
-        bodyColor: "#eee",
-        borderColor: "#7f3cff",
-        borderWidth: 1.5,
-        padding: 10,
-        titleFont: { family: "Segoe UI", size: 15, weight: "600" },
-        bodyFont: { family: "Segoe UI", size: 13 },
-      },
-    },
-
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          color: "#444",
-          font: { family: "Segoe UI", size: 12 },
-          callback: formatY,
-        },
-        title: {
-          display: true,
-          text: "Cumulative Tokens",
-          color: "#222", // reverted to non-white
-          font: { family: "Segoe UI", size: 16 },
-        },
-        grid: { color: "rgba(0,0,0,0.05)" },
-      },
-      x: {
-        ticks: {
-          color: "#444",
-          font: { family: "Segoe UI", size: 12 },
-        },
-        title: {
-          display: true,
-          text: "User Levels",
-          color: "#222", // reverted
-          font: { family: "Segoe UI", size: 16 },
-        },
-        grid: { color: "rgba(0,0,0,0.04)" },
-      },
-    },
+  // Custom Tooltip
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div
+          style={{
+            background: "linear-gradient(135deg, rgba(100, 72, 119, 0.529), rgba(228, 99, 235, 0.693))",
+            padding: "16px",
+            borderRadius: "16px",
+            color: "#fff",
+            fontSize: "13px",
+            pointerEvents: "none",
+            boxShadow: "0 0 25px rgb(98 5 120 / 26%)",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          <div>
+            <strong>{label}</strong>
+          </div>
+          {payload.map((p) => (
+            <div key={p.dataKey}>
+              {p.name}: {p.value.toLocaleString()}
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -215,52 +92,68 @@ export default function TokenSupplyProjection() {
       <h1 className="fw-bold text-purple mb-4">Token Supply Projection</h1>
 
       <div className="row align-items-center text-muted">
-        {/* --- Left Column: Description --- */}
+        {/* Left Column */}
         <div className="col-md-5 mb-4 text-start">
-          <div>
-            <h4 className="fw-bold mb-3 text-purple">What This Chart Shows</h4>
-
-            <p>
-              This chart illustrates how token supply evolves based on the
-              membership packages chosen by users. Each curve reflects a
-              different scenario depending on the package investment.
-            </p>
-
-            <ul className="px-0">
-              <li>
-                <b>Min Projection:</b> Occurs when users choose the{" "}
-                <span className="fw-semibold text-blue">Bronze Package</span> and mint tokens with 0.1 BNB, resulting in
-                a conservative cumulative supply.
-              </li>
-              <li>
-                <b>Max Projection:</b> Happens when users select the{" "}
-                <span className="fw-semibold text-blue">Gold Package</span> and mint tokens with 1 BNB, producing a
-                higher cumulative supply.
-              </li>
-              <li>
-                <b>Dynamic Projection:</b> Represents a smooth mid-range
-                scenario, showing realistic supply growth as adoption increases
-                across all packages.
-              </li>
-            </ul>
-
-            <p>
-              The dynamic projection provides a balanced view between the
-              minimum and maximum outcomes, reflecting typical adoption trends
-              as more users mint tokens through different packages.
-            </p>
-          </div>
+          <h4 className="fw-bold mb-3 text-purple">What This Chart Shows</h4>
+          <p>
+            This chart illustrates how token supply evolves based on the
+            membership packages chosen by users. Each curve reflects a different
+            scenario depending on the package investment.
+          </p>
+          <ul className="px-0">
+            <li>
+              <b>Min Projection:</b> Conservative cumulative supply for Bronze
+              Package users.
+            </li>
+            <li>
+              <b>Max Projection:</b> High cumulative supply for Gold Package
+              users.
+            </li>
+            <li>
+              <b>Dynamic Projection:</b> Smooth mid-range realistic adoption.
+            </li>
+          </ul>
         </div>
 
-        {/* --- Right Column: Chart --- */}
+        {/* Right Column: Chart */}
         <div className="col-md-7">
-          <div style={{ maxWidth: "100%", margin: "0 auto" }}>
-            <Line
-              ref={chartRef}
-              data={data}
-              options={{ ...options, maintainAspectRatio: false }}
-              height={400}
-            />
+          <div style={{ width: "100%", height: 400 }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="level" />
+                <YAxis />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend verticalAlign="top" height={36} />
+                <Line
+                  type="monotone"
+                  dataKey="min"
+                  name="Min Projection"
+                  stroke="#7A3FFF"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="max"
+                  name="Max Projection"
+                  stroke="#FF4F81"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="dynamic"
+                  name="Dynamic Projection"
+                  stroke="#00D1C1"
+                  strokeWidth={3}
+                  dot={{ r: 4 }}
+                  strokeDasharray="5 5"
+                  fillOpacity={0.2}
+                  fill="#00D1C1"
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>
