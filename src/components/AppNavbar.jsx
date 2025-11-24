@@ -41,7 +41,7 @@ export default function AppNavbar() {
               <i className="bi bi-wallet2 me-1"></i> Connect Wallet
             </Button>
             <Button size="sm" className="shining-button">
-              <i className="bi bi-person-circle me-1"></i> Profile
+              <i className="bi bi-person-circle me-1"></i> Claim
             </Button>
           </div>
         </Navbar.Collapse>

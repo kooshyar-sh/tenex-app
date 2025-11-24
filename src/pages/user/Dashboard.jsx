@@ -1,10 +1,4 @@
-import {
-  Container,
-  Row,
-  Col,
-  Modal,
-  Button,
-} from "react-bootstrap";
+import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import { currentUser } from "../../data/mockData";
 import { useState } from "react";
 import {
@@ -73,7 +67,8 @@ export default function Dashboard() {
       return (
         <div
           style={{
-            background: "linear-gradient(135deg, rgba(100, 72, 119, 0.529), rgba(228, 99, 235, 0.693))",
+            background:
+              "linear-gradient(135deg, rgba(100, 72, 119, 0.529), rgba(228, 99, 235, 0.693))",
             padding: "16px",
             borderRadius: "16px",
             color: "#fff",
@@ -83,7 +78,9 @@ export default function Dashboard() {
             backdropFilter: "blur(4px)",
           }}
         >
-          <div><strong>{label}</strong></div>
+          <div>
+            <strong>{label}</strong>
+          </div>
           {payload.map((p) => (
             <div key={p.dataKey}>
               {p.name}: {p.value}
@@ -98,8 +95,8 @@ export default function Dashboard() {
   return (
     <Container>
       {/* ---------- چهار باکس بالایی ---------- */}
-      <Row className="mb-4">
-        <Col md={3} className="p-0 px-md-2">
+      <Row className="mb-4 dashboard-top-row">
+        <Col md={6} lg={3} className="p-0 px-md-2">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-coin me-2 text-blue"></i> 10X Balance
@@ -111,7 +108,7 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col md={3} className="p-0 px-md-2 mt-2 mt-md-0">
+        <Col md={6} lg={3} className="p-0 px-md-2 mt-2 mt-md-0">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-cash-stack me-2 text-blue"></i> BNB Earnings
@@ -131,7 +128,7 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col md={3} className="p-0 px-md-2 mt-2 mt-md-0">
+        <Col md={6} lg={3} className="p-0 px-md-2 mt-2 mt-lg-0">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-graph-up-arrow me-2 text-blue"></i> Total Team
@@ -147,7 +144,7 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col md={3} className="p-0 px-md-2 mt-2 mt-md-0">
+        <Col md={6} lg={3} className="p-0 px-md-2 mt-2 mt-lg-0">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-people-fill me-2 text-blue"></i> Referrals
@@ -174,18 +171,23 @@ export default function Dashboard() {
           <div className="main-card p-3">
             <h5 className="text-purple mb-3">BNB Earnings</h5>
             <div className="mb-2">
-              {periods.map((p) => (
-                <Button
-                  key={p}
-                  variant={earningsPeriod === p ? "primary" : "outline-primary"}
-                  size="sm"
-                  className="me-2"
-                  onClick={() => setEarningsPeriod(p)}
-                >
-                  {p.charAt(0).toUpperCase() + p.slice(1)}
-                </Button>
-              ))}
+              {periods.map((p) => {
+                const isActive = earningsPeriod === p;
+                return (
+                  <Button
+                    key={p}
+                    size="sm"
+                    className={`me-1 ${
+                      isActive ? "btn-blue" : "btn-outline-blue"
+                    }`}
+                    onClick={() => setEarningsPeriod(p)}
+                  >
+                    {p.charAt(0).toUpperCase() + p.slice(1)}
+                  </Button>
+                );
+              })}
             </div>
+
             <ResponsiveContainer width="100%" height={250}>
               <LineChart data={earningsData[earningsPeriod]}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -209,17 +211,21 @@ export default function Dashboard() {
           <div className="main-card p-3">
             <h5 className="text-purple mb-3">New Team Members</h5>
             <div className="mb-2">
-              {periods.map((p) => (
-                <Button
-                  key={p}
-                  variant={referralsPeriod === p ? "primary" : "outline-primary"}
-                  size="sm"
-                  className="me-2"
-                  onClick={() => setReferralsPeriod(p)}
-                >
-                  {p.charAt(0).toUpperCase() + p.slice(1)}
-                </Button>
-              ))}
+              {periods.map((p) => {
+                const isActive = referralsPeriod === p;
+                return (
+                  <Button
+                    key={p}
+                    size="sm"
+                    className={`me-1 ${
+                      isActive ? "btn-blue" : "btn-outline-blue"
+                    }`}
+                    onClick={() => setReferralsPeriod(p)}
+                  >
+                    {p.charAt(0).toUpperCase() + p.slice(1)}
+                  </Button>
+                );
+              })}
             </div>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={referralsData[referralsPeriod]}>

@@ -6,6 +6,7 @@ $primary-color: #a66bff; // light purple
 $primary-dark: #7f3cff;
 $bg-light: #f5ddf9; // very light purple background
 $text-main: #222;
+$main-card: #f3f1f8;
 $text-muted: #666;
 $border-color: #ddd;
 $blue: #27abec;
@@ -77,7 +78,7 @@ a {
 // ========== Cards ==========
 .card,
 .main-card {
-  background: #f3f1f8;
+  background: $main-card;
   border: 1px solid $border-color;
   border-radius: 12px;
   padding: 1rem;
@@ -252,16 +253,27 @@ a {
 .btn-outline-blue {
   border-radius: 6px;
   background: transparent;
-  border: 1px solid #ccc;
-  color: #555;
+  border: 1px solid $blue !important;
+  color: $blue;
   font-weight: 600;
   transition: all 0.2s ease;
-  min-width: 100px;
 
   &:hover {
     background: $blue !important;
-    border-color: $blue !important;
-    color: #000 !important;
+    color: #fff !important;
+  }
+}
+
+.btn-blue {
+  border-radius: 6px;
+  background: $blue;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: darken($blue, 10%) !important;
   }
 }
 
@@ -595,7 +607,7 @@ a {
 
 // modal styles
 .modal-content {
-  background: #f3f1f8;
+  background: $main-card;
 }
 
 .volume-modal-sm {
@@ -604,7 +616,7 @@ a {
 
 /* custom input */
 .number-input {
-  background: #f3f1f8; /* مشابه تم سایت */
+  background: $main-card; /* مشابه تم سایت */
   color: #6f42c1;
   border: 1px solid #6f42c1;
   border-radius: 6px;
@@ -655,7 +667,6 @@ a {
   }
 }
 
-
 .dynamic-pulse-line path {
   stroke-linejoin: round;
   stroke-linecap: round;
@@ -670,23 +681,92 @@ a {
 @keyframes dynamicMegaPulse {
   0% {
     stroke-width: 2;
-    filter: 
-      drop-shadow(0 0 6px rgba(0, 255, 200, 0.6))
-      // drop-shadow(0 0 12px rgba(0, 255, 200, 0.4));
+    filter: drop-shadow(0 0 6px rgba(0, 255, 200, 0.6));
+    // drop-shadow(0 0 12px rgba(0, 255, 200, 0.4));
   }
 
   45% {
     stroke-width: 4; /* خیلی واضح */
-    filter:
-      drop-shadow(0 0 18px rgba(0, 255, 240, 1))
-      // drop-shadow(0 0 32px rgba(0, 255, 220, 0.7))
-      // drop-shadow(0 0 48px rgba(0, 255, 220, 0.5));
+    filter: drop-shadow(0 0 18px rgba(0, 255, 240, 1));
+    // drop-shadow(0 0 32px rgba(0, 255, 220, 0.7))
+    // drop-shadow(0 0 48px rgba(0, 255, 220, 0.5));
   }
 
   100% {
     stroke-width: 2;
-    filter:
-      drop-shadow(0 0 6px rgba(0, 255, 200, 0.6))
-      // drop-shadow(0 0 12px rgba(0, 255, 200, 0.4));
+    filter: drop-shadow(0 0 6px rgba(0, 255, 200, 0.6));
+    // drop-shadow(0 0 12px rgba(0, 255, 200, 0.4));
   }
+}
+
+
+// dashboard styles
+@media (min-width: 768px) {
+
+  .dashboard-top-row .main-card {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
+    align-items: start;
+  }
+}
+
+
+
+// myTeam styles
+.wallet-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+.address-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+}
+
+.copy-icon {
+  cursor: pointer;
+  color: #6c757d;
+  transition: color 0.2s;
+}
+
+.copy-icon:hover {
+  color: #000;
+}
+
+.copy-icon.copied::after {
+  content: "Copied";
+  position: absolute;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  top: -20px;
+  left: 0;
+}
+
+@media (max-width: 768px) {
+  .address-text {
+    max-width: 90px;
+  }
+}
+
+/* Popover کاستوم */
+.custom-popover {
+  border-radius: 12px !important;
+  background: $main-card !important;
+  border: 1px solid #ddd !important;
+  box-shadow: 0 4px 20px rgba(88, 3, 103, 0.3);
+  min-width: 200px;
+
+  .popover-arrow::after {
+    border-right-color: $main-card;
+}
 }
