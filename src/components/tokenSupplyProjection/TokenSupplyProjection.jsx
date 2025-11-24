@@ -49,7 +49,6 @@ export default function TokenSupplyProjectionRecharts() {
     x <= dynamicLimit ? sCurveProjection(x) : null
   );
 
-  // داده‌ها برای recharts
   const chartData = xLabels.map((label, i) => ({
     level: label,
     min: cumMin[i],
@@ -57,13 +56,21 @@ export default function TokenSupplyProjectionRecharts() {
     dynamic: dynamicCurve[i] ?? null,
   }));
 
+  // Y Axis Number Format
+  const formatYAxis = (value) => {
+    if (value >= 1_000_000) return Math.round(value / 1_000_000) + "M";
+    if (value >= 1_000) return Math.round(value / 1_000) + "K";
+    return value;
+  };
+
   // Custom Tooltip
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
         <div
           style={{
-            background: "linear-gradient(135deg, rgba(100, 72, 119, 0.529), rgba(228, 99, 235, 0.693))",
+            background:
+              "linear-gradient(135deg, rgba(100, 72, 119, 0.529), rgba(228, 99, 235, 0.693))",
             padding: "16px",
             borderRadius: "16px",
             color: "#fff",
@@ -118,13 +125,23 @@ export default function TokenSupplyProjectionRecharts() {
         {/* Right Column: Chart */}
         <div className="col-md-7">
           <div style={{ width: "100%", height: 400 }}>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer>
               <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="level" />
-                <YAxis />
+
+                {/* X Axis */}
+                <XAxis
+                  dataKey="level"
+                  interval="preserveStartEnd"
+                  tick={{ fontSize: 12 }}
+                />
+
+                {/* Y Axis FIXED */}
+                <YAxis tickFormatter={formatYAxis} />
+
                 <Tooltip content={<CustomTooltip />} />
                 <Legend verticalAlign="top" height={36} />
+
                 <Line
                   type="monotone"
                   dataKey="min"
@@ -149,8 +166,6 @@ export default function TokenSupplyProjectionRecharts() {
                   strokeWidth={3}
                   dot={{ r: 4 }}
                   strokeDasharray="5 5"
-                  fillOpacity={0.2}
-                  fill="#00D1C1"
                 />
               </LineChart>
             </ResponsiveContainer>
