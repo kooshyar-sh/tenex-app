@@ -1,0 +1,58 @@
+.my-select {
+  display: inline-block;
+  min-width: 170px;
+  background: #f3f1f8; /* $main-card */
+  border: 2px solid #a66bff;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  font-family: "Bahnschrift";
+  user-select: none;
+  transition: 0.2s;
+}
+
+.my-select:hover {
+  border-color: #7f3cff;
+}
+
+.my-select-header {
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between; /* متن + آیکون کنار هم */
+  align-items: center;
+  color: #222;
+  font-size: 14px;
+}
+
+.my-select-header i {
+  font-size: 18px;
+  color: #7f3cff;
+  pointer-events: none;
+}
+
+/* Dropdown */
+.my-select-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #a66bff;
+  border-radius: 10px;
+  margin-top: 4px;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.my-select-item {
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #222;
+  background: #fff;
+  transition: 0.15s;
+}
+
+.my-select-item:hover {
+  background: #f5ddf9; /* bg-light */
+  color: #7f3cff;
+}

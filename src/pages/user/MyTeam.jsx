@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useState, useMemo } from "react";
 import { BiCopy, BiShow } from "react-icons/bi";
-import CustomRadio from "../../components/CustomRadio/CustomRadio";
+import CustomSelectFlex from "../../components/CustomSelectFlex/CustomSelectFlex";
 
 const shortenAddress = (addr) =>
   addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : "";
@@ -20,7 +20,7 @@ export default function MyTeam() {
   const [copied, setCopied] = useState(null);
 
   const [sortBy, setSortBy] = useState("");
-  const [filterFilled, setFilterFilled] = useState(null); // null = همه
+  const [filterFilled, setFilterFilled] = useState("all"); // null = همه
 
   const copyToClipboard = (text, idx) => {
     navigator.clipboard.writeText(text);
@@ -35,9 +35,9 @@ export default function MyTeam() {
 
     // ---- Filtering ----
     if (filterFilled === "filled") {
-      data = data.filter((item) => item.referralCode !== null);
+      data = data.filter((item) => item.referralCode == null);
     } else if (filterFilled === "empty") {
-      data = data.filter((item) => item.referralCode === null);
+      data = data.filter((item) => item.referralCode !== null);
     }
 
     // ---- Sorting ----
@@ -83,32 +83,27 @@ export default function MyTeam() {
               </h5>
 
               <div className="d-flex align-items-center gap-3 flex-wrap">
-                {/* Sort Select */}
-                <div className="custom-select-wrapper">
-                  <select
-                    className="custom-select"
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                  >
-                    <option value="">Sort: None</option>
-                    <option value="level">Sort by Level</option>
-                    <option value="date">Sort by Joined Date</option>
-                  </select>
-                </div>
+                {/* ---------- Sort Select ---------- */}
+                <CustomSelectFlex
+                  value={sortBy}
+                  onChange={(val) => setSortBy(val)}
+                  options={[
+                    { value: "", label: "Sort: None" },
+                    { value: "level", label: "Sort by Level" },
+                    { value: "date", label: "Sort by Joined Date" },
+                  ]}
+                />
 
-                {/* ---------- Filter Select (All / Filled / Empty) ---------- */}
-
-                <div className="custom-select-wrapper">
-                  <select
-                    className="custom-select"
-                    value={filterFilled}
-                    onChange={(e) => setFilterFilled(e.target.value)}
-                  >
-                    <option value="all">All</option>
-                    <option value="filled">Filled</option>
-                    <option value="empty">Only Empty</option>
-                  </select>
-                </div>
+                {/* ---------- Filter Select (Filled / Empty) ---------- */}
+                <CustomSelectFlex
+                  value={filterFilled}
+                  onChange={(val) => setFilterFilled(val)}
+                  options={[
+                    { value: "all", label: "All" },
+                    { value: "filled", label: "Filled" },
+                    { value: "empty", label: "Only Empty" },
+                  ]}
+                />
               </div>
             </div>
 
