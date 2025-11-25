@@ -613,7 +613,7 @@ a {
 .modal-dialog{
   justify-content: center;
 
-  .modal-content{
+  .custom-modal-content{
     max-width: 380px !important;
   }
 }
@@ -667,8 +667,13 @@ a {
 
 // rechart styles
 @media (max-width: 992px) {
-  .recharts-default-legend {
-    margin: -20px !important;
+  // .recharts-default-legend {
+  //   margin: -20px !important;
+  // }
+
+  .recharts-legend-wrapper{
+    position: unset !important;
+    width: unset !important;
   }
 }
 

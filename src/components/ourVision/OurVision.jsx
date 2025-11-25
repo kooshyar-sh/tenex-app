@@ -26,6 +26,7 @@ export default function OurVision() {
       "Ultimate",
     ];
     const multipliers = [1, 0.95, 0.9, 0.85, 0.75, 0.65, 0.55, 0.45, 0.35];
+
     const start = index === 0 ? 1 : milestoneValues[index - 1];
     const end = value;
     return {
@@ -88,11 +89,18 @@ export default function OurVision() {
     return leftPercent;
   };
 
+  const formatMultiplier = (num) => {
+  return Number.isInteger(num) ? num.toString() : num.toFixed(2);
+};
+
   return (
     <section className="text-center mt-5">
       <h1 className="fw-bold text-purple mb-3">Our Vision</h1>
 
-      <p className="text-muted fw-semibold mx-auto mb-4" style={{ maxWidth: "700px" }}>
+      <p
+        className="text-muted fw-semibold mx-auto mb-4"
+        style={{ maxWidth: "700px" }}
+      >
         Our vision is to create a{" "}
         <span className="fw-semibold text-blue">community-oriented</span> &{" "}
         <span className="fw-semibold text-blue">community-owned</span> DeFi
@@ -147,7 +155,6 @@ export default function OurVision() {
         onHide={handleCloseModal}
         centered
         dialogClassName="fade-scale-modal"
-        contentClassName="custom-modal-content"
       >
         {activeMilestone !== null && (
           <>
@@ -170,7 +177,7 @@ export default function OurVision() {
             <Modal.Body>
               <div className="row">
                 <div className="col-md-6 border-end">
-                  <h6 className="fw-semibold mb-3">Rewards</h6>
+                  <h6 className="fw-semibold mb-2">Rewards</h6>
                   {(() => {
                     const multiplier =
                       milestones[activeMilestone].baseMultiplier;
@@ -183,7 +190,7 @@ export default function OurVision() {
                             {rewards.bronze} TENEX
                           </span>{" "}
                           <span className="custom-badge custom-badge-light-warning">
-                            ×{multiplier.toFixed(2)}
+                            ×{formatMultiplier(multiplier)}
                           </span>
                         </p>
                         <p className="mb-1">
@@ -192,7 +199,7 @@ export default function OurVision() {
                             {rewards.silver} TENEX
                           </span>{" "}
                           <span className="custom-badge custom-badge-light-warning">
-                            ×{multiplier.toFixed(2)}
+                            ×{formatMultiplier(multiplier)}
                           </span>
                         </p>
                         <p className="mb-0">
@@ -201,7 +208,7 @@ export default function OurVision() {
                             {rewards.gold} TENEX
                           </span>{" "}
                           <span className="custom-badge custom-badge-light-warning">
-                            ×{multiplier.toFixed(2)}
+                            ×{formatMultiplier(multiplier)}
                           </span>
                         </p>
                       </>
@@ -209,8 +216,8 @@ export default function OurVision() {
                   })()}
                 </div>
 
-                <div className="col-md-6">
-                  <h6 className="fw-semibold mb-3">Supply Data</h6>
+                <div className="col-md-6 mt-2 mt-md-0">
+                  <h6 className="fw-semibold mb-2">Supply Data</h6>
                   <p className="mb-1">
                     Min Supply:{" "}
                     <span className="fw-semibold">{supplyData.min}</span>
@@ -227,11 +234,6 @@ export default function OurVision() {
               </div>
             </Modal.Body>
 
-            <Modal.Footer>
-              <Button variant="outline-secondary" onClick={handleCloseModal}>
-                Close
-              </Button>
-            </Modal.Footer>
           </>
         )}
       </Modal>
