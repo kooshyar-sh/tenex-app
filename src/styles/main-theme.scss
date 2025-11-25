@@ -27,7 +27,7 @@ a {
   }
 }
 
-ul{
+ul {
   list-style: none;
 }
 
@@ -517,7 +517,7 @@ ul{
     text-transform: uppercase;
     border-bottom: 1px solid var(--border-color) !important;
 
-    @media (max-width:380px) {
+    @media (max-width: 380px) {
       font-size: 0.7rem;
     }
   }
@@ -618,14 +618,13 @@ ul{
   background: $main-card;
 }
 
-.modal-dialog{
+.modal-dialog {
   justify-content: center;
 
-  .custom-modal-content{
+  .custom-modal-content {
     max-width: 380px !important;
   }
 }
-
 
 /* custom input */
 .number-input {
@@ -679,7 +678,7 @@ ul{
   //   margin: -20px !important;
   // }
 
-  .recharts-legend-wrapper{
+  .recharts-legend-wrapper {
     position: unset !important;
     width: unset !important;
   }
@@ -813,11 +812,11 @@ ul{
   display: flex;
   align-items: center;
   background: #f3f1f8;
-    color: #6f42c1;
-    border: 1px solid #6f42c1;
-    border-radius: 6px;
-    padding: 8px 12px;
-    outline: none;
+  color: #6f42c1;
+  border: 1px solid #6f42c1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  outline: none;
 
   span {
     flex: 1;
@@ -830,20 +829,54 @@ ul{
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-
 }
 
-  .copy-btn {
-    background: none;
-    border: none;
-    font-size: 18px;
-    color: $primary-color;
-    cursor: pointer;
-    transition: 0.25s;
+.copy-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: $primary-color;
+  cursor: pointer;
+  transition: 0.25s;
 
-    &:hover {
-      transform: scale(1.2);
-      color: $primary-dark;
-    }
+  &:hover {
+    transform: scale(1.2);
+    color: $primary-dark;
   }
+}
+
+@media (min-width: 992px) {
+  .w-lg-50 {
+    width: 50% !important;
+  }
+}
+
+
+
+// media icons styles
+.share-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s ease;
+  cursor: pointer;
+
+  /* سایه اولیه */
+  box-shadow: 0 0 0px rgba(255, 255, 255, 0.0);
+}
+
+.share-icon:hover {
+  transform: translateY(-4px) scale(1.15);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  filter: brightness(1.15);
+}
+
+.share-icon:active {
+  transform: scale(0.9);
+}
