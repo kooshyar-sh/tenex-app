@@ -86,6 +86,42 @@ export const leftWingList = [
     referralCode: null,
     joinedDate: "2024-06-18",
   },
+  // 5 آیتم اضافی
+  {
+    address: "0xDDDDVx12Wx34KKLL889900112233",
+    level: 1,
+    volume: 0.5,
+    referralCode: "REF2233",
+    joinedDate: "2024-07-05",
+  },
+  {
+    address: "0xEEEEWx34XX56YY77ZZ1122334455",
+    level: 3,
+    volume: 0.8,
+    referralCode: null,
+    joinedDate: "2024-07-15",
+  },
+  {
+    address: "0xFFFFYy78ZZ90AA12BB33CC445566",
+    level: 2,
+    volume: 0.6,
+    referralCode: "REF4455",
+    joinedDate: "2024-08-01",
+  },
+  {
+    address: "0xGGGGZz12AA34BB56CC7788990011",
+    level: 1,
+    volume: 0.9,
+    referralCode: null,
+    joinedDate: "2024-08-12",
+  },
+  {
+    address: "0xHHHHAA34BB56CC78DD9900112233",
+    level: 3,
+    volume: 1.2,
+    referralCode: "REF6677",
+    joinedDate: "2024-08-25",
+  },
 ];
 
 export const rightWingList = [
@@ -158,5 +194,41 @@ export const rightWingList = [
     volume: 1.2,
     referralCode: "REF5566",
     joinedDate: "2024-06-25",
+  },
+  // 5 آیتم اضافی
+  {
+    address: "0xDDDDPP12QQ34RR56SS7788990011",
+    level: 1,
+    volume: 0.8,
+    referralCode: null,
+    joinedDate: "2024-07-04",
+  },
+  {
+    address: "0xEEEERR34SS56TT78UU9900112233",
+    level: 2,
+    volume: 1.1,
+    referralCode: "REF7788",
+    joinedDate: "2024-07-15",
+  },
+  {
+    address: "0xFFFFTT78UU90VV12WW33XX445566",
+    level: 3,
+    volume: 0.5,
+    referralCode: null,
+    joinedDate: "2024-08-02",
+  },
+  {
+    address: "0xGGGGUU12VV34WW56XX7788990011",
+    level: 1,
+    volume: 1.3,
+    referralCode: "REF8899",
+    joinedDate: "2024-08-12",
+  },
+  {
+    address: "0xHHHHVV34WW56XX78YY9900112233",
+    level: 2,
+    volume: 0.9,
+    referralCode: null,
+    joinedDate: "2024-08-26",
   },
 ];

@@ -774,7 +774,7 @@ ul {
 /* Popover کاستوم */
 .custom-popover {
   border-radius: 12px !important;
-  background: $main-card !important;
+  background: rgb(250, 247, 250) !important;
   border: 1px solid #ddd !important;
   box-shadow: 0 4px 20px rgba(88, 3, 103, 0.3);
   min-width: 200px;
@@ -791,7 +791,7 @@ ul {
   }
 
   .popover-arrow::after {
-    border-right-color: $main-card;
+    border-right-color: rgb(250, 247, 250);
   }
 }
 
@@ -880,3 +880,6 @@ ul {
 .share-icon:active {
   transform: scale(0.9);
 }
+  
+
+

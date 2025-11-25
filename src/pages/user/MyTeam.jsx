@@ -8,10 +8,10 @@ import {
   Popover,
   Button,
 } from "react-bootstrap";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { BiCopy, BiShow } from "react-icons/bi";
 import CustomSelectFlex from "../../components/CustomSelectFlex/CustomSelectFlex";
-import Pagination from "../../components/Pagination/Pagination";  
+import Pagination from "../../components/CustomPagination/Pagination"; 
 
 const shortenAddress = (addr) =>
   addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : "";
@@ -19,9 +19,11 @@ const shortenAddress = (addr) =>
 export default function MyTeam() {
   const [activeWing, setActiveWing] = useState("left");
   const [copied, setCopied] = useState(null);
-
   const [sortBy, setSortBy] = useState("");
-  const [filterFilled, setFilterFilled] = useState("all"); // null = همه
+  const [filterFilled, setFilterFilled] = useState("all");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const copyToClipboard = (text, idx) => {
     navigator.clipboard.writeText(text);
@@ -49,7 +51,22 @@ export default function MyTeam() {
     }
 
     return data;
-  }, [currentList, sortBy, filterFilled]);
+  }, [currentList, filterFilled, sortBy]);
+
+  // --- Reset Page When Filter or Sort Changes ---
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [sortBy, filterFilled, activeWing]);
+
+  // --- Pagination Logic ---
+  const totalItems = processedList.length;
+  console.log("processedList:", processedList.length)
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentItems = processedList.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
     <Container>
@@ -84,7 +101,6 @@ export default function MyTeam() {
               </h5>
 
               <div className="d-flex align-items-center gap-3 flex-wrap mt-2 mt-lg-0">
-                {/* ---------- Sort Select ---------- */}
                 <CustomSelectFlex
                   value={sortBy}
                   onChange={(val) => setSortBy(val)}
@@ -95,7 +111,6 @@ export default function MyTeam() {
                   ]}
                 />
 
-                {/* ---------- Filter Select (Filled / Empty) ---------- */}
                 <CustomSelectFlex
                   value={filterFilled}
                   onChange={(val) => setFilterFilled(val)}
@@ -113,10 +128,7 @@ export default function MyTeam() {
               <thead>
                 <tr>
                   <th style={{ width: "30px", textAlign: "center" }}>
-                    <i
-                      className="bi bi-question-circle-fill text-muted small"
-                      style={{ cursor: "pointer" }}
-                    ></i>
+                    <i className="bi bi-question-circle-fill text-muted small"></i>
                   </th>
                   <th>Wallet Address</th>
                   <th>Level</th>
@@ -125,7 +137,7 @@ export default function MyTeam() {
               </thead>
 
               <tbody>
-                {processedList.map((r, idx) => (
+                {currentItems.map((r, idx) => (
                   <tr key={idx}>
                     {/* Popover Button */}
                     <td className="text-center">
@@ -134,10 +146,7 @@ export default function MyTeam() {
                         placement="right"
                         rootClose
                         overlay={
-                          <Popover
-                            id={`popover-${idx}`}
-                            className="custom-popover"
-                          >
+                          <Popover className="custom-popover">
                             <Popover.Header as="h6">
                               Additional Info
                             </Popover.Header>
@@ -153,10 +162,7 @@ export default function MyTeam() {
                                   <BiCopy
                                     className="copy-icon"
                                     onClick={() =>
-                                      copyToClipboard(
-                                        r.referralCode,
-                                        `code-${idx}`
-                                      )
+                                      copyToClipboard(r.referralCode, idx)
                                     }
                                   />
                                 </div>
@@ -190,19 +196,25 @@ export default function MyTeam() {
                       </div>
                     </td>
 
-                    {/* Level */}
                     <td>
                       <span className="custom-badge custom-badge-light-purple">
                         {r.level}
                       </span>
                     </td>
 
-                    {/* BNB Volume */}
                     <td>{r.volume} BNB</td>
                   </tr>
                 ))}
               </tbody>
             </Table>
+
+            {/* Pagination Under Table */}
+            <Pagination
+              totalItems={totalItems}
+              itemsPerPage={itemsPerPage}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
+            />
           </div>
         </Col>
       </Row>
