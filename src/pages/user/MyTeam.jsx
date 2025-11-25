@@ -11,6 +11,7 @@ import {
 import { useState, useMemo } from "react";
 import { BiCopy, BiShow } from "react-icons/bi";
 import CustomSelectFlex from "../../components/CustomSelectFlex/CustomSelectFlex";
+import Pagination from "../../components/Pagination/Pagination";  
 
 const shortenAddress = (addr) =>
   addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : "";
