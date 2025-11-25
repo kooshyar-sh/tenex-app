@@ -27,6 +27,10 @@ a {
   }
 }
 
+ul{
+  list-style: none;
+}
+
 ::selection {
   color: #fff;
   background: $primary-dark;
@@ -512,6 +516,10 @@ a {
     background: transparent !important;
     text-transform: uppercase;
     border-bottom: 1px solid var(--border-color) !important;
+
+    @media (max-width:380px) {
+      font-size: 0.7rem;
+    }
   }
 
   td {
@@ -787,3 +795,55 @@ a {
     border-right-color: $main-card;
   }
 }
+
+// refrall center styles
+.ref-item {
+  margin-bottom: 25px;
+
+  label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #4b3c60;
+    font-weight: 600;
+  }
+}
+
+.ref-box {
+  display: flex;
+  align-items: center;
+  background: #f3f1f8;
+    color: #6f42c1;
+    border: 1px solid #6f42c1;
+    border-radius: 6px;
+    padding: 8px 12px;
+    outline: none;
+
+  span {
+    flex: 1;
+    font-weight: 500;
+    color: $primary-color;
+  }
+
+  .truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+}
+
+  .copy-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: $primary-color;
+    cursor: pointer;
+    transition: 0.25s;
+
+    &:hover {
+      transform: scale(1.2);
+      color: $primary-dark;
+    }
+  }

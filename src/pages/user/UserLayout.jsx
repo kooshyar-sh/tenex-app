@@ -4,11 +4,9 @@ import "./user-layout.scss";
 export default function UserLayout() {
   return (
     <div className="user-layout-container">
-
       {/* Sidebar → تبدیل به navbar افقی در موبایل */}
       <aside className="sidebar main-card mobile-scroll">
         <ul className="menu-list">
-
           <li>
             <NavLink end to="" className="nav-item">
               <i className="bi bi-speedometer2"></i>
@@ -16,12 +14,12 @@ export default function UserLayout() {
             </NavLink>
           </li>
 
-          {/* <li>
-            <NavLink to="statistics" className="nav-item">
-              <i className="bi bi-graph-up"></i>
-              <span>Statistics</span>
+          <li>
+            <NavLink to="referral" className="nav-item">
+              <i className="bi bi-share"></i>
+              <span>Referral Center</span>
             </NavLink>
-          </li> */}
+          </li>
 
           <li>
             <NavLink to="my-team" className="nav-item">
@@ -29,7 +27,6 @@ export default function UserLayout() {
               <span>My Team</span>
             </NavLink>
           </li>
-
         </ul>
       </aside>
 

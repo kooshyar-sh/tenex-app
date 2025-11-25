@@ -111,7 +111,7 @@ export default function MyTeam() {
             <Table hover responsive bordered className="custom-table">
               <thead>
                 <tr>
-                  <th style={{ width: "40px", textAlign: "center" }}>
+                  <th style={{ width: "30px", textAlign: "center" }}>
                     <i
                       className="bi bi-question-circle-fill text-muted small"
                       style={{ cursor: "pointer" }}
@@ -119,7 +119,7 @@ export default function MyTeam() {
                   </th>
                   <th>Wallet Address</th>
                   <th>Level</th>
-                  <th>BNB Volume</th>
+                  <th>Volume</th>
                 </tr>
               </thead>
 

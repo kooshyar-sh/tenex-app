@@ -3,11 +3,10 @@ import AppNavbar from "./components/AppNavbar";
 import Home from "./pages/Home";
 import Landing from "./pages/landing/Landing";
 import Mint from "./pages/Mint";
-import Referrals from "./pages/Referrals";
 import Dashboard from "./pages/user/Dashboard";
 import UserLayout from "./pages/user/UserLayout";
-import Statistics from "./pages/user/Statistics";
 import MyTeam from "./pages/user/MyTeam";
+import ReferralCenter from "./pages/user/ReferralCenter";
 import { useEffect } from "react";
 
 export default function App() {
@@ -30,12 +29,11 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/mint" element={<Mint />} />
-        <Route path="/referrals" element={<Referrals />} />
 
         {/* User Panel */}
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<Dashboard />} />
-          <Route path="statistics" element={<Statistics />} />
+          <Route path="referral" element={<ReferralCenter />} />
           <Route path="my-team" element={<MyTeam />} />
         </Route>
       </Routes>

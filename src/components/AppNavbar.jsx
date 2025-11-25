@@ -24,13 +24,7 @@ export default function AppNavbar() {
             >
               Dashboard
             </Nav.Link>
-            <Nav.Link
-              as={Link}
-              to="/referrals"
-              className="fw-semibold text-purple"
-            >
-              Referrals
-            </Nav.Link>
+          
             <Nav.Link as={Link} to="/mint" className="fw-semibold text-purple">
               Mint
             </Nav.Link>
