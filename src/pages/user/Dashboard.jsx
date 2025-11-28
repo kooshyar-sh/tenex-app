@@ -93,10 +93,10 @@ export default function Dashboard() {
   };
 
   return (
-    <Container>
+    <>
       {/* ---------- چهار باکس بالایی ---------- */}
       <Row className="mb-4 dashboard-top-row">
-        <Col md={6} lg={3} className="p-0 px-md-2">
+        <Col md={6} lg={3} className="px-md-2">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-coin me-2 text-blue"></i> 10X Balance
@@ -108,7 +108,7 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col md={6} lg={3} className="p-0 px-md-2 mt-2 mt-md-0">
+        <Col md={6} lg={3} className="px-md-2 mt-2 mt-md-0">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-cash-stack me-2 text-blue"></i> BNB Earnings
@@ -128,7 +128,7 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col md={6} lg={3} className="p-0 px-md-2 mt-2 mt-lg-0">
+        <Col md={6} lg={3} className="px-md-2 mt-2 mt-lg-0">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-graph-up-arrow me-2 text-blue"></i> Total Team
@@ -144,7 +144,7 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        <Col md={6} lg={3} className="p-0 px-md-2 mt-2 mt-lg-0">
+        <Col md={6} lg={3} className="px-md-2 mt-2 mt-lg-0">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-people-fill me-2 text-blue"></i> Referrals
@@ -167,7 +167,7 @@ export default function Dashboard() {
       {/* ---------- ردیف نمودارها ---------- */}
       <Row className="mt-4">
         {/* نمودار BNB Earnings */}
-        <Col md={6} className="p-0 px-md-2 mb-3">
+        <Col md={6} className="px-md-2 mb-3">
           <div className="main-card p-3">
             <h5 className="text-purple mb-3">BNB Earnings</h5>
             <div className="mb-2">
@@ -207,7 +207,7 @@ export default function Dashboard() {
         </Col>
 
         {/* نمودار تعداد افراد جدید */}
-        <Col md={6} className="p-0 px-md-2 mb-3">
+        <Col md={6} className="px-md-2 mb-3">
           <div className="main-card p-3">
             <h5 className="text-purple mb-3">New Team Members</h5>
             <div className="mb-2">
@@ -280,6 +280,6 @@ export default function Dashboard() {
           </div>
         </Modal.Body>
       </Modal>
-    </Container>
+    </>
   );
 }

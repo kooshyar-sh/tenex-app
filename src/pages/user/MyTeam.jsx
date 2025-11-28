@@ -1,10 +1,10 @@
 import { leftWingList, rightWingList } from "../../data/mockData";
 import { Row, Col, Table, Button } from "react-bootstrap";
 import { useState } from "react";
+import GlassAlert from "../../components/GlassAlert/GlassAlert";
 
 // کوتاه‌سازی آدرس‌ها
-const shorten = (txt) =>
-  txt ? `${txt.slice(0, 6)}...${txt.slice(-4)}` : "";
+const shorten = (txt) => (txt ? `${txt.slice(0, 6)}...${txt.slice(-4)}` : "");
 
 export default function MyTeam() {
   const [activeWing, setActiveWing] = useState("left");
@@ -27,6 +27,12 @@ export default function MyTeam() {
 
   return (
     <>
+      <GlassAlert type="success" dismissible>
+        This page displays the wallet addresses and referral links of your
+        direct team members. You can copy and use them to fill empty positions.
+        In the future, these referral links can also be listed in the Referral
+        Market and sold for 10X tokens.
+      </GlassAlert>
 
       {/* دکمه‌های موبایل برای تغییر تب */}
       <Row className="d-lg-none mb-3">
@@ -48,7 +54,6 @@ export default function MyTeam() {
       </Row>
 
       <Row className="g-3">
-
         {/* LEFT TABLE - DESKTOP */}
         <Col lg={6} className="d-none d-lg-block">
           <div className="main-card">
@@ -266,7 +271,6 @@ export default function MyTeam() {
             </Table>
           </div>
         </Col>
-
       </Row>
     </>
   );

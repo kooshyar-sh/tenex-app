@@ -85,6 +85,7 @@
   .menu-list {
     flex-direction: row; /* آیتم‌ها کنار هم */
     gap: .7rem;
+    width: fit-content;
   }
 
   .nav-item {
