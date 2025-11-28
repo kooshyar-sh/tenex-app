@@ -6,7 +6,7 @@ import GlassAlert from "../../components/GlassAlert/GlassAlert";
 // کوتاه‌سازی آدرس‌ها
 const shorten = (txt) => (txt ? `${txt.slice(0, 6)}...${txt.slice(-4)}` : "");
 
-export default function MyTeam() {
+export default function OpenReferralSlots() {
   const [activeWing, setActiveWing] = useState("left");
 
   // برای نمایش آیکون "کپی شد"
@@ -28,12 +28,13 @@ export default function MyTeam() {
   return (
     <>
       <GlassAlert type="info" dismissible>
-  This page shows the wallet addresses and referral links of your direct team 
-  members. You can copy these links and use them to fill your empty positions.  
-  In the upcoming Referral Market, you will be able to list your own referral link 
-  with a 10X token offer. Users who do not have an upline can browse these offers 
-  and join using the link that provides the most attractive reward.
-</GlassAlert>
+        This page shows the wallet addresses and referral links of your direct
+        team members. You can copy these links and use them to fill your empty
+        positions. In the upcoming Referral Market, you will be able to list
+        your own referral link with a 10X token offer. Users who do not have an
+        upline can browse these offers and join using the link that provides the
+        most attractive reward.
+      </GlassAlert>
 
       {/* دکمه‌های موبایل برای تغییر تب */}
       <Row className="d-lg-none mb-3">

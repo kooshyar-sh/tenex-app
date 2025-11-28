@@ -22,9 +22,9 @@ export default function UserLayout() {
           </li>
 
           <li>
-            <NavLink to="my-team" className="nav-item">
+            <NavLink to="open-referral-slots" className="nav-item">
               <i className="bi bi-people"></i>
-              <span>My Team</span>
+              <span>Open Referral Slots</span>
             </NavLink>
           </li>
         </ul>

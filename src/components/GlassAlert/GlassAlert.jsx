@@ -20,15 +20,14 @@ export default function GlassAlert({
 
   return (
     <div className={`glass-alert alert-${type}-glass`}>
-      {icon && <i className={icons[type]}></i>}
-      <div>{children}</div>
+      <div className="glass-alert-row">
+        {icon && <i className={icons[type]}></i>}
+        <div className="glass-alert-text">{children}</div>
+      </div>
 
       {dismissible && (
-        <button
-          className="dismiss-btn"
-          onClick={() => setVisible(false)}
-        >
-          <i className="bi bi-x-lg"></i>
+        <button className="glass-alert-close-btn" onClick={() => setVisible(false)}>
+          Close
         </button>
       )}
     </div>

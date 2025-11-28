@@ -5,8 +5,8 @@ import Landing from "./pages/landing/Landing";
 import Mint from "./pages/Mint";
 import Dashboard from "./pages/user/Dashboard";
 import UserLayout from "./pages/user/UserLayout";
-import MyTeam from "./pages/user/MyTeam";
 import ReferralCenter from "./pages/user/ReferralCenter";
+import OpenReferralSlots from "./pages/user/OpenReferralSlots";
 import { useEffect } from "react";
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="referral" element={<ReferralCenter />} />
-          <Route path="my-team" element={<MyTeam />} />
+          <Route path="open-referral-slots" element={<OpenReferralSlots />} />
         </Route>
       </Routes>
     </>
