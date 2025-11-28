@@ -737,39 +737,7 @@ ul {
   white-space: nowrap;
 }
 
-.address-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 130px;
-}
 
-.copy-icon {
-  cursor: pointer;
-  color: #6c757d;
-  transition: color 0.2s;
-}
-
-.copy-icon:hover {
-  color: #000;
-}
-
-.copy-icon.copied::after {
-  content: "Copied";
-  position: absolute;
-  background: #000;
-  color: #fff;
-  font-size: 10px;
-  padding: 2px 5px;
-  border-radius: 4px;
-  top: -20px;
-  left: 0;
-}
-
-@media (max-width: 768px) {
-  .address-text {
-    max-width: 90px;
-  }
-}
 
 /* Popover کاستوم */
 .custom-popover {
@@ -795,7 +763,7 @@ ul {
   }
 }
 
-// refrall center styles
+// referral center styles
 .ref-item {
   margin-bottom: 25px;
 

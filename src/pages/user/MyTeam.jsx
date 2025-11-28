@@ -1,77 +1,35 @@
 import { leftWingList, rightWingList } from "../../data/mockData";
-import {
-  Container,
-  Row,
-  Col,
-  Table,
-  OverlayTrigger,
-  Popover,
-  Button,
-} from "react-bootstrap";
-import { useState, useMemo, useEffect } from "react";
-import { BiCopy, BiShow } from "react-icons/bi";
-import CustomSelectFlex from "../../components/CustomSelectFlex/CustomSelectFlex";
-import Pagination from "../../components/CustomPagination/Pagination"; 
+import { Row, Col, Table, Button } from "react-bootstrap";
+import { useState } from "react";
 
-const shortenAddress = (addr) =>
-  addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : "";
+// کوتاه‌سازی آدرس‌ها
+const shorten = (txt) =>
+  txt ? `${txt.slice(0, 6)}...${txt.slice(-4)}` : "";
 
 export default function MyTeam() {
   const [activeWing, setActiveWing] = useState("left");
-  const [copied, setCopied] = useState(null);
-  const [sortBy, setSortBy] = useState("");
-  const [filterFilled, setFilterFilled] = useState("all");
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  // برای نمایش آیکون "کپی شد"
+  const [copiedField, setCopiedField] = useState(null);
 
-  const copyToClipboard = (text, idx) => {
-    navigator.clipboard.writeText(text);
-    setCopied(idx);
-    setTimeout(() => setCopied(null), 1500);
+  const copyToClipboard = (value, fieldKey) => {
+    navigator.clipboard.writeText(value);
+    setCopiedField(fieldKey);
+
+    setTimeout(() => setCopiedField(null), 1200);
   };
 
-  const currentList = activeWing === "left" ? leftWingList : rightWingList;
+  // هیچ فیلتری نمی‌کنیم
+  const cleanedLeft = leftWingList;
+  const cleanedRight = rightWingList;
 
-  const processedList = useMemo(() => {
-    let data = [...currentList];
-
-    // ---- Filtering ----
-    if (filterFilled === "filled") {
-      data = data.filter((item) => item.referralCode == null);
-    } else if (filterFilled === "empty") {
-      data = data.filter((item) => item.referralCode !== null);
-    }
-
-    // ---- Sorting ----
-    if (sortBy === "level") {
-      data.sort((a, b) => a.level - b.level);
-    } else if (sortBy === "date") {
-      data.sort((a, b) => new Date(a.joinedDate) - new Date(b.joinedDate));
-    }
-
-    return data;
-  }, [currentList, filterFilled, sortBy]);
-
-  // --- Reset Page When Filter or Sort Changes ---
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [sortBy, filterFilled, activeWing]);
-
-  // --- Pagination Logic ---
-  const totalItems = processedList.length;
-  console.log("processedList:", processedList.length)
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = processedList.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
+  const getReferralLink = (address) => `https://yourapp.com/?ref=${address}`;
 
   return (
-    <Container>
-      {/* Wing Selector */}
-      <Row className="mb-3">
+    <>
+
+      {/* دکمه‌های موبایل برای تغییر تب */}
+      <Row className="d-lg-none mb-3">
         <Col className="d-flex gap-2">
           <Button
             className={activeWing === "left" ? "btn-blue" : "btn-outline-blue"}
@@ -79,6 +37,7 @@ export default function MyTeam() {
           >
             Left Wing
           </Button>
+
           <Button
             className={activeWing === "right" ? "btn-blue" : "btn-outline-blue"}
             onClick={() => setActiveWing("right")}
@@ -88,136 +47,227 @@ export default function MyTeam() {
         </Col>
       </Row>
 
-      <Row>
-        <Col className="p-0 px-md-2">
+      <Row className="g-3">
+
+        {/* LEFT TABLE - DESKTOP */}
+        <Col lg={6} className="d-none d-lg-block">
           <div className="main-card">
-            {/* Title + Sorting/Filtering */}
-            <div className="d-flex justify-content-between align-items-center flex-wrap mb-3">
-              <h5 className="text-purple mb-0">
-                <i className="bi bi-diagram-3 me-2 text-blue"></i>
-                {activeWing === "left"
-                  ? "Left Wing Referral List"
-                  : "Right Wing Referral List"}
-              </h5>
+            <h5 className="text-purple mb-3">
+              <i className="bi bi-diagram-3 me-2 text-blue"></i>
+              Left Wing Referral List
+            </h5>
 
-              <div className="d-flex align-items-center gap-3 flex-wrap mt-2 mt-lg-0">
-                <CustomSelectFlex
-                  value={sortBy}
-                  onChange={(val) => setSortBy(val)}
-                  options={[
-                    { value: "", label: "Sort: None" },
-                    { value: "level", label: "Sort by Level" },
-                    { value: "date", label: "Sort by Joined Date" },
-                  ]}
-                />
-
-                <CustomSelectFlex
-                  value={filterFilled}
-                  onChange={(val) => setFilterFilled(val)}
-                  options={[
-                    { value: "all", label: "All" },
-                    { value: "filled", label: "Filled" },
-                    { value: "empty", label: "Only Empty" },
-                  ]}
-                />
-              </div>
-            </div>
-
-            {/* Table */}
             <Table hover responsive bordered className="custom-table">
               <thead>
                 <tr>
-                  <th style={{ width: "30px", textAlign: "center" }}>
-                    <i className="bi bi-question-circle-fill text-muted small"></i>
-                  </th>
                   <th>Wallet Address</th>
-                  <th>Level</th>
-                  <th>Volume</th>
+                  <th>Referral Link</th>
                 </tr>
               </thead>
 
               <tbody>
-                {currentItems.map((r, idx) => (
-                  <tr key={idx}>
-                    {/* Popover Button */}
-                    <td className="text-center">
-                      <OverlayTrigger
-                        trigger="click"
-                        placement="right"
-                        rootClose
-                        overlay={
-                          <Popover className="custom-popover">
-                            <Popover.Header as="h6">
-                              Additional Info
-                            </Popover.Header>
+                {cleanedLeft.map((item, idx) => {
+                  const referral = getReferralLink(item.address);
 
-                            <Popover.Body>
-                              <div className="mb-2">
-                                <strong>Joined Date: </strong> {r.joinedDate}
-                              </div>
+                  return (
+                    <tr key={idx}>
+                      {/* WALLET ADDRESS */}
+                      <td>
+                        <div className="wallet-cell">
+                          {shorten(item.address)}
 
-                              {r.referralCode ? (
-                                <div className="d-flex align-items-center">
-                                  <span className="me-2">{r.referralCode}</span>
-                                  <BiCopy
-                                    className="copy-icon"
-                                    onClick={() =>
-                                      copyToClipboard(r.referralCode, idx)
-                                    }
-                                  />
-                                </div>
-                              ) : (
-                                <span className="custom-badge custom-badge-light-success">
-                                  filled
-                                </span>
-                              )}
-                            </Popover.Body>
-                          </Popover>
-                        }
-                      >
-                        <Button variant="light" size="sm">
-                          <BiShow />
-                        </Button>
-                      </OverlayTrigger>
-                    </td>
+                          <button
+                            className="copy-btn"
+                            onClick={() =>
+                              copyToClipboard(item.address, `addr-left-${idx}`)
+                            }
+                          >
+                            {copiedField === `addr-left-${idx}` ? (
+                              <i className="bi bi-check2-circle text-purple"></i>
+                            ) : (
+                              <i className="bi bi-clipboard"></i>
+                            )}
+                          </button>
+                        </div>
+                      </td>
 
-                    {/* Wallet Address */}
-                    <td>
-                      <div className="wallet-cell">
-                        <span className="address-text">
-                          {shortenAddress(r.address)}
-                        </span>
-                        <BiCopy
-                          className={`copy-icon ${
-                            copied === idx ? "copied" : ""
-                          }`}
-                          onClick={() => copyToClipboard(r.address, idx)}
-                        />
-                      </div>
-                    </td>
+                      {/* REFERRAL LINK */}
+                      <td>
+                        <div className="wallet-cell">
+                          {shorten(referral)}
 
-                    <td>
-                      <span className="custom-badge custom-badge-light-purple">
-                        {r.level}
-                      </span>
-                    </td>
-
-                    <td>{r.volume} BNB</td>
-                  </tr>
-                ))}
+                          <button
+                            className="copy-btn"
+                            onClick={() =>
+                              copyToClipboard(referral, `ref-left-${idx}`)
+                            }
+                          >
+                            {copiedField === `ref-left-${idx}` ? (
+                              <i className="bi bi-check2-circle text-purple"></i>
+                            ) : (
+                              <i className="bi bi-clipboard"></i>
+                            )}
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </Table>
-
-            {/* Pagination Under Table */}
-            <Pagination
-              totalItems={totalItems}
-              itemsPerPage={itemsPerPage}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-            />
           </div>
         </Col>
+
+        {/* RIGHT TABLE - DESKTOP */}
+        <Col lg={6} className="d-none d-lg-block">
+          <div className="main-card">
+            <h5 className="text-purple mb-3">
+              <i className="bi bi-diagram-3 me-2 text-blue"></i>
+              Right Wing Referral List
+            </h5>
+
+            <Table hover responsive bordered className="custom-table">
+              <thead>
+                <tr>
+                  <th>Wallet Address</th>
+                  <th>Referral Link</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {cleanedRight.map((item, idx) => {
+                  const referral = getReferralLink(item.address);
+
+                  return (
+                    <tr key={idx}>
+                      {/* WALLET ADDRESS */}
+                      <td>
+                        <div className="wallet-cell">
+                          {shorten(item.address)}
+
+                          <button
+                            className="copy-btn"
+                            onClick={() =>
+                              copyToClipboard(item.address, `addr-right-${idx}`)
+                            }
+                          >
+                            {copiedField === `addr-right-${idx}` ? (
+                              <i className="bi bi-check2-circle text-purple"></i>
+                            ) : (
+                              <i className="bi bi-clipboard"></i>
+                            )}
+                          </button>
+                        </div>
+                      </td>
+
+                      {/* REFERRAL LINK */}
+                      <td>
+                        <div className="wallet-cell">
+                          {shorten(referral)}
+
+                          <button
+                            className="copy-btn"
+                            onClick={() =>
+                              copyToClipboard(referral, `ref-right-${idx}`)
+                            }
+                          >
+                            {copiedField === `ref-right-${idx}` ? (
+                              <i className="bi bi-check2-circle text-purple"></i>
+                            ) : (
+                              <i className="bi bi-clipboard"></i>
+                            )}
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </div>
+        </Col>
+
+        {/* MOBILE MODE */}
+        <Col xs={12} className="d-lg-none">
+          <div className="main-card">
+            <h5 className="text-purple mb-3">
+              <i className="bi bi-diagram-3 me-2 text-blue"></i>
+              {activeWing === "left"
+                ? "Left Wing Referral List"
+                : "Right Wing Referral List"}
+            </h5>
+
+            <Table hover responsive bordered className="custom-table">
+              <thead>
+                <tr>
+                  <th>Wallet Address</th>
+                  <th>Referral Link</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {(activeWing === "left" ? cleanedLeft : cleanedRight).map(
+                  (item, idx) => {
+                    const referral = getReferralLink(item.address);
+                    const prefix = activeWing === "left" ? "left" : "right";
+
+                    return (
+                      <tr key={idx}>
+                        {/* WALLET ADDRESS */}
+                        <td>
+                          <div className="wallet-cell">
+                            {shorten(item.address)}
+
+                            <button
+                              className="copy-btn"
+                              onClick={() =>
+                                copyToClipboard(
+                                  item.address,
+                                  `addr-${prefix}-${idx}`
+                                )
+                              }
+                            >
+                              {copiedField === `addr-${prefix}-${idx}` ? (
+                                <i className="bi bi-check2-circle text-purple"></i>
+                              ) : (
+                                <i className="bi bi-clipboard"></i>
+                              )}
+                            </button>
+                          </div>
+                        </td>
+
+                        {/* REFERRAL LINK */}
+                        <td>
+                          <div className="wallet-cell">
+                            {shorten(referral)}
+
+                            <button
+                              className="copy-btn"
+                              onClick={() =>
+                                copyToClipboard(
+                                  referral,
+                                  `ref-${prefix}-${idx}`
+                                )
+                              }
+                            >
+                              {copiedField === `ref-${prefix}-${idx}` ? (
+                                <i className="bi bi-check2-circle text-purple"></i>
+                              ) : (
+                                <i className="bi bi-clipboard"></i>
+                              )}
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  }
+                )}
+              </tbody>
+            </Table>
+          </div>
+        </Col>
+
       </Row>
-    </Container>
+    </>
   );
 }
