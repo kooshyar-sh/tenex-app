@@ -947,3 +947,98 @@ ul {
   
 
 
+// toast styles
+.toast-container-tenex {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+}
+
+/* ===================== GLASS TOAST ===================== */
+.tenex-toast {
+  min-width: 290px;
+  max-width: 350px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.12); /* شفافیت پایه */
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  color: #fff;
+  font-weight: 500;
+  animation: fadeIn 0.35s ease;
+  overflow: hidden;
+}
+
+.toast-text {
+  flex: 1;              
+  word-break: break-word; 
+  overflow-wrap: break-word; 
+  white-space: normal;
+}
+
+/* ===================== COLOR THEMES ===================== */
+.success {
+  box-shadow: 0 0 10px rgba(25, 135, 84, 0.45);
+  background: rgba(25, 135, 84, 0.35); /* کمی سبز شفاف */
+}
+
+.error {
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.45);
+  background: rgba(220, 53, 69, 0.35); /* کمی قرمز شفاف */
+}
+
+.warning {
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.45);
+  background: rgba(255, 193, 7, 0.35); /* کمی زرد شفاف */
+}
+
+.info {
+  box-shadow: 0 0 10px rgba(13, 202, 240, 0.45);
+  background: rgba(13, 202, 240, 0.35); /* کمی آبی شفاف */
+}
+
+/* ===================== PROGRESS BAR ===================== */
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  animation-name: progressShrink;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* colors matching your badges */
+.success-bar { background: rgba(25, 135, 84, 0.8); }
+.error-bar   { background: rgba(220, 53, 69, 0.8); }
+.warning-bar { background: rgba(255, 193, 7, 0.85); }
+.info-bar    { background: rgba(13, 202, 240, 0.85); }
+
+
+/* ===================== Animations ===================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes progressShrink {
+  from { width: 100%; }
+  to   { width: 0%; }
+}

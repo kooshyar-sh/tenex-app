@@ -2,6 +2,7 @@ import { leftWingList, rightWingList } from "../../data/mockData";
 import { Row, Col, Table, Button } from "react-bootstrap";
 import { useState } from "react";
 import GlassAlert from "../../components/GlassAlert/GlassAlert";
+import { useToast } from "../../components/Toast/ToastContext";
 
 // کوتاه‌سازی آدرس‌ها
 const shorten = (txt) => (txt ? `${txt.slice(0, 6)}...${txt.slice(-4)}` : "");
@@ -9,12 +10,22 @@ const shorten = (txt) => (txt ? `${txt.slice(0, 6)}...${txt.slice(-4)}` : "");
 export default function OpenReferralSlots() {
   const [activeWing, setActiveWing] = useState("left");
 
+  const toast = useToast();
+
   // برای نمایش آیکون "کپی شد"
   const [copiedField, setCopiedField] = useState(null);
 
-  const copyToClipboard = (value, fieldKey) => {
+  const copyToClipboard = (
+    value,
+    fieldKey,
+    type = "success",
+    prefix = "Copied"
+  ) => {
     navigator.clipboard.writeText(value);
     setCopiedField(fieldKey);
+
+    const message = `${prefix}: ${value}`;
+    toast?.showToast(type, message);
 
     setTimeout(() => setCopiedField(null), 1200);
   };
@@ -86,7 +97,12 @@ export default function OpenReferralSlots() {
                           <button
                             className="copy-btn"
                             onClick={() =>
-                              copyToClipboard(item.address, `addr-left-${idx}`)
+                              copyToClipboard(
+                                item.address,
+                                `addr-left-${idx}`,
+                                "info",
+                                "Wallet address copied"
+                              )
                             }
                           >
                             {copiedField === `addr-left-${idx}` ? (
@@ -106,7 +122,12 @@ export default function OpenReferralSlots() {
                           <button
                             className="copy-btn"
                             onClick={() =>
-                              copyToClipboard(referral, `ref-left-${idx}`)
+                              copyToClipboard(
+                                referral,
+                                `ref-left-${idx}`,
+                                "success",
+                                "Referral link copied"
+                              )
                             }
                           >
                             {copiedField === `ref-left-${idx}` ? (
@@ -155,7 +176,12 @@ export default function OpenReferralSlots() {
                           <button
                             className="copy-btn"
                             onClick={() =>
-                              copyToClipboard(item.address, `addr-right-${idx}`)
+                              copyToClipboard(
+                                item.address,
+                                `addr-left-${idx}`,
+                                "info",
+                                "Wallet address copied"
+                              )
                             }
                           >
                             {copiedField === `addr-right-${idx}` ? (
@@ -175,7 +201,12 @@ export default function OpenReferralSlots() {
                           <button
                             className="copy-btn"
                             onClick={() =>
-                              copyToClipboard(referral, `ref-right-${idx}`)
+                              copyToClipboard(
+                                referral,
+                                `ref-left-${idx}`,
+                                "success",
+                                "Referral link copied"
+                              )
                             }
                           >
                             {copiedField === `ref-right-${idx}` ? (
@@ -230,7 +261,9 @@ export default function OpenReferralSlots() {
                               onClick={() =>
                                 copyToClipboard(
                                   item.address,
-                                  `addr-${prefix}-${idx}`
+                                  `addr-left-${idx}`,
+                                  "info",
+                                  "Wallet address copied"
                                 )
                               }
                             >
@@ -253,7 +286,9 @@ export default function OpenReferralSlots() {
                               onClick={() =>
                                 copyToClipboard(
                                   referral,
-                                  `ref-${prefix}-${idx}`
+                                  `ref-left-${idx}`,
+                                  "success",
+                                  "Referral link copied"
                                 )
                               }
                             >

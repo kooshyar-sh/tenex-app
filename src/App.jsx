@@ -8,6 +8,7 @@ import UserLayout from "./pages/user/UserLayout";
 import ReferralCenter from "./pages/user/ReferralCenter";
 import OpenReferralSlots from "./pages/user/OpenReferralSlots";
 import { useEffect } from "react";
+import { ToastProvider } from "./components/Toast/ToastContext";
 
 export default function App() {
   const location = useLocation();
@@ -22,7 +23,7 @@ export default function App() {
   }, [isLanding]);
 
   return (
-    <>
+    <ToastProvider>
       {!isLanding && <AppNavbar />}
 
       <Routes>
@@ -37,6 +38,6 @@ export default function App() {
           <Route path="open-referral-slots" element={<OpenReferralSlots />} />
         </Route>
       </Routes>
-    </>
+    </ToastProvider>
   );
 }
