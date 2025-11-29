@@ -962,6 +962,8 @@ ul {
 .tenex-toast {
   min-width: 290px;
   max-width: 350px;
+
+  width: auto;
   padding: 14px 18px;
   border-radius: 16px;
   display: flex;
@@ -980,13 +982,29 @@ ul {
   overflow: hidden;
 }
 
+/* ===================== TEXT MULTILINE ===================== */
 .toast-text {
-  flex: 1;              
-  word-break: break-word; 
-  overflow-wrap: break-word; 
+  flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
   white-space: normal;
 }
 
+/* ===================== MOBILE FULL WIDTH ===================== */
+@media (max-width: 576px) {
+  .toast-container-tenex {
+    left: 0;
+    right: 0;
+    padding: 0 10px; /* فاصله کم از کناره‌ها */
+  }
+
+  .tenex-toast {
+    min-width: auto;
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0.75rem; /* کمی گردی کناره‌ها */
+  }
+}
 /* ===================== COLOR THEMES ===================== */
 .success {
   box-shadow: 0 0 10px rgba(25, 135, 84, 0.45);
