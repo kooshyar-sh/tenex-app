@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import Lottie from "lottie-react";
-import businessDeal from "../assets/Chart.json"; 
+import businessDeal from "../assets/Chart.json";
 import OurVision from "../components/ourVision/OurVision";
 import StatsPanel from "../components/statsPanel/statsPanel";
 import FAQ from "../components/FAQ/FAQ";
@@ -17,7 +17,7 @@ export default function Home() {
 
   // دیتای فیک
   const fakeWallet = "0x1234...ABCD";
-  const memberCount = 62751; // بعداً از API میاد
+  const memberCount = 62751; 
 
   // هندل‌ها
   const handleConnectWallet = () => {
@@ -27,6 +27,10 @@ export default function Home() {
   const handleGetStarted = () => {
     setRegistered(true);
     navigate("/mint");
+  };
+
+  const handleGoToDashboard = () => {
+    navigate("/user");
   };
 
   return (
@@ -59,17 +63,33 @@ export default function Home() {
         </p>
       )}
 
-      {/* شرط ثبت نام */}
-      {!registered && walletAddress && (
+      {/* شرط ثبت‌نام */}
+      {walletAddress && (
         <div className="d-flex flex-wrap justify-content-center align-items-center gap-3 mt-3">
-          <span className="fs-5 fw-semibold text-dark">
-            Be the <span className="fw-bold text-blue">{memberCount}th</span>{" "}
-            TENEX member
-          </span>
-          <Button onClick={handleGetStarted} className="pulse-button">
-            <i className="bi bi-rocket-takeoff-fill me-2"></i>
-            Get Started
-          </Button>
+          {!registered ? (
+            <>
+              <span className="fs-5 fw-semibold text-dark">
+                Be the{" "}
+                <span className="fw-bold text-blue">{memberCount}th</span> TENEX
+                member
+              </span>
+              <Button onClick={handleGetStarted} className="pulse-button">
+                <i className="bi bi-rocket-takeoff-fill me-2"></i>
+                Get Started
+              </Button>
+            </>
+          ) : (
+            <>
+              <span className="fs-5 fw-semibold text-dark">
+                You are member{" "}
+                <span className="fw-bold text-blue">#{memberCount}</span>
+              </span>
+              <Button onClick={handleGoToDashboard} className="pulse-button">
+                <i className="bi bi-speedometer2 me-2"></i>
+                Go to Dashboard
+              </Button>
+            </>
+          )}
         </div>
       )}
 
@@ -119,7 +139,6 @@ export default function Home() {
       <StatsPanel />
 
       <FAQ />
-
     </Container>
   );
 }
