@@ -3,6 +3,7 @@ import { Row, Col, Modal, Button } from "react-bootstrap";
 import Lottie from "lottie-react";
 import { QRCodeCanvas } from "qrcode.react";
 import Budgeting from "../../assets/Budgeting.json";
+import { useToast } from "../../components/Toast/ToastContext";
 
 export default function ReferralCenter() {
   const referralCode = "ABCD-9283";
@@ -11,9 +12,17 @@ export default function ReferralCenter() {
   const [copiedField, setCopiedField] = useState(null);
   const [showQR, setShowQR] = useState(false);
 
+  const toast = useToast();
+
   const copyToClipboard = (text, field) => {
     navigator.clipboard.writeText(text);
     setCopiedField(field);
+
+    toast.success(
+      field === "code" ? "Referral code copied!" : "Referral link copied!",
+      { duration: 2500 }
+    );
+
     setTimeout(() => setCopiedField(null), 1200);
   };
 
@@ -52,7 +61,7 @@ export default function ReferralCenter() {
       label: "Instagram",
       icon: "bi bi-instagram",
       color: "linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4)",
-      url: `https://www.instagram.com/`, 
+      url: `https://www.instagram.com/`,
     },
   ];
 
@@ -61,6 +70,14 @@ export default function ReferralCenter() {
       <h5 className="text-purple mb-3">
         Invite friends & earn rewards. Share your referral code or link below.
       </h5>
+
+      <p className="text-muted mb-4 fw-semibold" style={{ lineHeight: "1.6" }}>
+        Each account can directly invite two members using its own referral
+        code. To grow your team further, visit the{" "}
+        <span className="fw-semibold text-blue">Open Referral Slots</span> section, where you can access
+        referral codes of your downline members. Share those codes with new
+        users so they can join your team through available slots.
+      </p>
 
       <Row className="justify-content-between">
         <Col xl={6}>
@@ -138,14 +155,16 @@ export default function ReferralCenter() {
             />
           </div>
 
-          <h6 className="text-muted mb-3">Share your link via social platforms</h6>
+          <h6 className="text-muted mb-3">
+            Share your link via social platforms
+          </h6>
 
           <div className="d-flex flex-wrap justify-content-center gap-3">
             {shareOptions.map((s) => (
               <button
                 key={s.label}
                 onClick={() => window.open(s.url, "_blank")}
-                className="share-icon"  // ← کلاس مشترک
+                className="share-icon" // ← کلاس مشترک
                 style={{
                   background: s.color,
                 }}

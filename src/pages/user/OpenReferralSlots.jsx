@@ -1,7 +1,6 @@
 import { leftWingList, rightWingList } from "../../data/mockData";
 import { Row, Col, Table, Button } from "react-bootstrap";
 import { useState } from "react";
-import GlassAlert from "../../components/GlassAlert/GlassAlert";
 import { useToast } from "../../components/Toast/ToastContext";
 
 // کوتاه‌سازی آدرس‌ها
@@ -30,7 +29,6 @@ export default function OpenReferralSlots() {
     setTimeout(() => setCopiedField(null), 1200);
   };
 
-  // هیچ فیلتری نمی‌کنیم
   const cleanedLeft = leftWingList;
   const cleanedRight = rightWingList;
 
@@ -38,14 +36,15 @@ export default function OpenReferralSlots() {
 
   return (
     <>
-      <GlassAlert type="info" dismissible>
-        This page shows the wallet addresses and referral links of your direct
-        team members. You can copy these links and use them to fill your empty
-        positions. In the upcoming Referral Market, you will be able to list
-        your own referral link with a 10X token offer. Users who do not have an
-        upline can browse these offers and join using the link that provides the
-        most attractive reward.
-      </GlassAlert>
+      <p className="text-muted mb-4 fw-semibold" style={{ lineHeight: "1.6" }}>
+        This section displays the wallet addresses and referral links of your
+        direct team members. You can use these links to fill your empty referral
+        positions. In the upcoming <span className="fw-semibold text-blue">Referral Market</span>, you will be
+        able to list your own referral link with a{" "}
+        <span className="fw-semibold text-blue">10X token reward</span>. Users without an upline can browse
+        these offers and join through the link that provides the most attractive
+        incentive.
+      </p>
 
       {/* دکمه‌های موبایل برای تغییر تب */}
       <Row className="d-lg-none mb-3">

@@ -81,13 +81,13 @@ export default function Home() {
 
       {/* بخش توضیحات و انیمیشن */}
       <Row className="align-items-center mt-5">
-        <Col md={7} className="mb-4 mb-md-0 text-start">
+        <Col md={7} className="text-start">
           <div className="text-muted fw-semibold">
             <h2 className="text-purple fw-bold"> TENEX</h2>
 
             <h5 className="mb-3">Revolutionizing the Token Ecosystem</h5>
 
-            <p>
+            <p className="mb-0">
               TENEX is on a mission to revolutionize the token ecosystem by
               launching a deflationary minting system, allowing users to earn
               and mint tokens while growing their networks.
