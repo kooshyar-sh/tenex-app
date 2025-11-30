@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import { QRCodeCanvas } from "qrcode.react";
 import Budgeting from "../../assets/Budgeting.json";
 import { useToast } from "../../components/Toast/ToastContext";
+import { Link } from "react-router-dom";
 
 export default function ReferralCenter() {
   const referralCode = "ABCD-9283";
@@ -74,9 +75,15 @@ export default function ReferralCenter() {
       <p className="text-muted mb-4 fw-semibold" style={{ lineHeight: "1.6" }}>
         Each account can directly invite two members using its own referral
         code. To grow your team further, visit the{" "}
-        <span className="fw-semibold text-blue">Open Referral Slots</span> section, where you can access
-        referral codes of your downline members. Share those codes with new
-        users so they can join your team through available slots.
+        <Link
+          to="/user/open-referral-slots"
+          className="animated-underline fw-semibold text-blue text-decoration-none"
+        >
+          Open Referral Slots
+        </Link>{" "}
+        section, where you can access referral codes of your downline members.
+        Share those codes with new users so they can join your team through
+        available slots.
       </p>
 
       <Row className="justify-content-between">

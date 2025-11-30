@@ -96,7 +96,38 @@ export default function Dashboard() {
     <>
       {/* ---------- چهار باکس بالایی ---------- */}
       <Row className="mb-4 dashboard-top-row">
+        {/* ---------- User Info Box (New Box) ---------- */}
         <Col md={6} lg={3} className="px-md-2">
+          <div className="main-card">
+            {/* Top Row: Rank Circle + Package Name */}
+            <div className="d-flex align-items-center gap-3">
+              <div className="rank-circle">#{currentUser.rank}</div>
+
+              <div>
+                <h5 className="text-purple mb-1">{currentUser.packageName}</h5>
+              </div>
+            </div>
+
+            <hr className="my-2" />
+
+            {/* Rewards */}
+            <p className="mb-2">
+              <span className="text-muted">All-Time Reward:</span>{" "}
+              <span className="text-success fw-bold">
+                {currentUser.allTimeReward} BNB
+              </span>
+            </p>
+
+            <p className="mb-0">
+              <span className="text-muted">This Week’s Accumulated:</span>{" "}
+              <span className="text-info fw-bold">
+                {currentUser.weeklyReward} BNB
+              </span>
+            </p>
+          </div>
+        </Col>
+
+        <Col md={6} lg={3} className="px-md-2 mt-2 mt-md-0">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-coin me-2 text-blue"></i> 10X Balance
@@ -105,26 +136,6 @@ export default function Dashboard() {
             <small className="text-muted">
               Minted: {currentUser.minted} 10X
             </small>
-          </div>
-        </Col>
-
-        <Col md={6} lg={3} className="px-md-2 mt-2 mt-md-0">
-          <div className="main-card">
-            <h5 className="text-purple mb-2">
-              <i className="bi bi-cash-stack me-2 text-blue"></i> BNB Earnings
-            </h5>
-            <p className="mb-2">
-              <span className="text-muted">All-Time Reward:</span>{" "}
-              <span className="text-success fw-bold">
-                {currentUser.allTimeReward} BNB
-              </span>
-            </p>
-            <p className="mb-0">
-              <span className="text-muted">This Week’s Accumulated:</span>{" "}
-              <span className="text-info fw-bold">
-                {currentUser.weeklyReward} BNB
-              </span>
-            </p>
           </div>
         </Col>
 

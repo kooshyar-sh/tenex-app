@@ -1,6 +1,8 @@
 export const currentUser = {
   address: "0xAbC123...Ef9",
   referralCode: "TENEX-XY12",
+  rank: 62751,
+  packageName: "TENEX Bronze",
   balance: 1250,
   minted: 500,
   binaryVolume: 42000,
