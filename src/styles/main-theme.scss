@@ -1107,120 +1107,105 @@ ul {
 
 
 // cap upgrade styles
+/* Main layout */
 .cap-upgrade-container {
   display: flex;
-  gap: 30px;
-  position: relative;
-  padding: 20px;
+  gap: 40px;
   width: 100%;
+  position: relative;
 }
 
-/* ---------------- Sidebar Stepper ---------------- */
+/* ---------- Sidebar Stepper ---------- */
 .cap-stepper {
   position: relative;
   width: 120px;
   min-width: 120px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding-top: 10px;
-
-  .stepper-line {
-    position: absolute;
-    left: 25px;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: #d0c4e9;
-    z-index: 1;
-    border-radius: 2px;
-  }
-
-  .step-circle {
-    position: relative;
-    z-index: 2;
-    margin: 35px 0;
-    background: #e9e2f8;
-    color: #6f42c1;
-    border: 2px solid #6f42c1;
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 15px;
-    font-weight: bold;
-    transition: 0.3s;
-
-    &.active {
-      background: #6f42c1;
-      color: white;
-    }
-  }
+  align-items: center;
 }
 
-/* ---------------- Tasks Cards ---------------- */
+/* Title */
+.cap-stepper .stepper-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6f42c1;
+  margin-bottom: 25px;
+}
+
+/* Vertical middle line */
+.cap-stepper .stepper-line {
+  position: absolute;
+  top: 70px; /* دقیقا زیر عنوان */
+  bottom: 45px; /* قبل آخرین دایره */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: #d0c4e9;
+  z-index: 1;
+}
+
+/* Circles */
+.cap-stepper .step-circle {
+  position: relative;
+  z-index: 2;
+  margin: 35px 0;
+  background: #e9e2f8;
+  color: #6f42c1;
+  border: 2px solid #6f42c1;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.cap-stepper .step-circle.active {
+  background: #6f42c1;
+  color: white;
+}
+
+/* ---------- Tasks Column ---------- */
 .cap-tasks-wrapper {
   flex: 1;
-
-  .title-with-icon {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-  }
-
-  .sub-text {
-    opacity: 0.8;
-    margin-bottom: 20px;
-  }
-
-  .task-card {
-    margin-bottom: 15px;
-    position: relative;
-  }
-
-  .task-text {
-    font-size: 16px;
-    font-weight: 500;
-  }
-
-  .progress-count {
-    margin-top: 5px;
-    font-size: 14px;
-    text-align: right;
-    opacity: 0.7;
-  }
+  margin-top: 40px;
 }
 
-/* ---------------- Responsive ---------------- */
-@media (max-width: 992px) {
+.task-card {
+  margin-bottom: 30px;
+  padding: 20px;
+  position: relative;
+}
+
+/* ---------- Responsive mobile ---------- */
+@media (max-width: 768px) {
   .cap-upgrade-container {
-    flex-direction: column;
-    padding-top: 0;
+    flex-direction: row;     /* هنوز استپر چپ می‌ماند */
+    gap: 20px;
   }
 
   .cap-stepper {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    min-width: unset;
-    justify-content: space-between;
-    margin-bottom: 20px;
-
-    .stepper-line {
-      display: none;
-    }
-
-    .step-circle {
-      margin: 0 !important;
-      font-size: 13px;
-      padding: 4px 8px;
-    }
+    width: 80px;
+    min-width: 80px;
   }
 
-  .task-text {
-    font-size: 14px;
+  .cap-stepper .step-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+    margin: 28px 0;
   }
 
-  .simple-progress-bar {
-    height: 12px !important;
+  .cap-stepper .stepper-line {
+    left: 50%;
+    width: 2px;
+  }
+
+  .task-card {
+    padding: 15px;
   }
 }
