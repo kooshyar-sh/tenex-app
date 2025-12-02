@@ -27,6 +27,13 @@ export default function UserLayout() {
               <span>Open Referral Slots</span>
             </NavLink>
           </li>
+
+          <li>
+            <NavLink to="cap-upgrade" className="nav-item">
+              <i className="bi bi-arrow-up-square"></i>
+              <span>Cap Upgrade</span>
+            </NavLink>
+          </li>
         </ul>
       </aside>
 

@@ -860,6 +860,7 @@ ul {
   font-weight: bold;
   font-size: 14px;
   box-shadow: 0 0 12px rgba(130, 50, 200, 0.35);
+  border: 2px solid;
 }
 
 .user-info-top h5 {
@@ -1102,4 +1103,124 @@ ul {
 @keyframes progressShrink {
   from { width: 100%; }
   to   { width: 0%; }
+}
+
+
+// cap upgrade styles
+.cap-upgrade-container {
+  display: flex;
+  gap: 30px;
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+
+/* ---------------- Sidebar Stepper ---------------- */
+.cap-stepper {
+  position: relative;
+  width: 120px;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 10px;
+
+  .stepper-line {
+    position: absolute;
+    left: 25px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: #d0c4e9;
+    z-index: 1;
+    border-radius: 2px;
+  }
+
+  .step-circle {
+    position: relative;
+    z-index: 2;
+    margin: 35px 0;
+    background: #e9e2f8;
+    color: #6f42c1;
+    border: 2px solid #6f42c1;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+
+    &.active {
+      background: #6f42c1;
+      color: white;
+    }
+  }
+}
+
+/* ---------------- Tasks Cards ---------------- */
+.cap-tasks-wrapper {
+  flex: 1;
+
+  .title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+  }
+
+  .sub-text {
+    opacity: 0.8;
+    margin-bottom: 20px;
+  }
+
+  .task-card {
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .task-text {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .progress-count {
+    margin-top: 5px;
+    font-size: 14px;
+    text-align: right;
+    opacity: 0.7;
+  }
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 992px) {
+  .cap-upgrade-container {
+    flex-direction: column;
+    padding-top: 0;
+  }
+
+  .cap-stepper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-width: unset;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .stepper-line {
+      display: none;
+    }
+
+    .step-circle {
+      margin: 0 !important;
+      font-size: 13px;
+      padding: 4px 8px;
+    }
+  }
+
+  .task-text {
+    font-size: 14px;
+  }
+
+  .simple-progress-bar {
+    height: 12px !important;
+  }
 }

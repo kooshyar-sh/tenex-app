@@ -7,6 +7,7 @@ import Dashboard from "./pages/user/Dashboard";
 import UserLayout from "./pages/user/UserLayout";
 import ReferralCenter from "./pages/user/ReferralCenter";
 import OpenReferralSlots from "./pages/user/OpenReferralSlots";
+import CapUpgrade from "./pages/user/CapUpgrade"
 import { useEffect } from "react";
 import { ToastProvider } from "./components/Toast/ToastContext";
 
@@ -36,6 +37,7 @@ export default function App() {
           <Route index element={<Dashboard />} />
           <Route path="referral" element={<ReferralCenter />} />
           <Route path="open-referral-slots" element={<OpenReferralSlots />} />
+          <Route path="cap-upgrade" element={<CapUpgrade />} />
         </Route>
       </Routes>
     </ToastProvider>
