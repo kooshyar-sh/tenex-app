@@ -1107,105 +1107,83 @@ ul {
 
 
 // cap upgrade styles
-/* Main layout */
 .cap-upgrade-container {
-  display: flex;
-  gap: 40px;
-  width: 100%;
   position: relative;
 }
 
-/* ---------- Sidebar Stepper ---------- */
-.cap-stepper {
-  position: relative;
-  width: 120px;
-  min-width: 120px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Title */
-.cap-stepper .stepper-title {
-  font-size: 14px;
-  font-weight: 600;
+/* عنوان */
+.stepper-header {
+  font-weight: 700;
   color: #6f42c1;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
-/* Vertical middle line */
-.cap-stepper .stepper-line {
+/* خط عمودی */
+.global-step-line {
   position: absolute;
-  top: 70px; /* دقیقا زیر عنوان */
-  bottom: 45px; /* قبل آخرین دایره */
-  left: 50%;
-  transform: translateX(-50%);
+  top: 35px;
+  bottom: 0;
+  left: 22px;
   width: 3px;
   background: #d0c4e9;
+  border-radius: 2px;
   z-index: 1;
 }
 
-/* Circles */
-.cap-stepper .step-circle {
+/* ردیف مستقل */
+.step-row {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 35px;
+  position: relative;
+}
+
+/* دایره استپ */
+.step-circle {
   position: relative;
   z-index: 2;
-  margin: 35px 0;
-  background: #e9e2f8;
-  color: #6f42c1;
-  border: 2px solid #6f42c1;
-  border-radius: 50%;
   width: 45px;
   height: 45px;
+  border-radius: 50%;
+  border: 2px solid #6f42c1;
+  background: #e9e2f8;
+  color: #6f42c1;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 700;
   font-size: 15px;
-  font-weight: bold;
+  flex-shrink: 0;
   transition: 0.3s;
 }
 
-.cap-stepper .step-circle.active {
+.step-circle.active {
   background: #6f42c1;
   color: white;
 }
 
-/* ---------- Tasks Column ---------- */
-.cap-tasks-wrapper {
-  flex: 1;
-  margin-top: 40px;
-}
-
+/* کارت */
 .task-card {
-  margin-bottom: 30px;
-  padding: 20px;
-  position: relative;
+  flex: 1;
 }
 
-/* ---------- Responsive mobile ---------- */
 @media (max-width: 768px) {
   .cap-upgrade-container {
-    flex-direction: row;     /* هنوز استپر چپ می‌ماند */
-    gap: 20px;
   }
 
-  .cap-stepper {
-    width: 80px;
-    min-width: 80px;
-  }
-
-  .cap-stepper .step-circle {
+  .step-circle {
     width: 36px;
     height: 36px;
     font-size: 13px;
-    margin: 28px 0;
   }
 
-  .cap-stepper .stepper-line {
-    left: 50%;
+  .global-step-line {
+    left: 17px;
     width: 2px;
   }
 
-  .task-card {
-    padding: 15px;
+  .step-row {
+    gap: 15px;
   }
 }

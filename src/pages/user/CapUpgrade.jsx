@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export default function CapUpgrade() {
   const userCurrentCap = 0.5;
 
@@ -22,29 +20,26 @@ export default function CapUpgrade() {
         You can upgrade your weekly maximum reward by completing these tasks:
       </p>
 
+      {/* container اصلی */}
       <div className="cap-upgrade-container">
 
-        {/* --------- Sidebar Stepper --------- */}
-        <aside className="cap-stepper">
-          <div className="stepper-title">Your Current Cap (BNB)</div>
+        {/* عنوان */}
+        <div className="stepper-header">Your Current Cap (BNB)</div>
 
-          {/* خط از وسط اولین دایره تا وسط آخرین دایره */}
-          <div className="stepper-line"></div>
+        {/* خط عمودی بین همه‌ی استپ‌ها */}
+        <div className="global-step-line"></div>
 
-          {steps.map((s, idx) => (
-            <div
-              key={idx}
-              className={`step-circle ${userCurrentCap >= s.cap ? "active" : ""}`}
-            >
-              {s.cap}
+        {/* ردیف‌های استپ + کارت */}
+        {steps.map((task, idx) => (
+          <div key={idx} className="step-row">
+
+            {/* استپ */}
+            <div className={`step-circle ${userCurrentCap >= task.cap ? "active" : ""}`}>
+              {task.cap}
             </div>
-          ))}
-        </aside>
 
-        {/* --------- Tasks --------- */}
-        <div className="cap-tasks-wrapper">
-          {steps.map((task, idx) => (
-            <div key={idx} className="main-card task-card">
+            {/* کارت */}
+            <div className="main-card task-card">
               <div className="task-text">{task.label}</div>
 
               <div className="simple-progress-container mt-3">
@@ -60,8 +55,8 @@ export default function CapUpgrade() {
                 {task.progress}/{task.total}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
 
       </div>
     </>
