@@ -7,9 +7,10 @@ import Dashboard from "./pages/user/Dashboard";
 import UserLayout from "./pages/user/UserLayout";
 import ReferralCenter from "./pages/user/ReferralCenter";
 import OpenReferralSlots from "./pages/user/OpenReferralSlots";
-import CapUpgrade from "./pages/user/CapUpgrade"
+import CapUpgrade from "./pages/user/CapUpgrade";
 import { useEffect } from "react";
 import { ToastProvider } from "./components/Toast/ToastContext";
+import FooterTenex from "./components/FooterTenex";
 
 export default function App() {
   const location = useLocation();
@@ -25,6 +26,7 @@ export default function App() {
 
   return (
     <ToastProvider>
+      {/* Navbar مخفی روی لندینگ */}
       {!isLanding && <AppNavbar />}
 
       <Routes>
@@ -40,6 +42,8 @@ export default function App() {
           <Route path="cap-upgrade" element={<CapUpgrade />} />
         </Route>
       </Routes>
+
+      {!isLanding && <FooterTenex />}
     </ToastProvider>
   );
 }

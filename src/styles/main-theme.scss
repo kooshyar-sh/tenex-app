@@ -1169,9 +1169,6 @@ ul {
 }
 
 @media (max-width: 768px) {
-  .cap-upgrade-container {
-  }
-
   .step-circle {
     width: 36px;
     height: 36px;
@@ -1186,4 +1183,149 @@ ul {
   .step-row {
     gap: 15px;
   }
+}
+
+
+
+/* FooterTenex styles*/
+
+.footer-card {
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  /* بک‌گراند اصلی: لایه‌ی تاریک + دو گرادینت دایره‌ای */
+  background:
+    radial-gradient(circle at 20% 30%, rgba(111,66,193,0.22), transparent 12%),
+    radial-gradient(circle at 85% 70%, rgba(39,171,236,0.12), transparent 12%),
+    linear-gradient(180deg, #12061a 0%, #1a0726 100%);
+  box-shadow: 0 10px 30px rgba(8, 5, 12, 0.6);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* المانِ شناورِ گرادینت (بسیار ملایم و متحرک) */
+.footer-card::before{
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  right: -100px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(111,66,193,0.45), transparent 20%),
+    radial-gradient(circle at 70% 80%, rgba(39,171,236,0.28), transparent 20%);
+  filter: blur(48px);
+  opacity: 0.9;
+  transform: translate3d(0,0,0);
+  animation: floaty 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes floaty{
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(10px) rotate(6deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* لوگو پلِیس‌هولدر */
+.logo-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 2;
+}
+
+/* متن‌ها و لینک‌ها */
+.footer-intro h5, .footer-intro p {
+  color: #ffffff;
+  z-index: 2;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  display: inline-block;
+  padding: 6px 0;
+  transition: color .3s ease, transform .3s ease;
+}
+.footer-links a:hover {
+  color: #dcd6ff;
+  transform: translateX(4px);
+}
+
+/* دکمه دانلود */
+.btn-download {
+  background: linear-gradient(90deg, #6f42c1, #27abec);
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(111,66,193,0.24);
+  transition: all 0.3s;
+}
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(111,66,193,0.30);
+}
+
+/* آیکون‌های شبکه‌های اجتماعی */
+.socials {
+  display: flex;
+  gap: 12px;
+  z-index: 2;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  transition: background .18s ease, transform .12s ease;
+  text-decoration: none;
+    transition: all 0.3s;
+
+}
+.social-link:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-3px);
+}
+
+/* separator */
+.footer-hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  margin: 18px 0 10px;
+  z-index: 2;
+}
+
+/* footer bottom */
+.footer-bottom {
+  color: rgba(255,255,255,0.6);
+  z-index: 2;
+}
+
+/* responsive tweaks */
+@media (max-width: 767.98px) {
+  .footer-card {
+    padding: 20px;
+  }
+  .logo-placeholder {
+    width: 48px;
+    height: 48px;
+  }
+  .footer-intro h5 { font-size: 1.05rem; }
+  .footer-links a { font-size: 0.95rem; }
+  .btn-download { width: 100%; text-align: center; }
+  .socials { justify-content: flex-start; }
 }
