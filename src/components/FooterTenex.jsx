@@ -45,8 +45,7 @@ export default function FooterTenex() {
 
               {/* شعار پروژه */}
               <p className="mb-0 small">
-                10X your seed investment — Mint tokens, grow your binary network
-                and earn weekly rewards.
+               A deflationary minting system for a sustainable future
               </p>
 
               {/* دکمه‌ها: Presentation (باز کردن فایل) + (اختیاری) دکمه دوم */}

@@ -13,7 +13,6 @@ $blue: #27abec;
 
 // ========== Base Styles ==========
 body {
-  // background: $bg-light;
   color: $text-main;
   font-family: "Segoe UI", Tahoma, sans-serif;
 }
@@ -114,6 +113,11 @@ ul {
   &:hover {
     box-shadow: 0 4px 12px rgba($primary-dark, 0.15);
   }
+}
+
+.navbar-tenex {
+  background-color: #f5f1ff; /* اگر می‌خواهی رنگ را اینجا کنترل کنی */
+  z-index: 1030; /* بالاتر از محتوای صفحه */
 }
 
 .item-card {
