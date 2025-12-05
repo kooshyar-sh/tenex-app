@@ -18,7 +18,12 @@ export default function ClaimButton({
   const toggleRef = useRef(null);
   const menuRef = useRef(null);
 
-  const [menuStyle, setMenuStyle] = useState({ left: null, top: null, arrowLeft: null, width: null });
+  const [menuStyle, setMenuStyle] = useState({
+    left: null,
+    top: null,
+    arrowLeft: null,
+    width: null,
+  });
 
   const isHeaderVariant = (className || "").includes("claim-button--header");
 
@@ -44,8 +49,7 @@ export default function ClaimButton({
 
   const handleUpgrade = () => {
     setOpen(false);
-    if (typeof onUpgrade === "function") onUpgrade();
-    else navigate("/user/cap-upgrade");
+    navigate("/user/cap-upgrade");
   };
 
   const onKeyDown = (e) => {
@@ -71,13 +75,19 @@ export default function ClaimButton({
     const width = Math.max(toggleRect.width, 160);
     const menuHeight = menuEl.offsetHeight || 48;
 
-    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const viewportWidth =
+      window.innerWidth || document.documentElement.clientWidth;
+    const viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight;
     const margin = 8;
     const gap = 6;
 
     // direction: override prop > headerVariant > default mobile
-    const effectiveDirection = dropDirection ? dropDirection : (isHeaderVariant ? "down" : "up");
+    const effectiveDirection = dropDirection
+      ? dropDirection
+      : isHeaderVariant
+      ? "down"
+      : "up";
 
     // left: align left edge of menu with left edge of toggle (clamp to viewport)
     let leftAbs = Math.round(toggleRect.left);
@@ -92,7 +102,10 @@ export default function ClaimButton({
       topAbs = Math.round(toggleRect.bottom + gap);
       if (topAbs + menuHeight + margin > viewportHeight) {
         // fallback up
-        topAbs = Math.max(margin, Math.round(toggleRect.top - menuHeight - gap));
+        topAbs = Math.max(
+          margin,
+          Math.round(toggleRect.top - menuHeight - gap)
+        );
       }
     } else {
       topAbs = Math.round(toggleRect.top - menuHeight - gap);
@@ -103,7 +116,8 @@ export default function ClaimButton({
     }
 
     // arrow: place it near left side of toggle inside menu (clamped)
-    const arrowCenterAbs = toggleRect.left + Math.max(12, Math.floor(toggleRect.width / 4));
+    const arrowCenterAbs =
+      toggleRect.left + Math.max(12, Math.floor(toggleRect.width / 4));
     let arrowLeftInside = Math.round(arrowCenterAbs - leftAbs - 7); // 7 = half arrow width
     const arrowMin = 8;
     const arrowMax = Math.max(width - 8 - 14, arrowMin);
@@ -113,7 +127,7 @@ export default function ClaimButton({
     setMenuStyle({
       left: `${leftAbs}px`,
       top: `${topAbs}px`,
-    //   arrowLeft: `${arrowLeftInside}px`,
+      //   arrowLeft: `${arrowLeftInside}px`,
     });
   };
 
@@ -170,7 +184,8 @@ export default function ClaimButton({
       <div
         ref={menuRef}
         className={`claim-menu ${open ? "visible" : ""} ${
-          (dropDirection ? dropDirection : (isHeaderVariant ? "down" : "up")) === "down"
+          (dropDirection ? dropDirection : isHeaderVariant ? "down" : "up") ===
+          "down"
             ? "claim-menu--down"
             : "claim-menu--up"
         }`}
@@ -182,7 +197,11 @@ export default function ClaimButton({
         }}
       >
         <div className="menu-inner">
-          <button type="button" className="upgrade-text" onClick={handleUpgrade}>
+          <button
+            type="button"
+            className="upgrade-text"
+            onClick={handleUpgrade}
+          >
             Upgrade Cap
             <i className="bi bi-arrow-right ms-2" aria-hidden="true" />
           </button>

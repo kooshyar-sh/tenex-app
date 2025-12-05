@@ -45,7 +45,6 @@ export default function OpenReferralSlots() {
 
   return (
     <>
-
       <p className="text-muted mb-4 fw-semibold" style={{ lineHeight: "1.6" }}>
         This section displays the wallet addresses and referral links of your
         direct team members. You can use these links to fill your empty referral
@@ -90,11 +89,9 @@ export default function OpenReferralSlots() {
               {carryOverSide === "L" && carryOverAmount > 0 ? (
                 <span
                   className="custom-badge custom-badge-light-purple"
-                  title={`Carry over from left: ${formatBNB(
-                    carryOverAmount
-                  )} BNB`}
+                  title={`Carry over from left: ${formatBNB(carryOverAmount)} BNB`}
                 >
-                  L {formatBNB(carryOverAmount)} BNB
+                  Carry Over: {formatBNB(carryOverAmount)} BNB
                 </span>
               ) : (
                 // If carry over is on Right (or none), show "Recommended" for the other table
@@ -190,11 +187,9 @@ export default function OpenReferralSlots() {
               {carryOverSide === "R" && carryOverAmount > 0 ? (
                 <span
                   className="custom-badge custom-badge-light-info"
-                  title={`Carry over from right: ${formatBNB(
-                    carryOverAmount
-                  )} BNB`}
+                  title={`Carry over from right: ${formatBNB(carryOverAmount)} BNB`}
                 >
-                  R {formatBNB(carryOverAmount)} BNB
+                  Carry Over: {formatBNB(carryOverAmount)} BNB
                 </span>
               ) : (
                 carryOverSide !== "R" && (
@@ -291,7 +286,7 @@ export default function OpenReferralSlots() {
               {activeWing === "left" ? (
                 carryOverSide === "L" && carryOverAmount > 0 ? (
                   <span className="custom-badge custom-badge-light-purple">
-                    L {formatBNB(carryOverAmount)} BNB
+                    Carry Over: {formatBNB(carryOverAmount)} BNB
                   </span>
                 ) : (
                   <span className="fw-bold text-purple">
@@ -301,7 +296,7 @@ export default function OpenReferralSlots() {
               ) : activeWing === "right" ? (
                 carryOverSide === "R" && carryOverAmount > 0 ? (
                   <span className="custom-badge custom-badge-light-info">
-                    R {formatBNB(carryOverAmount)} BNB
+                    Carry Over: {formatBNB(carryOverAmount)} BNB
                   </span>
                 ) : (
                   <span className="fw-bold text-purple">

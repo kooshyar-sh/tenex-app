@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./ToolbarBottom.scss";
 import ClaimButton from "../ClaimButton/ClaimButton";
 
 export default function ToolbarBottom() {
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -27,8 +25,6 @@ export default function ToolbarBottom() {
             commission={0.34}
             cap={1.0}
             onClaim={() => {}}
-            onUpgrade={() => {
-            }}
             dropDirection="up" 
           />
         </div>
