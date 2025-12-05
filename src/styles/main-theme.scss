@@ -115,6 +115,19 @@ ul {
   }
 }
 
+
+header {
+  position: sticky;
+  position: -webkit-sticky;
+  left: 0;
+  right: 0;
+  top: 0; /* مهم: موقعیت اولیه */
+  transition: all 0.3s ease-in-out; /* یا transition: top 0.25s ease */
+  z-index: 888;
+  background-color: var(--white);
+  box-shadow: 0 0 13px #69696933;
+}
+
 .navbar-tenex {
   background-color: #f5f1ff; /* اگر می‌خواهی رنگ را اینجا کنترل کنی */
   z-index: 1030; /* بالاتر از محتوای صفحه */
