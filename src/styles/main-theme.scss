@@ -1353,21 +1353,6 @@ header {
   transform: translateX(4px);
 }
 
-/* دکمه دانلود */
-.btn-download {
-  background: linear-gradient(90deg, #6f42c1, #27abec);
-  border: none;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight: 600;
-  box-shadow: 0 6px 18px rgba(111,66,193,0.24);
-  transition: all 0.3s;
-}
-.btn-download:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(111,66,193,0.30);
-}
 
 /* آیکون‌های شبکه‌های اجتماعی */
 .socials {
@@ -1436,19 +1421,14 @@ header {
 .claim-button {
   display: flex;
   align-items: center;
-  gap: 12px;
   padding: 10px 14px;
-  border-radius: 10px;
   font-weight: 700;
   color: #fff;
   background: linear-gradient(90deg, #6f42c1, #27abec);
   border: none;
   box-shadow: 0 8px 20px rgba(111, 66, 193, 0.18);
-  min-width: 220px;
   justify-content: space-between;
   cursor: pointer;
-  /* اگر می‌خواهی دقیقا از کلاس .shining-button پروژه استفاده شود،
-     می‌توانی background بالا را حذف کنی و فقط کلاس را نگه داری */
 }
 
 /* claim-left */
@@ -1460,7 +1440,7 @@ header {
 
 /* label */
 .claim-label {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   margin-left: 6px;
 }
 
@@ -1470,7 +1450,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 3px;
   font-size: 0.9rem;
   color: #ffffffcc;
 }
@@ -1510,7 +1490,6 @@ header {
 /* منو (قابل استفاده به عنوان dropup یا dropdown) */
 .claim-menu {
   position: absolute;
-  left: 50%;
   transform: translateX(-50%) translateY(6px);
   min-width: 220px;
   display: none;
@@ -1546,13 +1525,23 @@ header {
   justify-content: center;
 }
 
-.upgrade-btn {
-  background: linear-gradient(90deg, #6f42c1, #27abec);
-  color: #fff;
+.upgrade-text {
+  background: transparent;
   border: none;
+  color: #6f42c1;         
   font-weight: 700;
-  padding: 8px 12px;
-  border-radius: 8px;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+/* آیکون فلش سمت راست */
+.upgrade-text .bi {
+  font-size: 14px;
+  color: inherit;
 }
 
 /* arrow */

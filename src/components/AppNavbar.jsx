@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import ClaimButton from "./ClaimButton/ClaimButton";
 
 export default function AppNavbar() {
   const [expanded, setExpanded] = useState(false);
-  const navRef = useRef(null);       // ref به <header>
+  const navRef = useRef(null); // ref به <header>
   const lastScrollTop = useRef(0);
   const didScroll = useRef(false);
   const scrollTimeout = useRef(null);
-  const delta = 5; 
+  const delta = 5;
   const [navbarHeight, setNavbarHeight] = useState(0);
 
   // این مقدار تعیین می‌کند هدر چند پیکسل بیشتر بالاتر برود تا سایه دیده نشود
@@ -50,7 +51,8 @@ export default function AppNavbar() {
 
   useEffect(() => {
     // مقدار اولیه
-    lastScrollTop.current = window.pageYOffset || document.documentElement.scrollTop || 0;
+    lastScrollTop.current =
+      window.pageYOffset || document.documentElement.scrollTop || 0;
 
     const onScroll = () => {
       didScroll.current = true;
@@ -58,7 +60,8 @@ export default function AppNavbar() {
       if (!scrollTimeout.current) {
         scrollTimeout.current = window.setTimeout(() => {
           if (didScroll.current && navRef.current) {
-            const st = window.pageYOffset || document.documentElement.scrollTop || 0;
+            const st =
+              window.pageYOffset || document.documentElement.scrollTop || 0;
             const el = navRef.current; // header element
             const navH = el ? el.offsetHeight : navbarHeight;
 
@@ -161,19 +164,17 @@ export default function AppNavbar() {
               </Nav>
 
               <div className="d-flex align-items-center">
-                <Button
-                  size="sm"
-                  className="btn-outline-blue me-2"
-                >
+                <Button size="sm" className="btn-outline-blue me-2">
                   <i className="bi bi-wallet2 me-1"></i> Connect Wallet
                 </Button>
 
-                <Button
-                  size="sm"
-                  className="shining-button d-none d-md-inline-flex align-items-center"
-                >
-                  <i className="bi bi-person-circle me-1"></i> Claim
-                </Button>
+                <ClaimButton
+                  commission={0.34}
+                  cap={1.0}
+                  onClaim={() => {}}
+                  onUpgrade={() => {}}
+                  dropDirection="down"
+                />
               </div>
             </Navbar.Collapse>
           </Container>

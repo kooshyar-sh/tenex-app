@@ -107,7 +107,7 @@ export default function FooterTenex() {
           <div className="col-12 col-md-3 text-md-end">
             <div className="d-flex flex-column align-items-start align-items-md-end">
               <button
-                className="btn btn-primary btn-download mb-2"
+                className="shining-button mb-2"
                 onClick={handleDownloadRoadmap}
                 aria-label="Download TENEX roadmap"
               >
