@@ -113,8 +113,7 @@ export default function ClaimButton({
     setMenuStyle({
       left: `${leftAbs}px`,
       top: `${topAbs}px`,
-      arrowLeft: `${arrowLeftInside}px`,
-      width: `${width}px`,
+    //   arrowLeft: `${arrowLeftInside}px`,
     });
   };
 
@@ -160,7 +159,7 @@ export default function ClaimButton({
         <button
           ref={toggleRef}
           type="button"
-          className={`toggle-area ${open ? "open" : ""}`}
+          className={`toggle-area ${open ? "open" : ""} d-md-none`}
           onClick={toggle}
           aria-label={open ? "Close options" : "Open options"}
         >
@@ -179,7 +178,6 @@ export default function ClaimButton({
         style={{
           left: menuStyle.left ?? undefined,
           top: menuStyle.top ?? undefined,
-          width: menuStyle.width ?? undefined,
           position: "fixed",
         }}
       >
