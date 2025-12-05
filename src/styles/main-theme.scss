@@ -1423,3 +1423,161 @@ header {
   .btn-download { width: 100%; text-align: center; }
   .socials { justify-content: flex-start; }
 }
+
+
+/* ClaimButton styles */
+.claim-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* دکمهٔ اصلی */
+.claim-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #6f42c1, #27abec);
+  border: none;
+  box-shadow: 0 8px 20px rgba(111, 66, 193, 0.18);
+  min-width: 220px;
+  justify-content: space-between;
+  cursor: pointer;
+  /* اگر می‌خواهی دقیقا از کلاس .shining-button پروژه استفاده شود،
+     می‌توانی background بالا را حذف کنی و فقط کلاس را نگه داری */
+}
+
+/* claim-left */
+.claim-left {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* label */
+.claim-label {
+  font-size: 0.95rem;
+  margin-left: 6px;
+}
+
+/* مقادیر وسطی */
+.claim-values {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #ffffffcc;
+}
+
+.collected {
+  color: #fff;
+  font-weight: 700;
+}
+
+.cap {
+  color: #ffffffcc;
+  font-weight: 600;
+}
+
+/* Toggle (حالا یک آیتم فلکس) */
+.toggle-area {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: #fff;
+  cursor: pointer;
+  padding: 6px;
+  transition: transform .18s ease, background .18s;
+}
+.toggle-area .bi {
+  font-size: 16px;
+  transition: transform .25s;
+}
+.toggle-area.open .bi { transform: rotate(180deg) scale(1.05); }
+
+/* منو (قابل استفاده به عنوان dropup یا dropdown) */
+.claim-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 220px;
+  display: none;
+  z-index: 300;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* dropup (پیش‌فرض) */
+.claim-menu--up {
+  bottom: calc(100% + 10px);
+}
+
+/* dropdown */
+.claim-menu--down {
+  top: calc(100% + 10px);
+}
+
+/* وقتی باز است */
+.claim-menu.visible {
+  display: block;
+  pointer-events: auto;
+  opacity: 1;
+  animation: claim-menu-fade 160ms ease-out;
+}
+
+.menu-inner {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(3, 3, 8, 0.12);
+  display: flex;
+  justify-content: center;
+}
+
+.upgrade-btn {
+  background: linear-gradient(90deg, #6f42c1, #27abec);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* arrow */
+.drop-arrow {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(3,3,8,0.08);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  /* اگر dropup است، فلش را پایین می‌گذاریم */
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+/* اگر dropDirection == down نیاز داریم arrow را بالای منو نمایش دهیم */
+.claim-menu--down .drop-arrow {
+  top: -7px;
+  bottom: auto;
+}
+
+/* انیمیشن */
+@keyframes claim-menu-fade {
+  from { transform: translateX(-50%) translateY(14px); opacity: 0 }
+  to   { transform: translateX(-50%) translateY(6px); opacity: 1 }
+}

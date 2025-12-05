@@ -52,8 +52,6 @@ export default function App() {
       <ToolbarBottom
         showHeaderAndFooter={showHeaderAndFooter}
         showNavBar={showNavBar}
-        commission={0.12}
-        cap={0.5}
       />
     </ToastProvider>
   );
