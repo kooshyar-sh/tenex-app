@@ -11,10 +11,14 @@ import CapUpgrade from "./pages/user/CapUpgrade";
 import { useEffect } from "react";
 import { ToastProvider } from "./components/Toast/ToastContext";
 import FooterTenex from "./components/FooterTenex";
+import ToolbarBottom from "./components/ToolbarBottom/ToolbarBottom";
 
 export default function App() {
   const location = useLocation();
   const isLanding = location.pathname === "/";
+
+  const showHeaderAndFooter = !isLanding;
+  const showNavBar = true;
 
   useEffect(() => {
     if (isLanding) {
@@ -44,6 +48,13 @@ export default function App() {
       </Routes>
 
       {!isLanding && <FooterTenex />}
+
+      <ToolbarBottom
+        showHeaderAndFooter={showHeaderAndFooter}
+        showNavBar={showNavBar}
+        commission={0.12}
+        cap={0.5}
+      />
     </ToastProvider>
   );
 }
