@@ -1440,7 +1440,7 @@ header {
 
 /* label */
 .claim-label {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-left: 6px;
 }
 
@@ -1451,7 +1451,6 @@ header {
   align-items: center;
   justify-content: center;
   gap: 3px;
-  font-size: 0.9rem;
   color: #ffffffcc;
 }
 
@@ -1569,4 +1568,109 @@ header {
 @keyframes claim-menu-fade {
   from { transform: translateX(-50%) translateY(14px); opacity: 0 }
   to   { transform: translateX(-50%) translateY(6px); opacity: 1 }
+}
+
+
+@media (min-width: 768px) {
+  .claim-wrapper.claim-button--header .claim-button {
+    gap: 8px;                      
+    min-width: 160px;              
+    font-size: 13px;              
+    line-height: 1;
+    padding: 12px;
+  }
+
+  .claim-wrapper.claim-button--header .claim-label {
+    font-size: 0.95rem; /* کوچک‌تر */
+    margin-left: 4px;
+  }
+
+  .claim-wrapper.claim-button--header .claim-values {
+    font-size: 0.8rem;  /* اعداد کوچکتر */
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .claim-wrapper.claim-button--header .collected {
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .claim-wrapper.claim-button--header .cap {
+    font-weight: 600;
+    font-size: 0.80rem;
+    opacity: 0.9;
+  }
+
+  /* Toggle کوچک‌تر داخل همان فلکس */
+  .claim-wrapper.claim-button--header .toggle-area {
+    width: 24px;
+    height: 20px;
+    border-radius: 6px;
+  }
+  .claim-wrapper.claim-button--header .toggle-area .bi {
+    font-size: 14px;
+  }
+
+  /* menu (drop) هم اندازهٔ کوچکتری داشته باشه وقتی در هدر استفاده می‌شه */
+  .claim-wrapper.claim-button--header .claim-menu .menu-inner {
+    padding: 6px 8px;
+    min-width: 160px;
+  }
+
+  .claim-wrapper.claim-button--header .upgrade-text {
+    font-size: 0.85rem;
+    padding: 6px 8px;
+  }
+}
+
+// navbar styles
+.navbar-tenex .me-auto {
+  flex: 1 1 auto;   
+  min-width: 0;    
+}
+
+.navbar-tenex .me-auto .nav {
+  display: flex;
+  gap: 8px;
+  align-items:center;
+  flex-wrap: nowrap;
+}
+
+.navbar-tenex .d-flex.align-items-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;     
+  white-space: nowrap; 
+}
+
+.navbar-tenex .btn-outline-blue,
+.navbar-tenex .btn-outline-blue .bi {
+  white-space: nowrap;
+}
+
+.claim-wrapper,
+.claim-button {
+  flex: 0 1 auto; 
+  min-width: 0;   
+  max-width: 320px;
+}
+
+.claim-values,
+.claim-values .collected,
+.claim-values .cap {
+  white-space: nowrap;
+}
+
+.claim-button .claim-values { 
+  max-width: 120px; 
+}
+
+@media (max-width: 767.98px) {
+  .navbar-tenex .navbar-collapse { flex-wrap: wrap; } 
+}
+
+.claim-button {
+  flex-shrink: 1;
 }

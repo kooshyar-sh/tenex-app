@@ -169,7 +169,7 @@ export default function AppNavbar() {
                 </Button>
 
                 <ClaimButton
-                  className="d-none d-md-block"
+                  className="d-none d-md-block claim-button--header"
                   commission={0.34}
                   cap={1.0}
                   onClaim={() => {}}
