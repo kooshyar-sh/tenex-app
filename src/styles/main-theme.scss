@@ -14,7 +14,7 @@ $blue: #27abec;
 // ========== Base Styles ==========
 body {
   color: $text-main;
-  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-family: "Bahnschrift", Arial, sans-serif;
 }
 
 a {
@@ -1595,7 +1595,7 @@ header {
   transform: rotate(45deg);
   /* اگر dropup است، فلش را پایین می‌گذاریم */
   bottom: -7px;
-  left: 50%;
+  left: 63%;
   transform: translateX(-50%) rotate(45deg);
 }
 

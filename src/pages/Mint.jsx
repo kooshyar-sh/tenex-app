@@ -3,14 +3,25 @@ import { useState } from "react";
 import Countdown from "react-countdown";
 import TooltipCard from "../components/TooltipCard/TooltipCard";
 import Loader from "../components/loader/Loader";
+// If the path to your custom checkbox component is different, update this import.
+import CustomCheckbox from "../components/CustomCheckbox/CustomCheckbox";
+import { useNavigate } from "react-router-dom";
 
 export default function Mint() {
-  const [step, setStep] = useState(1); // کنترل استپ‌ها
+  // step control
+  const [step, setStep] = useState(1);
   const [selectedTier, setSelectedTier] = useState(null);
   const [referral, setReferral] = useState("");
-  const [showModal, setShowModal] = useState(false); // modal state
+  const [showModal, setShowModal] = useState(false);
 
-  const userNumber = 62751; // شماره کاربر داینامیک
+  // modal / transaction states
+  const [agree, setAgree] = useState(false);
+  const [txInProgress, setTxInProgress] = useState(false);
+  const [txResult, setTxResult] = useState(null); // 'success' | 'failure' | null
+
+  const navigate = useNavigate();
+
+  const userNumber = 62751; // dynamic user number (example)
 
   const tiers = [
     {
@@ -37,14 +48,44 @@ export default function Mint() {
   ];
 
   const handleSubscribe = () => {
-    setShowModal(true); // باز کردن مدال
+    setShowModal(true);
   };
+
+  const handleModalClose = () => {
+    // reset modal states
+    setShowModal(false);
+    setAgree(false);
+    setTxInProgress(false);
+    setTxResult(null);
+  };
+
+  const handleApprove = () => {
+    // simulate wallet approval & transaction
+    setTxInProgress(true);
+    setTxResult(null);
+
+    setTimeout(() => {
+      const success = Math.random() > 0.2; // 80% chance of success (simulation)
+      setTxInProgress(false);
+      setTxResult(success ? "success" : "failure");
+
+      if (success) {
+        // after showing success, redirect to dashboard
+        setTimeout(() => {
+          setShowModal(false);
+          navigate("/user"); // adjust route if needed
+        }, 1400);
+      }
+    }, 3000);
+  };
+
+  // find currently selected tier object for dynamic texts
+  const currentTier = tiers.find((t) => t.name === selectedTier) || null;
 
   return (
     <Container className="py-5">
-      {/* ====================== STEPPER ====================== */}
+      {/* ========== STEPPER ========== */}
       <div className="d-flex justify-content-center align-items-center mb-5 position-relative">
-        {/* خط پس‌زمینه */}
         <div
           style={{
             position: "absolute",
@@ -56,8 +97,7 @@ export default function Mint() {
             transform: "translate(-50%, -50%)",
             zIndex: 1,
           }}
-        ></div>
-
+        />
         {[1, 2, 3].map((s) => (
           <div
             key={s}
@@ -77,49 +117,33 @@ export default function Mint() {
         ))}
       </div>
 
-      {/* ====================== STEP 1 — Tier Selection ====================== */}
+      {/* ========== STEP 1 — Tier Selection ========== */}
       {step === 1 && (
         <>
-          <h3 className="fw-bold text-purple mb-4 text-center">
-            Select a Tier
-          </h3>
+          <h3 className="fw-bold text-purple mb-4 text-center">Select a Tier</h3>
 
           <Row className="justify-content-center">
             {tiers.map((t, index) => {
-              // ===== محاسبات داینامیک =====
-              const teamBalanceAmount = 1; // مثال: 1 BNB تعادل تیم
-              const balancePercentage = parseFloat(t.balance) || 0; // درصد هر Tier
+              // dynamic calculations (example)
+              const teamBalanceAmount = 1; // example: 1 BNB
+              const balancePercentage = parseFloat(t.balance) || 0;
               const balanceEarned =
-                (teamBalanceAmount * balancePercentage) / 100; // پورسانت دریافتی
+                (teamBalanceAmount * balancePercentage) / 100;
 
-              // ===== تعیین Badge هر Tier =====
               const tierBadge =
                 index === 0
-                  ? {
-                      text: "Most Used",
-                      className: "custom-badge-light-warning",
-                    } // Bronze
+                  ? { text: "Most Used", className: "custom-badge-light-warning" }
                   : index === 1
-                  ? {
-                      text: "Medium Profit",
-                      className: "custom-badge-light-info",
-                    } // Silver
-                  : {
-                      text: "Best Value",
-                      className: "custom-badge-light-success",
-                    }; // Gold
+                  ? { text: "Medium Profit", className: "custom-badge-light-info" }
+                  : { text: "Best Value", className: "custom-badge-light-success" };
 
               return (
                 <Col md={4} key={index} className="mb-4">
                   <div className="main-card animated-border text-center h-100 p-4">
-                    {/* Tier Badge */}
-                    <div
-                      className={`tier-badge custom-badge ${tierBadge.className}`}
-                    >
+                    <div className={`tier-badge custom-badge ${tierBadge.className}`}>
                       {tierBadge.text}
                     </div>
 
-                    {/* Tier Info */}
                     <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
                     <p className="text-muted mb-1">
                       <strong>Pay:</strong> {t.price}
@@ -128,7 +152,6 @@ export default function Mint() {
                       <strong>Mint:</strong> {t.mint}
                     </p>
 
-                    {/* Direct Sales */}
                     <div className="text-muted mb-1">
                       <strong>Earn:</strong> {t.direct} direct sales
                       <TooltipCard
@@ -139,11 +162,10 @@ export default function Mint() {
                         <i
                           className="bi bi-question-circle-fill text-muted small ms-2"
                           style={{ cursor: "pointer" }}
-                        ></i>
+                        />
                       </TooltipCard>
                     </div>
 
-                    {/* Weekly Team Balance */}
                     <div className="text-muted mb-0">
                       <strong>Earn:</strong> {t.balance} weekly team balance
                       <TooltipCard
@@ -155,16 +177,15 @@ export default function Mint() {
                         <i
                           className="bi bi-question-circle-fill text-muted small ms-2"
                           style={{ cursor: "pointer" }}
-                        ></i>
+                        />
                       </TooltipCard>
                     </div>
 
-                    {/* Select Button */}
                     <Button
                       className="shining-button mt-3"
                       onClick={() => {
                         setSelectedTier(t.name);
-                        setStep(2); // رفتن به Step2 بعد انتخاب
+                        setStep(2);
                       }}
                     >
                       Select {t.name} (no: {userNumber.toLocaleString()})
@@ -177,17 +198,14 @@ export default function Mint() {
         </>
       )}
 
-      {/* ====================== STEP 2 — Referral Input ====================== */}
+      {/* ========== STEP 2 — Referral Input ========== */}
       {step === 2 && (
         <div className="main-card col-md-6 mx-auto animated-border position-relative p-4">
-          {/* Top-left user number */}
-          <div className="user-number-label rounded">
-            #{userNumber.toLocaleString()}
-          </div>
+          {/* top-left user number */}
+          <div className="user-number-label rounded">#{userNumber.toLocaleString()}</div>
 
-          <h5 className="fw-bold text-purple mb-3 mt-5">
-            Who introduced you? (Referral Code)
-          </h5>
+          <h5 className="fw-bold text-purple mb-3 mt-5">Who introduced you? (Referral Code)</h5>
+
           <input
             type="text"
             className="number-input w-100 mb-3"
@@ -196,25 +214,21 @@ export default function Mint() {
             onChange={(e) => setReferral(e.target.value)}
           />
 
-          {/* Buttons */}
           <div className="d-flex justify-content-between mt-3">
             <Button className="pulse-button-outline" onClick={() => setStep(1)}>
-              <i className="bi bi-chevron-left me-2"></i> Back
+              <i className="bi bi-chevron-left me-2" /> Back
             </Button>
             <Button className="pulse-button" onClick={() => setStep(3)}>
-              Next <i className="bi bi-chevron-right ms-2"></i>
+              Next <i className="bi bi-chevron-right ms-2" />
             </Button>
           </div>
         </div>
       )}
 
-      {/* ====================== STEP 3 — Subscription ====================== */}
+      {/* ========== STEP 3 — Subscription ========== */}
       {step === 3 && selectedTier && (
         <div className="main-card col-md-6 mx-auto animated-border step3-card position-relative p-4">
-          {/* Top-left user number */}
-          <div className="user-number-label rounded">
-            #{userNumber.toLocaleString()}
-          </div>
+          <div className="user-number-label rounded">#{userNumber.toLocaleString()}</div>
 
           <h5 className="fw-bold text-purple mb-3 mt-5">
             Your selected tier: {selectedTier}{" "}
@@ -223,40 +237,137 @@ export default function Mint() {
             {selectedTier === "Gold" && "(1 BNB)"}
           </h5>
 
-          {/* Subscribe Button */}
           <Button className="pulse-button mt-3" onClick={handleSubscribe}>
-            <i className="bi bi-bag-check me-2"></i> Subscribe
+            <i className="bi bi-bag-check me-2" /> Subscribe
           </Button>
 
-          {/* Info Text */}
           <div className="mt-4 text-start">
             <p>
-              You will be the member number:{" "}
-              <strong>{userNumber.toLocaleString()}</strong>
+              You will be the member number: <strong>{userNumber.toLocaleString()}</strong>
             </p>
             <p>
               Your first earning will be claimable in the next payment cycle:{" "}
-              <Countdown date={Date.now() + 5 * 24 * 60 * 60 * 1000} />{" "}
-              {/* مثال 5 روز */}
+              <Countdown date={Date.now() + 5 * 24 * 60 * 60 * 1000} /> {/* example: 5 days */}
             </p>
             <p>10X tokens into circulation (in your wallet)</p>
           </div>
 
-          {/* Back button */}
           <div className="d-flex justify-content-start mt-3">
             <Button className="pulse-button-outline" onClick={() => setStep(2)}>
-              <i className="bi bi-chevron-left me-2"></i> Back
+              <i className="bi bi-chevron-left me-2" /> Back
             </Button>
           </div>
         </div>
       )}
 
-      {/* ====================== Modal برای لودینگ ====================== */}
-      <Modal show={showModal} centered onHide={() => setShowModal(false)} >
-        <Modal.Body className="text-center">
-          <Loader />
-          <p className="mt-3">Processing your subscription...</p>
-        </Modal.Body>
+      {/* ========== Modal: confirmation, wallet approval & results ========== */}
+      <Modal
+        show={showModal}
+        centered
+        onHide={handleModalClose}
+        backdrop="static"
+        keyboard={!txInProgress} // disable ESC while transaction is in progress
+      >
+        {/* If transaction is in progress, show loader */}
+        {txInProgress ? (
+          <Modal.Body className="text-center">
+            <Loader />
+            <p className="mt-3 fw-bold">Waiting for wallet approval...</p>
+            <p className="text-muted small">
+              Please confirm the signature in your wallet. This behavior is currently simulated.
+            </p>
+          </Modal.Body>
+        ) : txResult === "success" ? (
+          <Modal.Body className="text-center p-4">
+            <div
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: 40,
+                background: "#dff0d8",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 16,
+              }}
+            >
+              <i className="bi bi-check-lg text-success" style={{ fontSize: 28 }} />
+            </div>
+            <h5 className="fw-bold">Transaction successful!</h5>
+            <p className="text-muted">Your transaction was recorded successfully. Redirecting to the dashboard...</p>
+          </Modal.Body>
+        ) : txResult === "failure" ? (
+          <Modal.Body className="text-center p-4">
+            <div
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: 40,
+                background: "#f8d7da",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: 16,
+              }}
+            >
+              <i className="bi bi-x-lg text-danger" style={{ fontSize: 24 }} />
+            </div>
+            <h5 className="fw-bold">Transaction failed</h5>
+            <p className="text-muted">
+              The transaction did not complete. Please check your wallet and try again.
+            </p>
+            <div className="d-flex justify-content-center gap-2 mt-3">
+              <Button className="pulse-button" onClick={handleApprove}>
+                Retry
+              </Button>
+              <Button variant="secondary" onClick={handleModalClose}>
+                Cancel
+              </Button>
+            </div>
+          </Modal.Body>
+        ) : (
+          // initial modal: show explanatory text, checkbox and Approve button
+          <Modal.Body className="p-4">
+            <h5 className="fw-bold text-purple mb-3">Confirm transaction</h5>
+
+            <p>
+              By signing the transaction, you will pay{" "}
+              <strong className="text-blue">{currentTier ? currentTier.price : "—"}</strong> and mint{" "}
+              <strong className="text-blue">{currentTier ? currentTier.mint : "—"}</strong>. This mint
+              represents <strong className="text-blue">10X Token</strong> that will be deposited to your wallet.
+            </p>
+
+            <p className="text-muted small">
+              By clicking Approve and signing the transaction, you acknowledge that you have read
+              and accept the project's terms and agree that you are responsible for any decisions
+              or risks associated with this transaction and the custody of the tokens. Please
+              verify your wallet and balance before continuing.
+            </p>
+
+            {/* Custom checkbox: assumed props: checked, onChange, label */}
+            <div className="d-flex align-items-center my-3">
+              <CustomCheckbox
+                checked={agree}
+                onChange={() => setAgree((p) => !p)}
+                label="I accept the project's terms and take responsibility for this transaction"
+              />
+            </div>
+
+            <div className="d-flex justify-content-between mt-3 gap-2">
+              <Button className="pulse-button-outline" onClick={handleModalClose}>
+                Cancel
+              </Button>
+              <Button
+                className="pulse-button"
+                onClick={handleApprove}
+                disabled={!agree}
+                title={!agree ? "You must agree to the terms before approving" : "Approve"}
+              >
+                Approve
+              </Button>
+            </div>
+          </Modal.Body>
+        )}
       </Modal>
     </Container>
   );
