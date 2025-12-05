@@ -1,3 +1,4 @@
+// src/components/ClaimButton/ClaimButton.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,20 +7,19 @@ export default function ClaimButton({
   cap = 0.5,
   onClaim = null,
   onUpgrade = null,
-  dropDirection = "up", // 'up' | 'down'
+  dropDirection = undefined, // optional override
   label = "Claim",
   className = "",
 }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+
   const wrapperRef = useRef(null);
-  const capRef = useRef(null);
+  const toggleRef = useRef(null);
   const menuRef = useRef(null);
 
-  // وضعیت استایل منو: left/top و left position for arrow
-  const [menuStyle, setMenuStyle] = useState({ left: null, top: null, arrowLeft: null });
+  const [menuStyle, setMenuStyle] = useState({ left: null, top: null, arrowLeft: null, width: null });
 
-  // آیا این حالت header است؟
   const isHeaderVariant = (className || "").includes("claim-button--header");
 
   useEffect(() => {
@@ -37,12 +37,12 @@ export default function ClaimButton({
     setOpen((s) => !s);
   };
 
-  const handleClaim = (e) => {
+  const handleClaim = () => {
     if (typeof onClaim === "function") onClaim();
     else console.log("Claim clicked");
   };
 
-  const handleUpgrade = (e) => {
+  const handleUpgrade = () => {
     setOpen(false);
     if (typeof onUpgrade === "function") onUpgrade();
     else navigate("/user/cap-upgrade");
@@ -60,98 +60,82 @@ export default function ClaimButton({
     return `${num.toFixed(2)} BNB`;
   };
 
-  // محاسبهٔ موقعیت منو نسبت به viewport (fixed) و محاسبهٔ arrow
-  const updateMenuPosition = () => {
-    if (!wrapperRef.current || !capRef.current || !menuRef.current) return;
+  // ساده: موقعیت منو را نسبت به خودِ toggle محاسبه کن
+  const positionMenuSimple = () => {
+    if (!toggleRef.current || !menuRef.current) return;
 
-    const capRect = capRef.current.getBoundingClientRect();
+    const toggleRect = toggleRef.current.getBoundingClientRect();
     const menuEl = menuRef.current;
 
-    const menuWidth = Math.max(menuEl.offsetWidth || 220, 180);
+    // set menu width equal to toggle width (nearly full width)
+    const width = Math.max(toggleRect.width, 160);
     const menuHeight = menuEl.offsetHeight || 48;
+
     const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-    // مرکز عدد cap نسبت به viewport
-    const centerAbsX = capRect.left + capRect.width / 2;
-
-    // هدف: قرار دادن مرکز منو روی مرکز cap
-    let leftAbs = Math.round(centerAbsX - menuWidth / 2);
-
-    // clamp درون viewport
     const margin = 8;
+    const gap = 6;
+
+    // direction: override prop > headerVariant > default mobile
+    const effectiveDirection = dropDirection ? dropDirection : (isHeaderVariant ? "down" : "up");
+
+    // left: align left edge of menu with left edge of toggle (clamp to viewport)
+    let leftAbs = Math.round(toggleRect.left);
     const minLeftAbs = margin;
-    const maxLeftAbs = Math.max(viewportWidth - menuWidth - margin, minLeftAbs);
+    const maxLeftAbs = Math.max(viewportWidth - width - margin, minLeftAbs);
     if (leftAbs < minLeftAbs) leftAbs = minLeftAbs;
     if (leftAbs > maxLeftAbs) leftAbs = maxLeftAbs;
 
-    // محاسبه top بر حسب dropDirection
+    // top based on direction (down -> below toggle; up -> above toggle)
     let topAbs;
-    const gap = 8; // فاصله بین cap و منو
-    if (dropDirection === "down") {
-      // منو زیر cap باز می‌شود
-      topAbs = Math.round(capRect.bottom + gap);
-      // اگر منو از viewport پایینی بیرون برود، تلاش می‌کنیم بالا بازش کنیم
+    if (effectiveDirection === "down") {
+      topAbs = Math.round(toggleRect.bottom + gap);
       if (topAbs + menuHeight + margin > viewportHeight) {
-        // باز کردن به بالا به عنوان fallback
-        topAbs = Math.max(margin, Math.round(capRect.top - menuHeight - gap));
+        // fallback up
+        topAbs = Math.max(margin, Math.round(toggleRect.top - menuHeight - gap));
       }
     } else {
-      // dropDirection 'up' => منو بالای cap باز می‌شود
-      topAbs = Math.round(capRect.top - menuHeight - gap);
+      topAbs = Math.round(toggleRect.top - menuHeight - gap);
       if (topAbs < margin) {
-        // اگر از بالای viewport خارج شد، fallback به پایین
-        topAbs = Math.round(capRect.bottom + gap);
+        // fallback down
+        topAbs = Math.round(toggleRect.bottom + gap);
       }
     }
 
-    // clamp top داخل viewport
-    const minTopAbs = margin;
-    const maxTopAbs = Math.max(viewportHeight - menuHeight - margin, minTopAbs);
-    if (topAbs < minTopAbs) topAbs = minTopAbs;
-    if (topAbs > maxTopAbs) topAbs = maxTopAbs;
+    // arrow: place it near left side of toggle inside menu (clamped)
+    const arrowCenterAbs = toggleRect.left + Math.max(12, Math.floor(toggleRect.width / 4));
+    let arrowLeftInside = Math.round(arrowCenterAbs - leftAbs - 7); // 7 = half arrow width
+    const arrowMin = 8;
+    const arrowMax = Math.max(width - 8 - 14, arrowMin);
+    if (arrowLeftInside < arrowMin) arrowLeftInside = arrowMin;
+    if (arrowLeftInside > arrowMax) arrowLeftInside = arrowMax;
 
-    // محاسبهٔ موقعیت پیکان داخل منو (نسبت به عرض منو)
-    const arrowCenterAbs = centerAbsX;
-    const arrowLeftInsideMenu = arrowCenterAbs - leftAbs - 7; // 7 = half arrow width
-    const arrowMin = 10;
-    const arrowMax = Math.max(menuWidth - 10 - 14, arrowMin);
-    let arrowPos = Math.round(arrowLeftInsideMenu);
-    if (arrowPos < arrowMin) arrowPos = arrowMin;
-    if (arrowPos > arrowMax) arrowPos = arrowMax;
-
-    // set state
     setMenuStyle({
       left: `${leftAbs}px`,
       top: `${topAbs}px`,
-      arrowLeft: `${arrowPos}px`,
+      arrowLeft: `${arrowLeftInside}px`,
+      width: `${width}px`,
     });
   };
 
-  // هنگام open و تغییر سایز/اسکرول موقعیت را بروزرسانی کن
   useEffect(() => {
     if (open) {
-      // timeout کوتاه تا منو render شود و اندازه گرفته شود
-      // (ممکن است منو هنوز display:block نشده باشد)
-      requestAnimationFrame(() => {
-        updateMenuPosition();
-      });
-      window.addEventListener("resize", updateMenuPosition);
-      window.addEventListener("scroll", updateMenuPosition, true);
+      // position immediately after render
+      requestAnimationFrame(() => positionMenuSimple());
+      window.addEventListener("resize", positionMenuSimple);
+      window.addEventListener("scroll", positionMenuSimple, true);
     } else {
-      setMenuStyle({ left: null, top: null, arrowLeft: null });
-      window.removeEventListener("resize", updateMenuPosition);
-      window.removeEventListener("scroll", updateMenuPosition, true);
+      setMenuStyle({ left: null, top: null, arrowLeft: null, width: null });
+      window.removeEventListener("resize", positionMenuSimple);
+      window.removeEventListener("scroll", positionMenuSimple, true);
     }
     return () => {
-      window.removeEventListener("resize", updateMenuPosition);
-      window.removeEventListener("scroll", updateMenuPosition, true);
+      window.removeEventListener("resize", positionMenuSimple);
+      window.removeEventListener("scroll", positionMenuSimple, true);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, commission, cap, dropDirection]);
+  }, [open, isHeaderVariant, dropDirection]);
 
-  // NOTE: we DO NOT change icon class in JS anymore — we render a fixed icon and CSS rotates it.
-  // Render
   return (
     <div className={`claim-wrapper ${className}`} ref={wrapperRef}>
       <div
@@ -170,32 +154,32 @@ export default function ClaimButton({
         <div className="claim-values">
           <span className="collected">{fmt(commission)}</span>
           <span className="sep"> / </span>
-          <span className="cap" ref={capRef}>
-            {fmt(cap)}
-          </span>
+          <span className="cap">{fmt(cap)}</span>
         </div>
 
         <button
+          ref={toggleRef}
           type="button"
           className={`toggle-area ${open ? "open" : ""}`}
           onClick={toggle}
           aria-label={open ? "Close options" : "Open options"}
         >
-          {/* fixed icon, CSS will rotate it */}
           <i className="bi bi-chevron-up" />
         </button>
       </div>
 
-      {/* منو: اکنون fixed و موقعیت left/top را مستقیماً از state می‌گیرم */}
       <div
         ref={menuRef}
         className={`claim-menu ${open ? "visible" : ""} ${
-          dropDirection === "down" ? "claim-menu--down" : "claim-menu--up"
+          (dropDirection ? dropDirection : (isHeaderVariant ? "down" : "up")) === "down"
+            ? "claim-menu--down"
+            : "claim-menu--up"
         }`}
         role="menu"
         style={{
           left: menuStyle.left ?? undefined,
           top: menuStyle.top ?? undefined,
+          width: menuStyle.width ?? undefined,
           position: "fixed",
         }}
       >
@@ -210,7 +194,6 @@ export default function ClaimButton({
           className="drop-arrow"
           style={{
             left: menuStyle.arrowLeft ?? undefined,
-            position: "absolute",
           }}
         />
       </div>
