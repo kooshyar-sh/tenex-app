@@ -8,8 +8,12 @@ export default function AppNavbar() {
   const lastScrollTop = useRef(0);
   const didScroll = useRef(false);
   const scrollTimeout = useRef(null);
-  const delta = 5; // حد نوسان مثل کد انگولار
+  const delta = 5; 
   const [navbarHeight, setNavbarHeight] = useState(0);
+
+  // این مقدار تعیین می‌کند هدر چند پیکسل بیشتر بالاتر برود تا سایه دیده نشود
+  const EXTRA_SHADOW_CLEARANCE = 10;
+  const originalBoxShadow = useRef("");
 
   const handleClose = () => setExpanded(false);
 
@@ -18,6 +22,13 @@ export default function AppNavbar() {
     const updateHeight = () => {
       if (navRef.current) {
         setNavbarHeight(Math.ceil(navRef.current.offsetHeight));
+        // ذخیره مقدار اولیه‌ی box-shadow برای بازگردانی بعداً
+        try {
+          const cs = window.getComputedStyle(navRef.current);
+          originalBoxShadow.current = cs?.boxShadow || "";
+        } catch (e) {
+          originalBoxShadow.current = "";
+        }
       }
     };
 
@@ -30,6 +41,10 @@ export default function AppNavbar() {
     // وقتی منو باز/بسته شد، احتمالاً ارتفاع هدر تغییر می‌کند
     if (navRef.current) {
       setNavbarHeight(Math.ceil(navRef.current.offsetHeight));
+      try {
+        const cs = window.getComputedStyle(navRef.current);
+        originalBoxShadow.current = cs?.boxShadow || originalBoxShadow.current;
+      } catch (e) {}
     }
   }, [expanded]);
 
@@ -40,7 +55,6 @@ export default function AppNavbar() {
     const onScroll = () => {
       didScroll.current = true;
 
-      // اگر قبلاً یک timeout فعال نیست، یکی ست کن (مثل setTimeout در کد انگولار)
       if (!scrollTimeout.current) {
         scrollTimeout.current = window.setTimeout(() => {
           if (didScroll.current && navRef.current) {
@@ -50,15 +64,20 @@ export default function AppNavbar() {
 
             if (st > navH) {
               if (st > lastScrollTop.current + delta) {
-                // اسکرول رو به پایین — هدر رو مخفی کن
-                el.style.top = `-${navH}px`;
+                // اسکرول رو به پایین — هدر رو بالاتر می‌فرستیم تا سایه پنهان شود
+                const hideOffset = navH + EXTRA_SHADOW_CLEARANCE;
+                el.style.top = `-${hideOffset}px`;
+                // موقتاً سایه را پاک کن تا اثری نداشته باشد
+                el.style.boxShadow = "none";
               } else if (st < lastScrollTop.current - delta) {
-                // اسکرول رو به بالا — هدر رو نشان بده
+                // اسکرول رو به بالا — هدر رو نشان بده و سایه را بازگردان
                 el.style.top = `0`;
+                el.style.boxShadow = originalBoxShadow.current || "";
               }
             } else {
-              // اگر در بالا صفحه هستیم (قبل از ارتفاع navbar) مقدار top را unset کن
+              // اگر در بالا صفحه هستیم (قبل از ارتفاع navbar) مقدار top را unset کن و سایه را برگردان
               el.style.top = "unset";
+              el.style.boxShadow = originalBoxShadow.current || "";
             }
 
             lastScrollTop.current = st;
@@ -145,7 +164,6 @@ export default function AppNavbar() {
                 <Button
                   size="sm"
                   className="btn-outline-blue me-2"
-                  onClick={handleClose}
                 >
                   <i className="bi bi-wallet2 me-1"></i> Connect Wallet
                 </Button>
