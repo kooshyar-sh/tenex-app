@@ -1,4 +1,4 @@
-import { leftWingList, rightWingList } from "../../data/mockData";
+import { leftWingList, rightWingList, currentUser } from "../../data/mockData";
 import { Row, Col, Table, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useToast } from "../../components/Toast/ToastContext";
@@ -8,7 +8,6 @@ const shorten = (txt) => (txt ? `${txt.slice(0, 6)}...${txt.slice(-4)}` : "");
 
 export default function OpenReferralSlots() {
   const [activeWing, setActiveWing] = useState("left");
-
   const toast = useToast();
 
   // برای نمایش آیکون "کپی شد"
@@ -34,16 +33,28 @@ export default function OpenReferralSlots() {
 
   const getReferralLink = (address) => `https://yourapp.com/?ref=${address}`;
 
+  // Carry over data from currentUser
+  const carryOverAmount = Number(currentUser?.carryOverAmount || 0);
+  const carryOverSide = (currentUser?.carryOverSide || "").toUpperCase(); // "L" or "R"
+
+  const formatBNB = (val) =>
+    Number(val).toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    });
+
   return (
     <>
+
       <p className="text-muted mb-4 fw-semibold" style={{ lineHeight: "1.6" }}>
         This section displays the wallet addresses and referral links of your
         direct team members. You can use these links to fill your empty referral
-        positions. In the upcoming <span className="fw-semibold text-blue">Referral Market</span>, you will be
-        able to list your own referral link with a{" "}
-        <span className="fw-semibold text-blue">10X token reward</span>. Users without an upline can browse
-        these offers and join through the link that provides the most attractive
-        incentive.
+        positions. In the upcoming{" "}
+        <span className="fw-semibold text-blue">Referral Market</span>, you will
+        be able to list your own referral link with a{" "}
+        <span className="fw-semibold text-blue">10X token reward</span>. Users
+        without an upline can browse these offers and join through the link that
+        provides the most attractive incentive.
       </p>
 
       {/* دکمه‌های موبایل برای تغییر تب */}
@@ -69,10 +80,31 @@ export default function OpenReferralSlots() {
         {/* LEFT TABLE - DESKTOP */}
         <Col lg={6} className="d-none d-lg-block">
           <div className="main-card">
-            <h5 className="text-purple mb-3">
-              <i className="bi bi-diagram-3 me-2 text-blue"></i>
-              Left Wing Referral List
-            </h5>
+            <div className="d-flex align-items-center mb-3 justify-content-between">
+              <h5 className="referral-title text-purple mb-0">
+                <i className="bi bi-diagram-3 me-2 text-blue"></i>
+                Left Wing Referral List
+              </h5>
+
+              {/* If carry over is on Left, show badge; otherwise show Recommended on opposite table */}
+              {carryOverSide === "L" && carryOverAmount > 0 ? (
+                <span
+                  className="custom-badge custom-badge-light-purple"
+                  title={`Carry over from left: ${formatBNB(
+                    carryOverAmount
+                  )} BNB`}
+                >
+                  L {formatBNB(carryOverAmount)} BNB
+                </span>
+              ) : (
+                // If carry over is on Right (or none), show "Recommended" for the other table
+                carryOverSide !== "L" && (
+                  <span className="fw-bold text-purple">
+                    Recommended <span className="pulse-dot" />
+                  </span>
+                )
+              )}
+            </div>
 
             <Table hover responsive bordered className="custom-table">
               <thead>
@@ -148,10 +180,30 @@ export default function OpenReferralSlots() {
         {/* RIGHT TABLE - DESKTOP */}
         <Col lg={6} className="d-none d-lg-block">
           <div className="main-card">
-            <h5 className="text-purple mb-3">
-              <i className="bi bi-diagram-3 me-2 text-blue"></i>
-              Right Wing Referral List
-            </h5>
+            <div className="d-flex mb-3 justify-content-between align-items-center">
+              <h5 className="referral-title text-purple mb-0">
+                <i className="bi bi-diagram-3 me-2 text-blue"></i>
+                Right Wing Referral List
+              </h5>
+
+              {/* If carry over is on Right, show blue badge; otherwise show Recommended */}
+              {carryOverSide === "R" && carryOverAmount > 0 ? (
+                <span
+                  className="custom-badge custom-badge-light-info"
+                  title={`Carry over from right: ${formatBNB(
+                    carryOverAmount
+                  )} BNB`}
+                >
+                  R {formatBNB(carryOverAmount)} BNB
+                </span>
+              ) : (
+                carryOverSide !== "R" && (
+                  <span className="fw-bold text-purple">
+                    Recommended <span className="pulse-dot" />
+                  </span>
+                )
+              )}
+            </div>
 
             <Table hover responsive bordered className="custom-table">
               <thead>
@@ -177,7 +229,7 @@ export default function OpenReferralSlots() {
                             onClick={() =>
                               copyToClipboard(
                                 item.address,
-                                `addr-left-${idx}`,
+                                `addr-right-${idx}`,
                                 "info",
                                 "Wallet address copied"
                               )
@@ -202,7 +254,7 @@ export default function OpenReferralSlots() {
                             onClick={() =>
                               copyToClipboard(
                                 referral,
-                                `ref-left-${idx}`,
+                                `ref-right-${idx}`,
                                 "success",
                                 "Referral link copied"
                               )
@@ -227,12 +279,37 @@ export default function OpenReferralSlots() {
         {/* MOBILE MODE */}
         <Col xs={12} className="d-lg-none">
           <div className="main-card">
-            <h5 className="text-purple mb-3">
-              <i className="bi bi-diagram-3 me-2 text-blue"></i>
-              {activeWing === "left"
-                ? "Left Wing Referral List"
-                : "Right Wing Referral List"}
-            </h5>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="referral-title text-purple mb-0">
+                <i className="bi bi-diagram-3 me-2 text-blue"></i>
+                {activeWing === "left"
+                  ? "Left Wing Referral List"
+                  : "Right Wing Referral List"}
+              </h5>
+
+              {/* mobile: show badge or recommended depending on active wing */}
+              {activeWing === "left" ? (
+                carryOverSide === "L" && carryOverAmount > 0 ? (
+                  <span className="custom-badge custom-badge-light-purple">
+                    L {formatBNB(carryOverAmount)} BNB
+                  </span>
+                ) : (
+                  <span className="fw-bold text-purple">
+                    Recommended <span className="pulse-dot" />
+                  </span>
+                )
+              ) : activeWing === "right" ? (
+                carryOverSide === "R" && carryOverAmount > 0 ? (
+                  <span className="custom-badge custom-badge-light-info">
+                    R {formatBNB(carryOverAmount)} BNB
+                  </span>
+                ) : (
+                  <span className="fw-bold text-purple">
+                    Recommended <span className="pulse-dot" />
+                  </span>
+                )
+              ) : null}
+            </div>
 
             <Table hover responsive bordered className="custom-table">
               <thead>
@@ -260,7 +337,7 @@ export default function OpenReferralSlots() {
                               onClick={() =>
                                 copyToClipboard(
                                   item.address,
-                                  `addr-left-${idx}`,
+                                  `addr-${prefix}-${idx}`,
                                   "info",
                                   "Wallet address copied"
                                 )
@@ -285,7 +362,7 @@ export default function OpenReferralSlots() {
                               onClick={() =>
                                 copyToClipboard(
                                   referral,
-                                  `ref-left-${idx}`,
+                                  `ref-${prefix}-${idx}`,
                                   "success",
                                   "Referral link copied"
                                 )
