@@ -320,7 +320,7 @@ export default function Mint() {
               <Button className="pulse-button" onClick={handleApprove}>
                 Retry
               </Button>
-              <Button variant="secondary" onClick={handleModalClose}>
+              <Button className="pulse-button-outline" onClick={handleModalClose}>
                 Cancel
               </Button>
             </div>

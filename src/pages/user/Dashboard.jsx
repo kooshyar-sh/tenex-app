@@ -20,7 +20,7 @@ export default function Dashboard() {
 
   const periods = ["weekly", "monthly", "all"];
 
-  // داده‌های فرضی نمودارها
+  // sample chart data...
   const earningsData = {
     weekly: [
       { time: "Week1", BNB: 1 },
@@ -61,7 +61,6 @@ export default function Dashboard() {
     ],
   };
 
-  // ---------- Custom Tooltip ----------
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -92,17 +91,19 @@ export default function Dashboard() {
     return null;
   };
 
+  const formatBNB = (val) =>
+    Number(val).toLocaleString(undefined, {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    });
+
   return (
     <>
-      {/* ---------- چهار باکس بالایی ---------- */}
       <Row className="mb-4 dashboard-top-row">
-        {/* ---------- User Info Box (New Box) ---------- */}
         <Col md={6} lg={3} className="px-md-2">
           <div className="main-card">
-            {/* Top Row: Rank Circle + Package Name */}
             <div className="d-flex align-items-center gap-3">
               <div className="rank-circle">#{currentUser.rank}</div>
-
               <div>
                 <h5 className="text-purple mb-1">{currentUser.packageName}</h5>
               </div>
@@ -110,7 +111,6 @@ export default function Dashboard() {
 
             <hr className="my-2" />
 
-            {/* Rewards */}
             <p className="mb-2">
               <span className="text-muted">All-Time Reward:</span>{" "}
               <span className="text-success fw-bold">
@@ -139,19 +139,50 @@ export default function Dashboard() {
           </div>
         </Col>
 
+        {/* Total Team Volume with Carry Over below the volume */}
         <Col md={6} lg={3} className="px-md-2 mt-2 mt-lg-0">
           <div className="main-card">
             <h5 className="text-purple mb-2">
               <i className="bi bi-graph-up-arrow me-2 text-blue"></i> Total Team
               Volume
             </h5>
-            <h4>{currentUser.binaryVolume} BNB</h4>
-            <button
-              className="btn btn-link p-0 mt-2 text-purple fw-bold"
-              onClick={() => setShowVolumeModal(true)}
-            >
-              Show Details <i className="bi bi-chevron-right"></i>
-            </button>
+
+            <div>
+              <h4 style={{ margin: 0 }}>{currentUser.binaryVolume} BNB</h4>
+
+              {/* Carry Over: placed under total volume */}
+              {Number(currentUser.carryOverAmount) > 0 &&
+                currentUser.carryOverSide && (
+                  <p className="mt-2 mb-0">
+                    <span className="text-muted">Carry Over :</span>{" "}
+                    <span className="mt-1">
+                      <strong className="me-3 text-success">
+                        {formatBNB(currentUser.carryOverAmount)} BNB
+                      </strong>
+
+                      <span
+                        className={`custom-badge ${
+                          currentUser.carryOverSide === "L"
+                            ? "custom-badge-light-purple"
+                            : "custom-badge-light-info"
+                        }`}
+                      >
+                        {currentUser.carryOverSide}
+                      </span>
+                    </span>
+                  </p>
+                )}
+            </div>
+
+            <div className="mt-3">
+              <button
+                className="btn btn-link p-0 mt-2 text-purple fw-bold"
+                onClick={() => setShowVolumeModal(true)}
+                style={{ textDecoration: "none" }}
+              >
+                Show Details <i className="bi bi-chevron-right"></i>
+              </button>
+            </div>
           </div>
         </Col>
 
@@ -175,9 +206,8 @@ export default function Dashboard() {
         </Col>
       </Row>
 
-      {/* ---------- ردیف نمودارها ---------- */}
+      {/* Charts (unchanged) */}
       <Row className="mt-4">
-        {/* نمودار BNB Earnings */}
         <Col md={6} className="px-md-2 mb-3">
           <div className="main-card p-3">
             <h5 className="text-purple mb-3">BNB Earnings</h5>
@@ -217,7 +247,6 @@ export default function Dashboard() {
           </div>
         </Col>
 
-        {/* نمودار تعداد افراد جدید */}
         <Col md={6} className="px-md-2 mb-3">
           <div className="main-card p-3">
             <h5 className="text-purple mb-3">New Team Members</h5>
@@ -251,7 +280,6 @@ export default function Dashboard() {
         </Col>
       </Row>
 
-      {/* ---------- Modal Team Volume ---------- */}
       <Modal
         show={showVolumeModal}
         onHide={() => setShowVolumeModal(false)}

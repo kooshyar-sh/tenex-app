@@ -15,6 +15,8 @@ export const currentUser = {
   weekRight: 4.2,
   new24h: 12,
   new7d: 84,
+  carryOverAmount: 0.1,
+  carryOverSide: "R",
 };
 
 export const leftWingList = [
