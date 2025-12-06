@@ -118,7 +118,9 @@ export default function Mint() {
       {/* ========== STEP 1 — Tier Selection ========== */}
       {step === 1 && (
         <>
-          <h3 className="fw-bold text-purple mb-4 text-center">Select a Tier</h3>
+          <h3 className="fw-bold text-purple mb-4 text-center">
+            Select a Tier
+          </h3>
 
           <Row className="justify-content-center">
             {tiers.map((t, index) => {
@@ -130,15 +132,26 @@ export default function Mint() {
 
               const tierBadge =
                 index === 0
-                  ? { text: "Most Used", className: "custom-badge-light-warning" }
+                  ? {
+                      text: "Most Used",
+                      className: "custom-badge-light-warning",
+                    }
                   : index === 1
-                  ? { text: "Medium Profit", className: "custom-badge-light-info" }
-                  : { text: "Best Value", className: "custom-badge-light-success" };
+                  ? {
+                      text: "Medium Profit",
+                      className: "custom-badge-light-info",
+                    }
+                  : {
+                      text: "Best Value",
+                      className: "custom-badge-light-success",
+                    };
 
               return (
                 <Col md={4} key={index} className="mb-4">
                   <div className="main-card animated-border text-center h-100 p-4">
-                    <div className={`tier-badge custom-badge ${tierBadge.className}`}>
+                    <div
+                      className={`tier-badge custom-badge ${tierBadge.className}`}
+                    >
                       {tierBadge.text}
                     </div>
 
@@ -200,9 +213,13 @@ export default function Mint() {
       {step === 2 && (
         <div className="main-card col-md-6 mx-auto animated-border position-relative p-4">
           {/* top-left user number */}
-          <div className="user-number-label rounded">#{userNumber.toLocaleString()}</div>
+          <div className="user-number-label rounded">
+            #{userNumber.toLocaleString()}
+          </div>
 
-          <h5 className="fw-bold text-purple mb-3 mt-5">Who introduced you? (Referral Code)</h5>
+          <h5 className="fw-bold text-purple mb-3 mt-5">
+            Who introduced you? (Referral Code)
+          </h5>
 
           <input
             type="text"
@@ -226,7 +243,9 @@ export default function Mint() {
       {/* ========== STEP 3 — Subscription ========== */}
       {step === 3 && selectedTier && (
         <div className="main-card col-md-6 mx-auto animated-border step3-card position-relative p-4">
-          <div className="user-number-label rounded">#{userNumber.toLocaleString()}</div>
+          <div className="user-number-label rounded">
+            #{userNumber.toLocaleString()}
+          </div>
 
           <h5 className="fw-bold text-purple mb-3 mt-5">
             Your selected tier: {selectedTier}{" "}
@@ -240,17 +259,21 @@ export default function Mint() {
           </Button>
 
           <div className="mt-4 text-start">
+            <h5 className="fw-bold text-purple mb-3">
+              Tokens to be minted:{" "}
+              {tiers.find((t) => t.name === selectedTier)?.mint ?? "—"}
+            </h5>
+
             <p>
-              You will be the member number: <strong>{userNumber.toLocaleString()}</strong>
+              You will be the member number:{" "}
+              <strong className="text-blue">{userNumber.toLocaleString()}</strong>
             </p>
             <p>10X tokens into circulation (in your wallet)</p>
           </div>
 
-          <div className="d-flex justify-content-start mt-3">
             <Button className="pulse-button-outline" onClick={() => setStep(2)}>
               <i className="bi bi-chevron-left me-2" /> Back
             </Button>
-          </div>
         </div>
       )}
 
@@ -268,7 +291,8 @@ export default function Mint() {
             <Loader />
             <p className="mt-3 fw-bold">Waiting for wallet approval...</p>
             <p className="text-muted small">
-              Please confirm the signature in your wallet. This behavior is currently simulated.
+              Please confirm the signature in your wallet. This behavior is
+              currently simulated.
             </p>
           </Modal.Body>
         ) : txResult === "success" ? (
@@ -285,10 +309,16 @@ export default function Mint() {
                 marginBottom: 16,
               }}
             >
-              <i className="bi bi-check-lg text-success" style={{ fontSize: 28 }} />
+              <i
+                className="bi bi-check-lg text-success"
+                style={{ fontSize: 28 }}
+              />
             </div>
             <h5 className="fw-bold">Transaction successful!</h5>
-            <p className="text-muted">Your transaction was recorded successfully. Redirecting to the dashboard...</p>
+            <p className="text-muted">
+              Your transaction was recorded successfully. Redirecting to the
+              dashboard...
+            </p>
           </Modal.Body>
         ) : txResult === "failure" ? (
           <Modal.Body className="text-center p-4">
@@ -308,13 +338,15 @@ export default function Mint() {
             </div>
             <h5 className="fw-bold">Transaction failed</h5>
             <p className="text-muted">
-              The transaction did not complete. Please check your wallet and try again.
+              The transaction did not complete. Please check your wallet and try
+              again.
             </p>
             <div className="d-flex justify-content-center gap-2 mt-3">
-              <Button className="pulse-button" onClick={handleApprove}>
-                Retry
-              </Button>
-              <Button className="pulse-button-outline" onClick={handleModalClose}>
+              
+              <Button
+                className="pulse-button-outline"
+                onClick={handleModalClose}
+              >
                 Cancel
               </Button>
             </div>
@@ -326,16 +358,24 @@ export default function Mint() {
 
             <p>
               By signing the transaction, you will pay{" "}
-              <strong className="text-blue">{currentTier ? currentTier.price : "—"}</strong> and mint{" "}
-              <strong className="text-blue">{currentTier ? currentTier.mint : "—"}</strong>. This mint
-              represents <strong className="text-blue">10X Token</strong> that will be deposited to your wallet.
+              <strong className="text-blue">
+                {currentTier ? currentTier.price : "—"}
+              </strong>{" "}
+              and mint{" "}
+              <strong className="text-blue">
+                {currentTier ? currentTier.mint : "—"}
+              </strong>
+              . This mint represents{" "}
+              <strong className="text-blue">10X Token</strong> that will be
+              deposited to your wallet.
             </p>
 
             <p className="text-muted small">
-              By clicking Approve and signing the transaction, you acknowledge that you have read
-              and accept the project's terms and agree that you are responsible for any decisions
-              or risks associated with this transaction and the custody of the tokens. Please
-              verify your wallet and balance before continuing.
+              By clicking Approve and signing the transaction, you acknowledge
+              that you have read and accept the project's terms and agree that
+              you are responsible for any decisions or risks associated with
+              this transaction and the custody of the tokens. Please verify your
+              wallet and balance before continuing.
             </p>
 
             {/* Custom checkbox: assumed props: checked, onChange, label */}
@@ -348,14 +388,21 @@ export default function Mint() {
             </div>
 
             <div className="d-flex justify-content-between mt-3 gap-2">
-              <Button className="pulse-button-outline" onClick={handleModalClose}>
+              <Button
+                className="pulse-button-outline"
+                onClick={handleModalClose}
+              >
                 Cancel
               </Button>
               <Button
                 className="pulse-button"
                 onClick={handleApprove}
                 disabled={!agree}
-                title={!agree ? "You must agree to the terms before approving" : "Approve"}
+                title={
+                  !agree
+                    ? "You must agree to the terms before approving"
+                    : "Approve"
+                }
               >
                 Approve
               </Button>
