@@ -104,7 +104,17 @@ ul {
   object-fit: cover;
   display: inline-block;
   vertical-align: middle;
-  margin: 0px 3px 7px 3px; /* margin-right ~8 */
+  margin: 0px 3px 7px 3px;
+}
+
+.token-logo-small {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.token-logo-larg {
+  width: 35px !important;
+  height: 35px !important;
 }
 
 /* responsive: smaller icons on very small screens */
@@ -911,14 +921,14 @@ header {
   font-family: monospace;
   white-space: nowrap;
 }
-@media (max-width:450px) {
-  .referral-title{
+@media (max-width: 450px) {
+  .referral-title {
     font-size: 1.05rem;
   }
 }
-@media (max-width:390px) {
-  .referral-title{
-    font-size: .9rem;
+@media (max-width: 390px) {
+  .referral-title {
+    font-size: 0.9rem;
   }
 }
 
@@ -1407,20 +1417,6 @@ header {
   }
 }
 
-/* لوگو پلِیس‌هولدر */
-.logo-placeholder {
-  min-width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  z-index: 2;
-}
-
 /* متن‌ها و لینک‌ها */
 .footer-intro h5,
 .footer-intro p {
@@ -1487,10 +1483,6 @@ header {
 @media (max-width: 767.98px) {
   .footer-card {
     padding: 20px;
-  }
-  .logo-placeholder {
-    min-width: 48px;
-    height: 48px;
   }
   .footer-intro h5 {
     font-size: 1.05rem;

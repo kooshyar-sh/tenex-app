@@ -1,5 +1,6 @@
 import React from "react";
-import { FaBolt, FaTwitter, FaTelegramPlane, FaDiscord } from "react-icons/fa";
+import { FaTwitter, FaTelegramPlane } from "react-icons/fa";
+import EthLogo from "../assets/eth.png";
 
 /**
  * توضیح تابع دانلود roadmap:
@@ -38,7 +39,7 @@ export default function FooterTenex() {
           {/* LEFT: logo + text */}
           <div className="col-12 col-md-6 d-flex align-items-start gap-3">
             <div className="logo-placeholder d-flex align-items-center justify-content-center">
-              <FaBolt size={26} />
+              <img src={EthLogo} alt="TENEX" className="token-logo token-logo-larg" />
             </div>
             <div className="footer-intro">
               <h5 className="mb-1 fw-bold">TENEX</h5>
@@ -128,15 +129,6 @@ export default function FooterTenex() {
                   aria-label="Twitter"
                 >
                   <FaTwitter />
-                </a>
-                <a
-                  className="social-link"
-                  href="https://discord.gg/your_invite"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Discord"
-                >
-                  <FaDiscord />
                 </a>
               </div>
             </div>

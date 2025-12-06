@@ -7,6 +7,7 @@ import StatsPanel from "../components/statsPanel/statsPanel";
 import FAQ from "../components/FAQ/FAQ";
 import { useNavigate } from "react-router-dom";
 import TextType from "../components/TextType/TextType";
+import EthLogo from "../assets/eth.png";
 
 export default function Home() {
   // حالت‌ها
@@ -103,7 +104,9 @@ export default function Home() {
       <Row className="align-items-center mt-5">
         <Col md={7} className="text-start">
           <div className="text-muted fw-semibold">
-            <h2 className="text-purple fw-bold"> TENEX</h2>
+            <h2 className="text-purple fw-bold">
+              <img src={EthLogo} alt="TENEX" className="token-logo" />
+               TENEX</h2>
 
             <h5 className="mb-3">Revolutionizing the Token Ecosystem</h5>
 

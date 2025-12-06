@@ -160,9 +160,11 @@ export default function Mint() {
                     <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
                     <p className="text-muted mb-1">
                       <strong>Pay:</strong> {t.price}
+                      <img src={BNBLogo} alt="BNB" className="token-logo token-logo-small" />
                     </p>
                     <p className="text-muted mb-1">
                       <strong>Mint:</strong> {t.mint}
+                      <img src={EthLogo} alt="TENEX" className="token-logo token-logo-small" />
                     </p>
 
                     <div className="text-muted mb-1">
@@ -254,32 +256,19 @@ export default function Mint() {
             {selectedTier === "Bronze" && (
               <>
                 0.1 BNB
-                <img
-                  src={BNBLogo}
-                  alt="BNB"
-                  className="token-logo token-logo--bnb"
-                />
+                <img src={BNBLogo} alt="BNB" className="token-logo" />
               </>
             )}
             {selectedTier === "Silver" && (
               <>
                 0.3 BNB
-                <img
-                  src={BNBLogo}
-                  alt="BNB"
-                  className="token-logo token-logo--bnb"
-                />
+                <img src={BNBLogo} alt="BNB" className="token-logo" />
               </>
             )}
             {selectedTier === "Gold" && (
               <>
-              1 BNB
-                <img
-                  src={BNBLogo}
-                  alt="BNB"
-                  className="token-logo token-logo--bnb"
-                />
-                
+                1 BNB
+                <img src={BNBLogo} alt="BNB" className="token-logo" />
               </>
             )}
           </h5>
@@ -290,15 +279,9 @@ export default function Mint() {
 
           <div className="mt-4 text-start">
             <h5 className="fw-bold text-purple mb-3">
-              
               Tokens to be minted:{" "}
               {tiers.find((t) => t.name === selectedTier)?.mint ?? "—"}
-
-              <img
-                src={EthLogo}
-                alt="TENEX"
-                className="token-logo token-logo--tenex"
-              />
+              <img src={EthLogo} alt="TENEX" className="token-logo" />
             </h5>
 
             <p>

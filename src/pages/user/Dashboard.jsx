@@ -12,6 +12,8 @@ import {
   BarChart,
   Bar,
 } from "recharts";
+import BNBLogo from "../../../src/assets/bnb.png";
+import EthLogo from "../../../src/assets/eth.png";
 
 export default function Dashboard() {
   const [showVolumeModal, setShowVolumeModal] = useState(false);
@@ -132,7 +134,13 @@ export default function Dashboard() {
             <h5 className="text-purple mb-2">
               <i className="bi bi-coin me-2 text-blue"></i> 10X Balance
             </h5>
-            <h3>{currentUser.balance} 10X</h3>
+            <h3>{currentUser.balance} 10X 
+              <img
+                src={EthLogo}
+                alt="TENEX"
+                className="token-logo"
+              />
+            </h3>
             <small className="text-muted">
               Minted: {currentUser.minted} 10X
             </small>
@@ -148,7 +156,9 @@ export default function Dashboard() {
             </h5>
 
             <div>
-              <h4 style={{ margin: 0 }}>{currentUser.binaryVolume} BNB</h4>
+              <h4 style={{ margin: 0 }}>{currentUser.binaryVolume} BNB
+                <img src={BNBLogo} alt="BNB" className="token-logo" />
+              </h4>
 
               {/* Carry Over: placed under total volume */}
               {Number(currentUser.carryOverAmount) > 0 &&
