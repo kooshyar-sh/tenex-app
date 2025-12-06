@@ -14,6 +14,7 @@ import {
 } from "recharts";
 import BNBLogo from "../../../src/assets/bnb.png";
 import EthLogo from "../../../src/assets/eth.png";
+import TooltipCard from "../../components/TooltipCard/TooltipCard";
 
 export default function Dashboard() {
   const [showVolumeModal, setShowVolumeModal] = useState(false);
@@ -134,12 +135,9 @@ export default function Dashboard() {
             <h5 className="text-purple mb-2">
               <i className="bi bi-coin me-2 text-blue"></i> 10X Balance
             </h5>
-            <h3>{currentUser.balance} 10X 
-              <img
-                src={EthLogo}
-                alt="TENEX"
-                className="token-logo"
-              />
+            <h3>
+              {currentUser.balance} 10X
+              <img src={EthLogo} alt="TENEX" className="token-logo" />
             </h3>
             <small className="text-muted">
               Minted: {currentUser.minted} 10X
@@ -156,7 +154,8 @@ export default function Dashboard() {
             </h5>
 
             <div>
-              <h4 style={{ margin: 0 }}>{currentUser.binaryVolume} BNB
+              <h4 style={{ margin: 0 }}>
+                {currentUser.binaryVolume} BNB
                 <img src={BNBLogo} alt="BNB" className="token-logo" />
               </h4>
 
@@ -164,7 +163,22 @@ export default function Dashboard() {
               {Number(currentUser.carryOverAmount) > 0 &&
                 currentUser.carryOverSide && (
                   <p className="mt-2 mb-0">
-                    <span className="text-muted">Carry Over :</span>{" "}
+                    <span className="text-muted">
+                      <TooltipCard
+                        title="Carry Over — Saved Balance"
+                        description={`Carry Over is the excess BNB that has accumulated on one side of your team and hasn't been balanced yet. This amount is held in your account and will remain saved indefinitely (it does not expire). Once the opposite side grows and the teams balance, the Carry Over amount becomes eligible for weekly team rewards and payouts. Note: Carry Over is not counted toward weekly payouts until it is balanced.`}
+                        badge="Saved Balance"
+                        verticalPosition="bottom"
+                        mobileHorizontalPosition="right"
+                        mobileVerticalPosition="bottom"
+                      >
+                        <i
+                          className="bi bi-question-circle-fill text-muted small me-2"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </TooltipCard>
+                      Carry Over :
+                    </span>{" "}
                     <span className="mt-1">
                       <strong className="me-3 text-success">
                         {formatBNB(currentUser.carryOverAmount)} BNB
