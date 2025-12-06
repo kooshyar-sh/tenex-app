@@ -30,6 +30,7 @@ export default function Mint() {
       mint: "100 TENEX",
       direct: "4%",
       balance: "8%",
+      cap: "0.5 BNB",
     },
     {
       name: "Silver",
@@ -37,6 +38,7 @@ export default function Mint() {
       mint: "330 TENEX",
       direct: "6%",
       balance: "10%",
+      cap: "0.5 BNB",
     },
     {
       name: "Gold",
@@ -44,6 +46,7 @@ export default function Mint() {
       mint: "1210 TENEX",
       direct: "8%",
       balance: "13%",
+      cap: "2.1 BNB",
     },
   ];
 
@@ -160,11 +163,40 @@ export default function Mint() {
                     <h4 className="fw-bold text-purple mb-3">{t.name}</h4>
                     <p className="text-muted mb-1">
                       <strong>Pay:</strong> {t.price}
-                      <img src={BNBLogo} alt="BNB" className="token-logo token-logo-small" />
+                      <img
+                        src={BNBLogo}
+                        alt="BNB"
+                        className="token-logo token-logo-small"
+                      />
                     </p>
                     <p className="text-muted mb-1">
                       <strong>Mint:</strong> {t.mint}
-                      <img src={EthLogo} alt="TENEX" className="token-logo token-logo-small" />
+                      <img
+                        src={EthLogo}
+                        alt="TENEX"
+                        className="token-logo token-logo-small"
+                      />
+                    </p>
+
+                    <p className="text-muted mb-1">
+                      <strong>Cap limit:</strong> {t.cap}
+                      <img
+                        src={BNBLogo}
+                        alt="BNB"
+                        className="token-logo token-logo-small"
+                      />
+                      / week
+                      <TooltipCard
+                        title="Cap Limit"
+                        description={`The cap limit is the maximum BNB amount associated with this tier. It defines the maximum volume or purchase amount considered for rewards/minting under this tier. If your volume exceeds this cap, excess may not generate rewards until you upgrade your cap or adjust your balance.`}
+                        badge="Cap Info"
+                        mobileHorizontalPosition="left"
+                      >
+                        <i
+                          className="bi bi-question-circle-fill text-muted small ms-2"
+                          style={{ cursor: "pointer" }}
+                        />
+                      </TooltipCard>
                     </p>
 
                     <div className="text-muted mb-1">
