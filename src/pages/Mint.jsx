@@ -4,6 +4,8 @@ import TooltipCard from "../components/TooltipCard/TooltipCard";
 import Loader from "../components/loader/Loader";
 import CustomCheckbox from "../components/CustomCheckbox/CustomCheckbox";
 import { useNavigate } from "react-router-dom";
+import BNBLogo from "../assets/bnb.png";
+import EthLogo from "../assets/eth.png";
 
 export default function Mint() {
   // step control
@@ -249,9 +251,37 @@ export default function Mint() {
 
           <h5 className="fw-bold text-purple mb-3 mt-5">
             Your selected tier: {selectedTier}{" "}
-            {selectedTier === "Bronze" && "(0.1 BNB)"}
-            {selectedTier === "Silver" && "(0.3 BNB)"}
-            {selectedTier === "Gold" && "(1 BNB)"}
+            {selectedTier === "Bronze" && (
+              <>
+                0.1 BNB
+                <img
+                  src={BNBLogo}
+                  alt="BNB"
+                  className="token-logo token-logo--bnb"
+                />
+              </>
+            )}
+            {selectedTier === "Silver" && (
+              <>
+                0.3 BNB
+                <img
+                  src={BNBLogo}
+                  alt="BNB"
+                  className="token-logo token-logo--bnb"
+                />
+              </>
+            )}
+            {selectedTier === "Gold" && (
+              <>
+              1 BNB
+                <img
+                  src={BNBLogo}
+                  alt="BNB"
+                  className="token-logo token-logo--bnb"
+                />
+                
+              </>
+            )}
           </h5>
 
           <Button className="pulse-button mt-3" onClick={handleSubscribe}>
@@ -260,20 +290,29 @@ export default function Mint() {
 
           <div className="mt-4 text-start">
             <h5 className="fw-bold text-purple mb-3">
+              
               Tokens to be minted:{" "}
               {tiers.find((t) => t.name === selectedTier)?.mint ?? "—"}
+
+              <img
+                src={EthLogo}
+                alt="TENEX"
+                className="token-logo token-logo--tenex"
+              />
             </h5>
 
             <p>
               You will be the member number:{" "}
-              <strong className="text-blue">{userNumber.toLocaleString()}</strong>
+              <strong className="text-blue">
+                {userNumber.toLocaleString()}
+              </strong>
             </p>
             <p>10X tokens into circulation (in your wallet)</p>
           </div>
 
-            <Button className="pulse-button-outline" onClick={() => setStep(2)}>
-              <i className="bi bi-chevron-left me-2" /> Back
-            </Button>
+          <Button className="pulse-button-outline" onClick={() => setStep(2)}>
+            <i className="bi bi-chevron-left me-2" /> Back
+          </Button>
         </div>
       )}
 
@@ -342,7 +381,6 @@ export default function Mint() {
               again.
             </p>
             <div className="d-flex justify-content-center gap-2 mt-3">
-              
               <Button
                 className="pulse-button-outline"
                 onClick={handleModalClose}
