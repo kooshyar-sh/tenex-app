@@ -92,14 +92,10 @@ export default function FooterTenex() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Doc
+                  Docs
                 </a>
               </li>
-              <li>
-                <a href="/faq" target="_blank" rel="noopener noreferrer">
-                  Help &amp; Support
-                </a>
-              </li>
+              
             </ul>
           </div>
 

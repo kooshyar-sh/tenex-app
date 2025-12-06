@@ -1,9 +1,7 @@
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import { useState } from "react";
-import Countdown from "react-countdown";
 import TooltipCard from "../components/TooltipCard/TooltipCard";
 import Loader from "../components/loader/Loader";
-// If the path to your custom checkbox component is different, update this import.
 import CustomCheckbox from "../components/CustomCheckbox/CustomCheckbox";
 import { useNavigate } from "react-router-dom";
 
@@ -244,10 +242,6 @@ export default function Mint() {
           <div className="mt-4 text-start">
             <p>
               You will be the member number: <strong>{userNumber.toLocaleString()}</strong>
-            </p>
-            <p>
-              Your first earning will be claimable in the next payment cycle:{" "}
-              <Countdown date={Date.now() + 5 * 24 * 60 * 60 * 1000} /> {/* example: 5 days */}
             </p>
             <p>10X tokens into circulation (in your wallet)</p>
           </div>
